@@ -1,5 +1,7 @@
 package leetcode._0001_TwoSum;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 // one pass hashmap
 public class Solution {
@@ -23,3 +25,5 @@ public class Solution {
         System.out.println(Arrays.toString(sol.twoSum(input, 6)));
     }
 }
+
+// time: O(n); space: O(n);

@@ -1,20 +1,23 @@
 package leetcode._0144_BinaryTreePreorderTraversal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import leetcode.TreeNode;
 
-// recursion
+// dfs
 class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
-        helper(root, list);
+        dfs(root, list);
         return list;
     }
-    private void helper(TreeNode root, List<Integer> list) {
+    
+    private void dfs(TreeNode root, List<Integer> list) {
+        // cc + end
         if (root == null) return;
         
         list.add(root.val);
-        helper(root.left, list);
-        helper(root.right, list);
+        dfs(root.left, list);
+        dfs(root.right, list);
     }
 }
-

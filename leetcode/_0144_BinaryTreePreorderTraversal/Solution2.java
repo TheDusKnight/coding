@@ -1,5 +1,8 @@
 package leetcode._0144_BinaryTreePreorderTraversal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 import leetcode.TreeNode;
 
 // stack模拟

@@ -3,7 +3,7 @@ package leetcode._0317_ShortestDistanceFromAllBuildings;
 import java.util.*;
 
 class Solution {
-    // 注意不应该把所有1一次性放进queue，否则需要三维的board更新cost
+    // 注意不应该把所有1一次性放进queue，否则需要三维的board更新cost求和
     int[][] DIRECTIONS = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
 
     public int shortestDistance(int[][] grid) {
