@@ -3,6 +3,7 @@ package jianzhioffer.recursionDp._10;
 // 一维dp
 public class Solution2 {
     public int fib(int n) {
+        // 注意长度101， dp index才能到100
         int[] dp = new int[101];
         dp[0] = 0;
         dp[1] = 1;
