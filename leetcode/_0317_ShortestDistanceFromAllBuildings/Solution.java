@@ -1,6 +1,7 @@
 package leetcode._0317_ShortestDistanceFromAllBuildings;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 class Solution {
     // 注意不应该把所有1一次性放进queue，否则需要三维的board更新cost求和
@@ -57,6 +58,7 @@ class Solution {
             minLen++;
         }
 
+        // 注意没有visited到的0set成2
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (grid[i][j] == 0 && !visited[i][j]) {

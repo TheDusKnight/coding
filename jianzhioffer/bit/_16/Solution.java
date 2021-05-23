@@ -1,7 +1,7 @@
 package jianzhioffer.bit._16;
 
 /**
- * 二进制中1的个数
+ * 二进制中1的个数 same: lc50
  */
 
  // Brute force

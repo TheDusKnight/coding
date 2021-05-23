@@ -1,44 +1,47 @@
 package leetcode._0127_WordLadder;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Set;
 
-// One way bfs, could be improve
+// One way bfs
 public class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        // cc
-        if (wordList == null || wordList.size() == 0)
-            return 0;
-
+        if (beginWord.equals(endWord)) {
+            return 2;
+        }
         Set<String> set = new HashSet<>();
-        for (String word : wordList) {
+        for (String word: wordList) {
             set.add(word);
         }
         Queue<String> queue = new LinkedList<>();
         queue.offer(beginWord);
-
-        int minLen = 1;
+        int minLen = 2;
         while (!queue.isEmpty()) {
             int size = queue.size();
-            for (int k = 0; k < size; k++) {
+            while (size-- > 0) {
                 String cur = queue.poll();
-                char[] words = cur.toCharArray();
-                for (int i = 0; i < words.length; i++) {
-                    char tmp = words[i];
+                char[] arr = cur.toCharArray();
+                for (int i = 0; i < arr.length; i++) {
+                    char c = arr[i];
+                    // 注意z也要包含
                     for (char j = 'a'; j <= 'z'; j++) {
-                        words[i] = j;
-                        // String midWord = Arrays.toString(words); 有中括号
-                        String midWord = String.valueOf(words);
-                        // String midWord = new String(words);
-                        if (!midWord.equals(cur) && set.contains(midWord)) {
-                            // return condition
-                            if (midWord.equals(endWord))
-                                return minLen + 1;
-
-                            queue.offer(midWord);
-                            set.remove(midWord); // 去重
+                        arr[i] = j;
+                        // String next = Arrays.toString(arr); 不正确,有中括号
+                        String next = String.valueOf(arr);
+                        // String next = new String(arr);
+                        if (set.contains(next) && next.equals(endWord)) {
+                            return minLen;
+                        }
+                        if (set.contains(next)) {
+                            queue.offer(next);
+                            set.remove(next);
                         }
                     }
-                    words[i] = tmp;
+                    arr[i] = c;
                 }
             }
             minLen++;
@@ -48,11 +51,12 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution sol = new Solution();
-        List<String> wordList = Arrays.asList("hot", "dot", "dog", "lot", "log", "cog");
-        String beginWord = "hit";
-        String endWord = "cog";
+        List<String> wordList = Arrays.asList("ymann","yycrj","oecij","ymcnj","yzcrj","yycij","xecij","yecij","ymanj","yzcnj","ymain");
+        String beginWord = "ymain";
+        String endWord = "oecij";
         System.out.println(sol.ladderLength(beginWord, endWord, wordList));
     }
 }
-// time: O(V + E) -> O(N + 25*k) -> O(N) k is the length of longest word in dict
-// space: O(N)
+
+// n是dict的长度
+// time: O(n + 26k*n) = O(n); space: O(n)
