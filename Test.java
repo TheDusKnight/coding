@@ -18,8 +18,12 @@ public class Test {
         // map.put(0,1);
         // map.put(1,4);
         // System.out.println(map.get(0));
-        System.out.println(12 << 2);
-        System.out.println(12 >> 2);
+        // System.out.println(12 << 2);
+        // System.out.println(12 >> 2);
+        // System.out.println(Integer.MAX_VALUE);
+        // System.out.println(Character.getNumericValue('1') + 1);
+        char t = 1 + '0';
+        System.out.println(t);
     }
 
 }

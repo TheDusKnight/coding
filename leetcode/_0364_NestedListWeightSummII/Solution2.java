@@ -1,4 +1,4 @@
-package leetcode._0339_NestedListWeightSum;
+package leetcode._0364_NestedListWeightSummII;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -33,35 +33,31 @@ interface NestedInteger {
     public List<NestedInteger> getList();
 }
 
-// BFS
-// LinkedIn 超高频题
-class Solution {
-    public int depthSum(List<NestedInteger> nestedList) {
-        if (nestedList == null) return -1;
-        
+class Solution2 {
+    // 数学垫高bfs
+    public int depthSumInverse(List<NestedInteger> nestedList) {
         Queue<NestedInteger> queue = new LinkedList<>();
-        for (NestedInteger n : nestedList) {
-            queue.offer(n);
+        for (NestedInteger nested: nestedList) {
+            queue.offer(nested);
         }
-        
-        int minLen = 1;
-        int sum = 0;
+        // tmpSum每层保留，意味着每次加sum都会加一遍之前所有从层的值
+        int sum = 0, tmpSum = 0;
         while (!queue.isEmpty()) {
             int size = queue.size();
-            for (int k = 0; k < size; k++) {
-                NestedInteger tmp = queue.poll();
-                if (tmp.isInteger()) {
-                    sum += tmp.getInteger() * minLen;
+            while (size-- > 0) {
+                NestedInteger cur = queue.poll();
+                if (cur.isInteger()) {
+                    tmpSum += cur.getInteger();
                 } else {
-                    for (NestedInteger cur : tmp.getList()) {
-                        queue.offer(cur);
+                    for (NestedInteger next: cur.getList()) {
+                        queue.offer(next);
                     }
                 }
             }
-            minLen++;
+            sum += tmpSum;
         }
         return sum;
     }
 }
 
-// time: O(V + E) = O(V + 2V) = O(3n) = O(n) n = number of nested integers
+// time: O(n); space: O(n);
