@@ -1,9 +1,15 @@
 package leetcode._0752_OpenTheLock;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Set;
 
-// BFS
 class Solution {
+    // BFS
+    // 算法哥
     public int openLock(String[] deadends, String target) {
         // cc
         Set<String> deadList = new HashSet<>();
@@ -29,10 +35,7 @@ class Solution {
                     if (next.equals(target))
                         return minLen;
 
-                    if (deadList.contains(next))
-                        continue;
-
-                    if (visited.add(next)) {
+                    if (!deadList.contains(next) && visited.add(next)) {
                         queue.offer(next);
                     }
                 }
@@ -73,4 +76,4 @@ class Solution {
     }
 }
 
-// time: O(1)
+// time: O(m*n) = O(10000*8) = O(1);

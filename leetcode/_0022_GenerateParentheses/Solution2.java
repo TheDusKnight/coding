@@ -1,32 +1,58 @@
 package leetcode._0022_GenerateParentheses;
-import java.util.*;
 
-// 算法哥dfs
-class Solution2 {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
+public class Solution2 {
+    // dfs + stack验证，时间复杂度高
     public List<String> generateParenthesis(int n) {
         List<String> res = new ArrayList<>();
-        if (n <= 0) return res;
-        
-        dfs(res, n, n, new StringBuilder());
+        dfs(res, new StringBuilder(), n);
         return res;
     }
-    
-    // 不需要set visited因为是图没有环
-    private void dfs(List<String> res, int l, int r, StringBuilder sb) {
-        // success
-        if (l == 0 && r == 0) { // 最终每个res的长度为2n并且l = r
-            res.add(sb.toString());
+
+    private void dfs(List<String> res, StringBuilder path, int n) {
+        if (path.length() == 2 * n) {
+            if (isValid(path.toString())) {
+                res.add(path.toString());
+            }
             return;
         }
-        // fail
-        if (l < 0 || r < l) return; // 左边加超过n或者右边加超过左边都fail
-        
-        sb.append('(');
-        dfs(res, l-1, r, sb);
-        sb.setLength(sb.length()-1);
-        
-        sb.append(')');
-        dfs(res, l, r-1, sb);
-        sb.setLength(sb.length()-1);
+
+        int len = path.length(); // 非必要
+        path.append('(');
+        dfs(res, path, n);
+        path.setLength(len);
+        // path.setLength(path.length()-1);
+
+        path.append(')');
+        dfs(res, path, n);
+        path.setLength(len);
+        // path.setLength(path.length()-1);
+    }
+
+    private boolean isValid(String path) {
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < path.length(); i++) {
+            char curChar = path.charAt(i);
+            if (curChar == '(') {
+                stack.push('(');
+            } else {
+                if (stack.empty())
+                    return false;
+                stack.pop();
+            }
+        }
+        if (!stack.empty())
+            return false;
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Solution2 sol = new Solution2();
+        System.out.println(sol.generateParenthesis(3));
     }
 }
+
+// time: O(2^n+)

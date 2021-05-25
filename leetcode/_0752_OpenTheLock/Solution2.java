@@ -6,6 +6,7 @@ import java.util.Queue;
 import java.util.Set;
 
 class Solution2 {
+    // 纯手写
     // bfs
     // target will not be in the list deadends
     public int openLock(String[] deadends, String target) {
@@ -38,8 +39,9 @@ class Solution2 {
                         up = '0';
                         down = '8';
                     } else {
-                        up = (char) (Character.getNumericValue(tmp + 1) + '0');
-                        down = (char) (Character.getNumericValue(tmp - 1) + '0');
+                        int in = Character.getNumericValue(tmp);
+                        up = (char)(in + 1 + '0');
+                        down = (char)(in - 1 + '0');
                     }
                     arr[i] = up;
                     String before = String.valueOf(arr);

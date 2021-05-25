@@ -21,9 +21,9 @@ public class Test {
         // System.out.println(12 << 2);
         // System.out.println(12 >> 2);
         // System.out.println(Integer.MAX_VALUE);
-        // System.out.println(Character.getNumericValue('1') + 1);
-        char t = 1 + '0';
-        System.out.println(t);
+        System.out.println(Character.getNumericValue('1') + 1);
+        // char t = 1 + '0';
+        // System.out.println(t);
     }
 
 }
