@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Solution3 {
-    // dfs + delta, 时间复杂度小
+    // dfs + delta, 时间复杂度小，Memory Usage 最优
     public List<String> generateParenthesis(int n) {
         List<String> res = new ArrayList<>();
         if (n <= 0)
@@ -33,4 +33,4 @@ class Solution3 {
         path.setLength(len);
     }
 }
-// time: O(2^n)
+// time: O(2^n)，常数级别优化

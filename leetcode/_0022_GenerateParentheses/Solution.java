@@ -34,4 +34,4 @@ class Solution {
         sb.setLength(sb.length()-1);
     }
 }
-// time: O(2^n)
+// time: O(2^n), 常数级别优化
