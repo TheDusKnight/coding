@@ -32,8 +32,7 @@ class Solution {
 
         int curSize = res.size();
         for (int i = idx + 1; i <= len; i++) {
-            // 个人认为dfs的题要有for loop的条件是和for loop代码和index产生联系的时候
-            // 如果只需要处理当前层逻辑，即每一层相互独立则for loop非必要
+            // dfs使用for loop表示拼接
             String str = s.substring(idx, i);
             if (dict.contains(str) && m[i]) {
                 int lenPath = path.length();

@@ -1,36 +1,51 @@
 package leetcode._0093_RestoreIPAddress;
-import java.util.*;
 
-// dfs 做或不做模版
+import java.util.ArrayList;
+import java.util.List;
+
 class Solution {
+    // dfs for loop
     public List<String> restoreIpAddresses(String s) {
         List<String> res = new ArrayList<>();
-        if (s.length() < 4 || s.length() > 12) return res;
-        
+        if (s == null || s.length() < 4 || s.length() > 255)
+            return res;
         dfs(res, s, new StringBuilder(), 0, 0);
         return res;
     }
     
-    private void dfs(List<String> res, String s, StringBuilder sb, int index, int part) {
-        if (index == s.length() && part == 4) {
-            sb.setLength(sb.length()-1);
-            res.add(sb.toString());
+    private void dfs(List<String> res, String s, StringBuilder path, int idx, int num) {
+        int sLen = s.length();
+        int pLen = path.length();
+        if (num == 4) {
+            if (idx == sLen) {
+                path.deleteCharAt(pLen-1);
+                res.add(path.toString());
+            }
             return;
         }
-        if (index == s.length()) return;
+        if (idx >= sLen)
+            return;
         
-        int len = sb.length();
         for (int l = 1; l <= 3; l++) {
-            if (index+l <= s.length()) {
-                int cur = Integer.valueOf(s.substring(index, index+l));
-                if (cur >= 0 && cur <= 255) {
-                    sb.append(cur + ".");
-                    dfs(res, s, sb, index+l, part+1);
-                    sb.setLength(len);
-                }
-                // if cur part start with 0, then this branch can not be continue
-                if (cur == 0) break;
+            // idx+l = length of current path
+            if (idx+l > sLen)
+                break;
+            int val = Integer.parseInt(s.substring(idx, idx+l));
+            if (val <= 255) {
+                path.append(val + ".");
+                dfs(res, s, path, idx+l, num+1);
+                path.setLength(pLen);
             }
+            // 当val为0时，只能走"0."分支，0后面不能加数字
+            if (val == 0)
+                break;
         }
     }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        System.out.println(sol.restoreIpAddresses("25525511135"));
+    }
 }
+
+// time: O(2^12) = O(1); space: O(1)

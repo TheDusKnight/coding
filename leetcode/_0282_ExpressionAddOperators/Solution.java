@@ -3,53 +3,59 @@ package leetcode._0282_ExpressionAddOperators;
 import java.util.ArrayList;
 import java.util.List;
 
-// dfs+stack进行加减乘运算
-public class Solution {
+class Solution {
+    // dfs for loop
     public List<String> addOperators(String num, int target) {
         List<String> res = new ArrayList<>();
-        if (num == null)
+        if (num == null || num.length() == 0)
             return res;
-        dfs(num, target, res, new StringBuilder(), 0, 0, 0);
+        dfs(res, num, target, new StringBuilder(), 0, 0, 0);
         return res;
     }
-
-    private void dfs(String num, int target, List<String> res, StringBuilder sb, int idx, long lastVal, long sum) {
-        if (idx == num.length() && sum == target) {
-            res.add(sb.toString());
+    
+    private void dfs(List<String> res, String num, int target, StringBuilder path, int idx, long lastVal, long sum) {
+        int pLen = path.length();
+        int sLen = num.length();
+        if (idx == sLen) {
+            // 可以使用basic cal的加减乘来eval最终结果是否valid
+            if (sum == target)
+                res.add(path.toString());
             return;
         }
-        if (idx == num.length()) {
-            return;
-        }
-
+        
         long val = 0;
-        int len = sb.length(); // ?
-        for (int i = idx; i < num.length(); i++) {
-            val = val * 10 + (num.charAt(i) - '0'); // 当前层的真实值
-
+        for (int i = idx; i < sLen; i++) {
+            // 当前层的真实
+            val = val * 10 + (num.charAt(i) - '0');
             // special check,第一位只能是数字
-            if (sb.length() == 0) {
-                sb.append(val);
-                dfs(num, target, res, sb, i + 1, val, val);
-                sb.setLength(len);
-                // continue;
-            } else {
-                sb.append("+" + val);
-                dfs(num, target, res, sb, i + 1, val, sum + val);
-                sb.setLength(len);
-
-                sb.append("-" + val);
-                dfs(num, target, res, sb, i + 1, -val, sum - val);
-                sb.setLength(len);
-
-                sb.append("*" + val);
-                dfs(num, target, res, sb, i + 1, lastVal * val, sum - lastVal + lastVal * val);
-                sb.setLength(len);
+            if (pLen == 0) {
+                path.append(val);
+                // 注意是i+1而不是idx+1
+                dfs(res, num, target, path, i+1, val, val);
+                path.setLength(pLen);
+                if (val == 0)
+                    break;
+                continue;
             }
-
-            if (val == 0) // 每段数字不容许以0开头
+            path.append("+" + val);
+            dfs(res, num, target, path, i+1, val, sum+val);
+            path.setLength(pLen);
+            path.append("-" + val);
+            dfs(res, num, target, path, i+1, -val, sum-val);
+            path.setLength(pLen);
+            path.append("*" + val);
+            dfs(res, num, target, path, i+1, lastVal*val, sum-lastVal+lastVal*val);
+            path.setLength(pLen);
+            // 每段数字不容许以0开
+            if (val == 0)
                 break;
         }
     }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        System.out.println(sol.addOperators("123", 6));
+    }
 }
-// time: O(4^n)
+
+// time: O(4^n), n是input的长度; space: O(2*n)
