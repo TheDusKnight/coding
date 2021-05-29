@@ -1,5 +1,6 @@
 package leetcode._0078_Subsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 // dfs1,无脑先加结果，答案在每个node
 // binary reduction?
@@ -20,6 +21,31 @@ class Solution {
             sub.add(nums[i]); // 也可以每次创建新的object不需要回溯但不推荐
             dfs(nums, i+1, sub, sol);
             sub.remove(sub.size()-1);
+        }
+    }
+
+    // 在for loop中加入结果的写法
+    public List<List<Integer>> subsets2(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        // cc
+        
+        res.add(new ArrayList<Integer>());
+        dfs2(res, nums, new ArrayList<Integer>(), 0);
+        return res;
+    }
+
+    private void dfs2(List<List<Integer>> res, int[] nums, List<Integer> path, int idx) {
+        int sLen = nums.length;
+        int pLen = path.size();
+        if (idx == sLen) {
+            return;
+        }
+        
+        for (int i = idx; i < sLen; i++) {
+            path.add(nums[i]);
+            res.add(new ArrayList<Integer>(path));
+            dfs2(res, nums, path, i+1);
+            path.remove(pLen);
         }
     }
 }

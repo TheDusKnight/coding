@@ -33,7 +33,7 @@ class Solution {
             res.add(path.toString());
             return;
         }
-        // 注意>=
+        // 注意>=，成功的case idx依然可能越界
         if (idx >= sLen || rmL < 0 || rmR < 0 || delta < 0)
             return;
         
@@ -57,3 +57,9 @@ class Solution {
         }
     }
 }
+
+// worst case: "((((((((" 每次分两个叉，一共n层
+// time: O(2^n)
+// 会有duplicate: "(()"。删第一个："()"，删第二个"()"
+// HashSet每次put扫一遍String，O(k)。和ArrayList有时间constant factor区别
+// HashSet空间有load factor

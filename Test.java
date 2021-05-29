@@ -1,5 +1,7 @@
 public class Test {
     public static void main(String[] args) {
+        /** Arrays.sort() inplace sort */
+
         /** shallow copy vs deep copy */
         // int[] cool = new int[2];
         // int[] newCool = Arrays.copyOf(cool, cool.length * 2);
@@ -17,6 +19,12 @@ public class Test {
         /** substring 左闭右开区间 */
         // System.out.println("123".substring(0, 2));
 
+        /** Difference between Arrays.asList() and List.of() */
+        // List<Integer> list = Arrays.asList(1, 2, null); // mutable, allow null
+        // list.set(1, 10); // OK
+        // List<Integer> list2 = List.of(1, 2, 3); // immutable, doesn't allow null
+        // list2.set(1, 10); // Fails with UnsupportedOperationException
+
         /** char to int两种方法 */
         // System.out.println(Character.getNumericValue('1') + 1);
         // System.out.println('1' - '0' + 1);
@@ -24,7 +32,7 @@ public class Test {
         /** int to char */
         // char t = 1 + '0';
         // System.out.println(t);
-        
+
         /** int to String */
         // String s = 1 + "k";
 

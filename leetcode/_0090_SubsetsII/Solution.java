@@ -1,9 +1,11 @@
 package leetcode._0090_SubsetsII;
 
 import java.util.ArrayList;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class Solution {
+    // 老刘dfs
     public List<List<Integer>> subsetsWithDup(int[] nums) {
     Arrays.sort(nums);
     List<List<Integer>> res = new ArrayList<>();

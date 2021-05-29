@@ -1,34 +1,34 @@
 package leetcode._0139_WordBreak;
-import java.util.*;
 
-// TODO: dfs
-// 二维dp -> 一维dp -> list of index 只保留历史上index是true的情况
-// 这是一维dp解法
-public class Solution {
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+class Solution {
+    // 自写dfs无剪枝
     public boolean wordBreak(String s, List<String> wordDict) {
-        // cc
-
-        Set<String> set = new HashSet<>();
+        if (s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0)
+            return false;
+        Set<String> set = new HashSet<String>();
         for (String word: wordDict) {
             set.add(word);
         }
-
-        int len = s.length();
-        boolean[] dp = new boolean[len+1];
-        dp[0] = true;
-
-        // first i letters [0, i)
-        for (int i = 1; i <= len; i++) {
-            // 左边看dp有没有，右边看是否dict contains
-            for (int j = 0; j < i; j++) {
-                if (dp[j] && set.contains(s.substring(j, i))) {
-                    dp[i] = true;
-                    break;
-                }
+        return dfs(s, set, 0);
+    }
+    
+    private boolean dfs(String s, Set<String> wordDict, int idx) {
+        int tLen = s.length();
+        if (idx == tLen)
+            return true;
+        
+        for (int i = idx; i < tLen; i++) {
+            String cur = s.substring(idx, i+1);
+            if (wordDict.contains(cur) && dfs(s, wordDict, i+1)) {
+                return true;
             }
         }
-        return dp[len];
+        return false;
     }
 }
 
-// time: n^2 * n = O(n^s) because substring is O(n)
+// time: O(2^n); space: O(n)

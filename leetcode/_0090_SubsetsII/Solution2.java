@@ -1,34 +1,36 @@
 package leetcode._0090_SubsetsII;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-// 算法哥DFS
-// 再看看为什么去重是保留前缀？
-public class Solution2 {
+class Solution2 {
+    // 算法哥DFS
     public List<List<Integer>> subsetsWithDup(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
-
-        Arrays.sort(nums);
-        res.add(new ArrayList<Integer>());
-        helper(res, new ArrayList<Integer>(), nums, 0);
+        // cc
         
+        Arrays.sort(nums); // 聚合，跳过连续的数字
+        res.add(new ArrayList<Integer>());
+        dfs(res, nums, new ArrayList<Integer>(), 0);
         return res;
     }
-
-    private void helper(List<List<Integer>> res, List<Integer> path, int[] nums, int index) {
-        int len = nums.length;
-        if (index == len) return;
-
-        for (int i = index; i < len; i++) {
-            // 保证只能在开头(i == index)时，选择连续重复的数字，保留前缀
-            if (i != index && nums[i] == nums[i-1]) {
+    
+    private void dfs(List<List<Integer>> res, int[] nums, List<Integer> path, int idx) {
+        int sLen = nums.length;
+        int pLen = path.size();
+        if (idx == sLen)
+            return;
+        
+        for (int i = idx; i < sLen; i++) {
+            // 确保i-1是从当前层for loop过来的，而不是从上一层过来的i
+            // 当遇到连续的数字时，确保不会skip prefix
+            if (i != idx && nums[i] == nums[i-1])
                 continue;
-            }
-
+            
             path.add(nums[i]);
-            List<Integer> copy = new ArrayList<Integer>(path);
-            res.add(copy);
-            helper(res, path, nums, i + 1);
-            path.remove(path.size() - 1);
+            res.add(new ArrayList<Integer>(path));
+            dfs(res, nums, path, i+1);
+            path.remove(pLen);
         }
     }
 }

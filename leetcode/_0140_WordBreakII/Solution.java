@@ -5,10 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-// similar to valid ip address
-// 亚麻原题！！
-// TODO: trie!
 class Solution {
+    // dfs for loop: similar to valid ip address
+    // 亚麻原题
     public List<String> wordBreak(String s, List<String> wordDict) {
         List<String> res = new ArrayList<>();
         int len = s.length();
