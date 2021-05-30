@@ -2,8 +2,8 @@ package leetcode._0078_Subsets;
 import java.util.ArrayList;
 import java.util.List;
 
-// dfs1,无脑先加结果，答案在每个node
-// binary reduction?
+// 老刘 dfs1,无脑先加结果，答案在每个node
+// binary reduction
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         if (nums == null || nums.length == 0) return null; // 需要讨论

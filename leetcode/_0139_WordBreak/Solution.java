@@ -23,6 +23,7 @@ class Solution {
         
         for (int i = idx; i < tLen; i++) {
             String cur = s.substring(idx, i+1);
+            // 一通百通逻辑
             if (wordDict.contains(cur) && dfs(s, wordDict, i+1)) {
                 return true;
             }

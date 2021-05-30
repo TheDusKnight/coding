@@ -2,8 +2,8 @@ package leetcode._0078_Subsets;
 import java.util.ArrayList;
 import java.util.List;
 
-// dfs2, 答案在leaf node
-// linear reduction?
+// 算法哥 dfs2, 答案在leaf node
+// linear reduction
 class Solution2 {
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
@@ -33,10 +33,9 @@ class Solution2 {
         //     path.remove(path.size()-1);
         // }
     }
-
     public static void main(String[] args) {
         Solution2 sol = new Solution2();
-        int[] input = new int[]{1,2,3};
+        int[] input = new int[]{3,4,5};
         System.out.println(sol.subsets(input));
     }
 }

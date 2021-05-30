@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Solution {
-    // dfs, similar to subsetII
+    // dfs, similar to subset
     // 答案出来leave node
     public List<String> generateAbbreviations(String word) {
         List<String> res = new ArrayList<>();
