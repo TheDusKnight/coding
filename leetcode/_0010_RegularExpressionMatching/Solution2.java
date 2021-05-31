@@ -1,23 +1,30 @@
 package leetcode._0010_RegularExpressionMatching;
 
-public class Solution {
-    public static boolean isMatch(String s, String p) {
+class Solution2 {
+    // dfs + pruning
+    public boolean isMatch(String s, String p) {
         // 注意s和p长度都可以是0
         if (s == null || p == null)
             return false;
-        return dfs(s, 0, p, 0);
+        Boolean[][] memo = new Boolean[s.length()+1][p.length()+1];
+        return dfs(s, 0, p, 0, memo);
     }
     
-    private static boolean dfs(String s, int idxS, String p, int idxP) {
+    private boolean dfs(String s, int idxS, String p, int idxP, Boolean[][] memo) {
         int sLen = s.length(), pLen = p.length();
         // 注意s到头p有可能不到头但依然valid，比如s="", p="a*"，但p到头s必须到头才算valid
         if (idxP == pLen) {
             return idxS == sLen;
         }
+        if (memo[idxS][idxP] != null) {
+            return memo[idxS][idxP];
+        }
+        
         if (idxP+1 == pLen || p.charAt(idxP+1) != '*') { // 非星结构
             if (idxS < sLen && isMatch(s, idxS, p, idxP)) {
-                return dfs(s, idxS+1, p, idxP+1);
+                return dfs(s, idxS+1, p, idxP+1, memo);
             } else {
+                memo[idxS][idxP] = false;
                 return false;
             }
         } else {
@@ -25,25 +32,21 @@ public class Solution {
             int i = idxS-1;
             // 当i == idxS-1不需要match
             while (i < sLen && (i == idxS-1 || isMatch(s, i, p, idxP))) {
-                if (dfs(s, i+1, p, idxP+2)) {
+                if (dfs(s, i+1, p, idxP+2, memo)) {
+                    memo[idxS][idxP] = true;
                     return true;
                 }
                 i++;
             }
+            memo[idxS][idxP] = false;
             return false;
         }
     }
     
-    private static boolean isMatch(String s, int idxS, String p, int idxP) {
+    private boolean isMatch(String s, int idxS, String p, int idxP) {
         if (p.charAt(idxP) == '.' || p.charAt(idxP) == s.charAt(idxS)) {
             return true;
         }
         return false;
-    }
-
-    public static void main(String[] args) {
-        String s = "ab"; // aab, aab, aa
-        String p = "a*a"; // a*bb, a*aa or a*a, a*a
-        System.out.println(isMatch(s, p));
     }
 }

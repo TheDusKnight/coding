@@ -1,30 +1,40 @@
 package leetcode._0139_WordBreak;
-import java.util.*;
 
-// list of index 只保留历史上index是true的情况
-public class Solution2 {
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+class Solution2 {
+    // 自写dfs pruning
     public boolean wordBreak(String s, List<String> wordDict) {
-        // cc
-
+        if (s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0)
+            return false;
         Set<String> set = new HashSet<>();
         for (String word: wordDict) {
             set.add(word);
         }
-
-        int len = s.length();
-        List<Integer> list = new LinkedList<>(); // Or ArrayList
-        list.add(0);
-
-        // first i letters [0, i)
-        for (int i = 1; i <= len; i++) {
-            // 左边看dp有没有，右边看是否dict contains
-            for (int j: list) {
-                if (set.contains(s.substring(j, i))) {
-                    list.add(i);
-                    break;
-                }
+        Boolean[] memo = new Boolean[s.length()];
+        return dfs(s, set, 0, memo);
+    }
+    
+    private boolean dfs(String s, Set<String> wordDict, int idx, Boolean[] memo) {
+        int sLen = s.length();
+        if (idx >= sLen)
+            return true;
+        if (memo[idx] != null)
+            return memo[idx];
+        
+        for (int i = idx; i < sLen; i++) {
+            String cur = s.substring(idx, i+1);
+            if (wordDict.contains(cur) && dfs(s, wordDict, i+1, memo)) {
+                memo[idx] = true;
+                return true;
             }
         }
-        return list.contains(s.length());
+        memo[idx] = false;
+        return false;
     }
 }
+
+// time: O(n^2), (memo list length) * (time to calc one value in list)
+// 个人认为优化的原因是call dfs的次数降为n
