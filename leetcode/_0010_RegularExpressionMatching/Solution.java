@@ -14,7 +14,7 @@ public class Solution {
         if (idxP == pLen) {
             return idxS == sLen;
         }
-        if (idxP+1 == pLen || p.charAt(idxP+1) != '*') { // 非星结构
+        if (idxP+1 == pLen || p.charAt(idxP+1) != '*') { // 非星结构没有分叉
             if (idxS < sLen && isMatch(s, idxS, p, idxP)) {
                 return dfs(s, idxS+1, p, idxP+1);
             } else {
@@ -47,3 +47,7 @@ public class Solution {
         System.out.println(isMatch(s, p));
     }
 }
+
+// time: O(m^n) 一个a*分m个叉，一共n层高
+// s = "aaaa...ab" O(m)
+// p = "a*a*a*...a*" O(n)

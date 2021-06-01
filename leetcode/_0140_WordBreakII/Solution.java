@@ -1,53 +1,57 @@
 package leetcode._0140_WordBreakII;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-class Solution {
-    // dfs for loop: similar to valid ip address
-    // 亚麻原题
+public class Solution {
+    // similar to valid ip address
+    // dfs for loop 自写无boolean array pruning
     public List<String> wordBreak(String s, List<String> wordDict) {
         List<String> res = new ArrayList<>();
-        int len = s.length();
-        boolean[] m = new boolean[len+1];
-        Arrays.fill(m, true);
-        HashSet<String> dict = new HashSet<>();
+        if (s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0)
+            return res;
+        Set<String> set = new HashSet<>();
         for (String word : wordDict) {
-            dict.add(word);
+            set.add(word);
         }
-
-        search(res, new StringBuilder(), s, 0, dict, m);
+        dfs(res, s, set, new StringBuilder(), 0);
         return res;
     }
 
-    private void search(List<String> res, StringBuilder path, String s, int idx, Set<String> dict, boolean m[]) {
-        int len = s.length();
-        if (idx == len) {
-            res.add(path.toString());
+    private void dfs(List<String> res, String s, Set<String> wordDict, StringBuilder path, int idx) {
+        int tLen = s.length();
+        int pLen = path.length();
+        if (idx == tLen) {
+            res.add(path.toString().trim());
             return;
         }
 
-        int curSize = res.size();
-        for (int i = idx + 1; i <= len; i++) {
-            // dfs使用for loop表示拼接
-            String str = s.substring(idx, i);
-            if (dict.contains(str) && m[i]) {
-                int lenPath = path.length();
-                if (lenPath == 0) {
-                    path.append(str);
-                } else {
-                    path.append(" " + str);
-                }
+        for (int i = idx; i < tLen; i++) {
+            String cur = s.substring(idx, i+1);
+            if (wordDict.contains(cur)) {
+                // if (idx == 0) {
+                //     path.append(cur);
+                //     dfs(res, s, wordDict, path, i+1);
+                //     path.setLength(pLen);
+                // } else {
+                //     path.append(" " + cur);
+                //     dfs(res, s, wordDict, path, i+1);
+                //     path.setLength(pLen);
+                // }
 
-                search(res, path, s, i, dict, m);
-                path.setLength(lenPath);
+                path.append(cur + " ");
+                dfs(res, s, wordDict, path, i+1);
+                path.setLength(pLen);
             }
         }
-        // ?
-        if (curSize == res.size()) {
-            m[idx] = false;
-        }
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        System.out.println(sol.wordBreak("catsanddog", List.of("cat","cats","and","sand","dog")));
     }
 }
+
+// time: O(2^n), space: O(3*n)

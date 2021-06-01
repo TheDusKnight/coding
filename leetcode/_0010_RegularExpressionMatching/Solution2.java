@@ -20,9 +20,11 @@ class Solution2 {
             return memo[idxS][idxP];
         }
         
-        if (idxP+1 == pLen || p.charAt(idxP+1) != '*') { // 非星结构
+        if (idxP+1 == pLen || p.charAt(idxP+1) != '*') { // 非星结构没有分叉
             if (idxS < sLen && isMatch(s, idxS, p, idxP)) {
-                return dfs(s, idxS+1, p, idxP+1, memo);
+                boolean res = dfs(s, idxS+1, p, idxP+1, memo);
+                memo[idxS][idxP] = res;
+                return res;
             } else {
                 memo[idxS][idxP] = false;
                 return false;
@@ -50,3 +52,5 @@ class Solution2 {
         return false;
     }
 }
+
+// time: O(m*n*m) = O((m^2)*n)

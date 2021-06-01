@@ -29,6 +29,7 @@ class Solution {
     }
 }
 
+// 该题不能用pruning，因为每个dfs的状态是唯一确定的，并且boolean[][] visited无法作为pruning的key
 // time: O(2^(2L)*n*m); space: O(n*m) (不计算栈的情况下)n*m为2d board长和宽，L为word长度
 
 // 另一种计算方法，考虑word有可能比2d board长的情况

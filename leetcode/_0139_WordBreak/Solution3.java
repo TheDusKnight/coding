@@ -57,4 +57,4 @@ public class Solution3 {
     }
 }
 
-// time: n^2 * n = O(n^s) because substring is O(n)
+// time: n^2 * n = O(n^s) because substring is O(n), 言之有理即可

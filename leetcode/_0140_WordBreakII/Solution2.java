@@ -1,56 +1,48 @@
 package leetcode._0140_WordBreakII;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Solution2 {
-    // dfs 自写无boolean array速度快
+class Solution2 {
+    // dfs + pruning
     public List<String> wordBreak(String s, List<String> wordDict) {
         List<String> res = new ArrayList<>();
         if (s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0)
             return res;
         Set<String> set = new HashSet<>();
-        for (String word : wordDict) {
+        for (String word: wordDict) {
             set.add(word);
         }
-        dfs(res, s, set, new StringBuilder(), 0);
+        boolean[] visited = new boolean[s.length()];
+        Arrays.fill(visited, true);
+        dfs(res, s, 0, new StringBuilder(), set, visited);
         return res;
     }
-
-    private void dfs(List<String> res, String s, Set<String> wordDict, StringBuilder path, int idx) {
+    
+    private void dfs(List<String> res, String s, int idx, StringBuilder path, Set<String> wordDict, boolean[] visited) {
         int tLen = s.length();
         int pLen = path.length();
         if (idx == tLen) {
             res.add(path.toString().trim());
             return;
         }
-
+        if (!visited[idx])
+            return;
+        
+        int curSize = res.size(); // cache res长度
         for (int i = idx; i < tLen; i++) {
             String cur = s.substring(idx, i+1);
             if (wordDict.contains(cur)) {
-                // if (idx == 0) {
-                //     path.append(cur);
-                //     dfs(res, s, wordDict, path, i+1);
-                //     path.setLength(pLen);
-                // } else {
-                //     path.append(" " + cur);
-                //     dfs(res, s, wordDict, path, i+1);
-                //     path.setLength(pLen);
-                // }
-
                 path.append(cur + " ");
-                dfs(res, s, wordDict, path, i+1);
+                dfs(res, s, i+1, path, wordDict, visited);
                 path.setLength(pLen);
             }
         }
-    }
-
-    public static void main(String[] args) {
-        Solution2 sol = new Solution2();
-        System.out.println(sol.wordBreak("catsanddog", List.of("cat","cats","and","sand","dog")));
+        if (curSize == res.size()) // 如果长度没变，说明走不通，以后就不要走了
+            visited[idx] = false;
     }
 }
-
-// time: O(2^n), space: O(3*n)
+// time: O(2^n) pruning常数级别优化
