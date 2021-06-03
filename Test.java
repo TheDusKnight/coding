@@ -15,6 +15,7 @@ public class Test {
         /** bit operations */
         // System.out.println(12 << 2);
         // System.out.println(12 >> 2);
+        System.out.println((1 << 2) - 1);
 
         /** substring 左闭右开区间 */
         // System.out.println("123".substring(0, 2));

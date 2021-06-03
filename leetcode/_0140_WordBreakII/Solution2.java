@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 class Solution2 {
-    // dfs + pruning
+    // dfs + 特殊方法pruning
     public List<String> wordBreak(String s, List<String> wordDict) {
         List<String> res = new ArrayList<>();
         if (s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0)
