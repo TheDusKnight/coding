@@ -1,37 +1,40 @@
 package leetcode._0072_EditDistance;
 
-// 匹配问题
-// 二维dp
-class Solution {
+import java.util.Arrays;
+
+public class Solution {
+    // dfs + pruning
     public int minDistance(String word1, String word2) {
-        // cc
-        if (word1 == null || word2 == null) return -1;
-        if (word1.length() == 0) return word2.length();
-        if (word2.length() == 0) return word1.length();
+        // 注意word1和word2可以length为0
+        if (word1 == null || word2 == null)
+            return -1;
 
-        int m = word1.length();
-        int n = word2.length();
-        int[][] dp = new int[m+1][n+1];
-        dp[0][0] = 0;
-        for (int i = 0; i <= m; i++) {
-            dp[i][0] = i;
+        int[][] memo = new int[word1.length()][word2.length()];
+        // 值不能初始化为0，因为0代表index之前完全匹配
+        for (int i = 0; i < memo.length; i++) {
+            Arrays.fill(memo[i], -1);
         }
-        for (int i= 0; i <= n; i++) {
-            dp[0][i] = i;
-        }
+        return dfs(word1, word2, word1.length()-1, word2.length()-1, memo);
+    }
 
-        for (int i = 1; i <= m; i++) {
-            for (int j = 1; j <= n; j++) {
-                // i，j从1开始，所以word从i-1，j-1开始
-                if ((word1.charAt(i-1) == word2.charAt(j-1))) {
-                    dp[i][j] = dp[i-1][j-1];
-                } else {
-                    dp[i][j] = Math.min(dp[i-1][j-1], Math.min(dp[i][j-1], dp[i-1][j])) + 1;
-                }
-            }
+    private int dfs(String word1, String word2, int i, int j, int[][]memo) {
+        if (i == -1) 
+            return j+1;
+        if (j == -1)
+            return i+1;
+        if (memo[i][j] != -1)
+            return memo[i][j];
+        
+        char c1 = word1.charAt(i);
+        char c2 = word2.charAt(j);
+        if (c1 == c2) {
+            memo[i][j] = dfs(word1, word2, i-1, j-1, memo);
+        } else {
+            int replace = dfs(word1, word2, i-1, j-1, memo) + 1;
+            int insert = dfs(word1, word2, i, j-1, memo) + 1;
+            int delete = dfs(word1, word2, i-1, j, memo) + 1;
+            memo[i][j] = Math.min(replace, Math.min(insert, delete));
         }
-        return dp[m][n];
+        return memo[i][j];
     }
 }
-
-// time: m * n
