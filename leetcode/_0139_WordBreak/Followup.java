@@ -18,15 +18,16 @@ public class Followup {
             set.add(word);
         }
         int dp[] = new int[tLen+1]; // 可以改成Integer[]初始为null说明没走过
-        Arrays.fill(dp, -2);
         // 根据面试官要求分析切一刀值为多少？
         dp[tLen] = -1;
         for (int i = tLen-1; i >= 0; i--) {
+            // 尝试不断更新dp[i]
+            dp[i] = Integer.MAX_VALUE;
             for (int j = i; j < tLen; j++) {
                 String str = s.substring(i, j+1);
-                // 当i到j的substring valid，判断j后面一位是否也valid
-                if (set.contains(str) && dp[j+1] > -2) {
-                    dp[i] = dp[i] == -2 ? dp[j+1]+1 : Math.min(dp[j+1]+1, dp[i]);
+                // i到j的substring valid
+                if (set.contains(str)) {
+                    dp[i] = Math.min(dp[j+1]+1, dp[i]);
                     // 不断更新，不是一通百通，不能加break
                 }
             }
@@ -36,7 +37,7 @@ public class Followup {
 
     public static void main(String[] args) {
         Followup sol = new Followup();
-        List<String> wordDict = new ArrayList<String>(Arrays.asList("cat", "sand", "dog", "catsand"));
+        List<String> wordDict = new ArrayList<String>(Arrays.asList("cat", "sand", "dog"));
         System.out.println(sol.wordBreak("catsanddog", wordDict));
     }
 }
