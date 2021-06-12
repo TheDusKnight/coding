@@ -15,8 +15,8 @@ public class Solution {
     
     private List<TreeNode> dfs(int start, int end) {
         List<TreeNode> res = new ArrayList<>();
-        if (start > end) {
-            res.add(null);
+        if (start > end) { // 不能左右相等因为闭闭区间有一个值相当于叶子节点，左右越过相当于null
+            res.add(null); // leave node 挂着个null
             return res;
         }
         
@@ -38,3 +38,4 @@ public class Solution {
 }
 
 // time: O(n^n)
+// 每个node左右节点各n/2种可能性，每层一共n种可能性，一共n层所以O(n^n)
