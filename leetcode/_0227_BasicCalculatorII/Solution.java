@@ -1,5 +1,4 @@
 package leetcode._0227_BasicCalculatorII;
-import java.util.*;
 
 public class Solution {
     public int calculate(String s) {

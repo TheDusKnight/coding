@@ -1,21 +1,11 @@
 package leetcode._0199_BinaryTreeRightSideView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
-
-//   Definition for a binary tree node.
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode() {}
-    TreeNode(int val) { this.val = val; }
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-}
+import leetcode.TreeNode;
 
 public class Solution {
     public List<Integer> rightSideView(TreeNode root) {

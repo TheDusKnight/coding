@@ -2,7 +2,7 @@ package leetcode._0226_InvertBinaryTree;
 import leetcode.TreeNode;
 
 // top down
-class Solution {
+class Solution2 {
     public TreeNode invertTree(TreeNode root) {
         // cc
         if (root == null) return null;

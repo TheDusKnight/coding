@@ -1,5 +1,6 @@
 package leetcode;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 // 1.“0”
 //  0 
@@ -82,15 +83,15 @@ public class TreeGenerator { // LC449
   }
 }
 
-class TreeNode {
+// class TreeNode {
 
-  public int val;
-  public TreeNode left, right;
+//   public int val;
+//   public TreeNode left, right;
 
-  public TreeNode(int val) {
-    this.val = val;
-    this.left = null;
-    this.right = null;
-  }
+//   public TreeNode(int val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
 
 }
