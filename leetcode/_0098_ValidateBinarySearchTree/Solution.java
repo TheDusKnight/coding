@@ -4,22 +4,29 @@ import leetcode.TreeNode;
 // Use definition of inorder traverse, curr value always bigger than previous value
 // inorder: 左根右
 public class Solution {
-    private Integer prev;
-
+    // dfs maintain prev inorder
+    // inorder traversal list 的优化
+    Integer prev;
     public boolean isValidBST(TreeNode root) {
-        return inorder(root);
+        if (root == null)
+            return false;
+        return dfs(root);
     }
-
-    private boolean inorder(TreeNode root) {
-        // corner case
-        if (root == null) return true;
+    
+    private boolean dfs(TreeNode root) {
+        if (root == null)
+            return true;
         
-        // left
-        if (!inorder(root.left)) return false;
-        // root
-        if (prev != null && root.val <= prev) return false;
+        if (!dfs(root.left))
+            return false;
+        if (prev != null && prev >= root.val)
+            return false;
         prev = root.val;
-        // right
-        return inorder(root.right);
+        // 左和根都check过了，check右返回什么就是什么
+        if (!dfs(root.right))
+            return false;
+        return true;
     }
 }
+
+// time: O(n)

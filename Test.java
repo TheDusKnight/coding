@@ -7,6 +7,14 @@ public class Test {
         // int[] newCool = Arrays.copyOf(cool, cool.length * 2);
         // System.out.println(Arrays.toString(newCool));
 
+        /** method pass by value */
+        // int n = 0;
+        // foo(n);
+        // System.out.println(n);
+
+        /** Math强制类型转换 */
+        // System.out.println((int)Math.pow(2, 5));
+
         /** compare 函数 */
         // String s1 = "a";
         // String s2 = "b";
@@ -15,7 +23,7 @@ public class Test {
         /** bit operations */
         // System.out.println(12 << 2);
         // System.out.println(12 >> 2);
-        System.out.println((1 << 2) - 1);
+        // System.out.println((1 << 2) - 1);
 
         /** substring 左闭右开区间 */
         // System.out.println("123".substring(0, 2));
@@ -41,5 +49,9 @@ public class Test {
         // System.out.println(Integer.parseInt("55"));
         /* String to Integer */
         // System.out.println(Integer.valueOf("55"));
+    }
+
+    public static void foo(int n) {
+        n++;
     }
 }

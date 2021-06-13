@@ -1,10 +1,14 @@
 package leetcode._0692_TopKFrequentWords;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 
 // hashmap + min-heap
 public class Solution {
     public List<String> topKFrequent(String[] words, int k) {
-        Map<String, Integer> count = new HashMap();
+        Map<String, Integer> count = new HashMap<>();
         for (String word: words) {
             count.put(word, count.getOrDefault(word, 0) + 1);
         }
@@ -28,7 +32,7 @@ public class Solution {
         //     }
         // }
 
-        List<String> ans = new ArrayList();
+        List<String> ans = new ArrayList<>();
         while (!heap.isEmpty()) 
             ans.add(0, heap.poll());
         return ans;
