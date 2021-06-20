@@ -48,7 +48,7 @@ public class Test {
         /* String to int */
         // System.out.println(Integer.parseInt("55"));
         /* String to Integer */
-        // System.out.println(Integer.valueOf("55"));
+        System.out.println(Integer.valueOf("55"));
     }
 
     public static void foo(int n) {
