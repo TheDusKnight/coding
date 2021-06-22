@@ -1,18 +1,15 @@
 package leetcode._0268_MissingNumber;
-import java.util.*;
 
-// HashSet || HashMap（没必要）
-class Solution4 {
+public class Solution4 {
+    // math
     public int missingNumber(int[] nums) {
-        Set<Integer> set = new HashSet<>();
-        
-        for (int num : nums) {
-            set.add(num);
+        // [3,0,1], expectedSum: [0,1,2,3]=6, sum: [0,1,3]=4
+        int expectedSum = (nums.length+1)*(0+nums.length)/2;
+        int sum = 0;
+        for (int n: nums) {
+            sum += n;
         }
-        int len = nums.length;
-        for (int i = 0; i <= len; i++) {
-            if (!set.contains(i)) return i;
-        }
-        return -1;
+        return expectedSum - sum;
     }
 }
+// time: O(n); space: O(1);

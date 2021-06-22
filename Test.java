@@ -20,10 +20,15 @@ public class Test {
         // String s2 = "b";
         // System.out.println(s2.compareTo(s1));
 
+        
         /** bit operations */
         // System.out.println(12 << 2);
         // System.out.println(12 >> 2);
         // System.out.println((1 << 2) - 1);
+        // System.out.println(5 ^ 7);
+
+        // int to bits
+        // System.out.println("i: " + String.format("%32s", Integer.toBinaryString(2)).replaceAll(" ", "0"));
 
         /** substring 左闭右开区间 */
         // System.out.println("123".substring(0, 2));
@@ -48,7 +53,7 @@ public class Test {
         /* String to int */
         // System.out.println(Integer.parseInt("55"));
         /* String to Integer */
-        System.out.println(Integer.valueOf("55"));
+        // System.out.println(Integer.valueOf("55"));
     }
 
     public static void foo(int n) {

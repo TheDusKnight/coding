@@ -1,20 +1,21 @@
 package leetcode._0215_KthLargestElementInAnArray;
-import java.util.*;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
-// max heap
-class Solution2 {
+public class Solution3 {
+    // maxHeap
     public int findKthLargest(int[] nums, int k) {
-        if (nums == null || nums.length == 0) throw new RuntimeException("msg");
-        Queue<Integer> queue = new PriorityQueue<Integer> ((n1, n2) -> (n2 - n1));
-        
-        for (int num : nums) {
-            queue.add(num);
+        // cc
+        Queue<Integer> maxHeap = new PriorityQueue<>((n1, n2) -> (n2 - n1));
+        for (int num: nums) {
+            maxHeap.add(num);
         }
-        
-        while (k-- > 1) {
-            queue.poll();
+        int tmp = 0;
+        while (k-- > 0) {
+            tmp = maxHeap.poll();
         }
-        
-        return queue.poll();
+        return tmp;
     }
 }
+
+// time: O(n*log(n))

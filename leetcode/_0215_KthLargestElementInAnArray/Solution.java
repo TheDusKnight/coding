@@ -1,11 +1,14 @@
 package leetcode._0215_KthLargestElementInAnArray;
-import java.util.*;
+import java.util.Arrays;
 
-// Sort and return kth element, Time O(n*log(n)) O(1) → count/bucket sort
-class Solution {
+public class Solution {
+    // sort, return kth element
     public int findKthLargest(int[] nums, int k) {
+        // cc
         Arrays.sort(nums);
         int len = nums.length;
         return nums[len-k];
     }
 }
+
+// time: O(n*log(n))

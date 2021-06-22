@@ -1,25 +1,16 @@
 package leetcode._0268_MissingNumber;
-import java.util.*;
 
-// Sort -> binary search, check index and value;
 public class Solution3 {
+    // bit
     public int missingNumber(int[] nums) {
         // cc
-        
-        Arrays.sort(nums);
-        int len = nums.length;
-        if (nums[0] != 0) return 0;
-        else if (nums[len-1] != len) return len;
-        
-        int left = 0, right = len-1, mid = 0;
-        while (left + 1 < right) {
-            mid = left + (right - left) / 2;
-            if (nums[mid] == mid) {
-                left = mid;
-            } else {
-                right = mid;
-            }
+        int res = nums.length;
+        for (int i = 0; i < nums.length; i++) {
+            // 相同的i和nums[i] cancel，不同的留下来和nums.lenggth,最后match不上的留下来
+            res ^= i ^ nums[i];
         }
-        return nums[left] == left ? right : left;
+        return res;
     }
 }
+
+// time: O(n); space: O(1)

@@ -1,20 +1,19 @@
 package leetcode._0268_MissingNumber;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
-// one pass check index == element
-public class Solution2 {
+// HashSet（没必要）
+class Solution2 {
     public int missingNumber(int[] nums) {
-        // cc
-        if (nums == null || nums.length == 0) throw new RuntimeException();
-
-        int len = nums.length;
-        Arrays.sort(nums);
-        if (nums[len-1] != len) return len;
-
-        for (int i = 0; i < len; i++) {
-            if (nums[i] != i) return i;
+        Set<Integer> set = new HashSet<>();
+        
+        for (int num : nums) {
+            set.add(num);
         }
-
+        int len = nums.length;
+        for (int i = 0; i <= len; i++) {
+            if (!set.contains(i)) return i;
+        }
         return -1;
     }
 }
