@@ -1,5 +1,5 @@
 package leetcode._0211_DesignAddAndSearchWordsDataStructure;
-
+// Trie
 class TrieNode {
     char ch;
     boolean isWord;
