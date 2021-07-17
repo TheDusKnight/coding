@@ -4,6 +4,7 @@ public class Test {
 
         /** shallow copy vs deep copy */
         // int[] cool = new int[2];
+        /** copyOf必须有长度 */
         // int[] newCool = Arrays.copyOf(cool, cool.length * 2);
         // System.out.println(Arrays.toString(newCool));
 
