@@ -23,7 +23,7 @@ public class TreeGenerator { // LC449
   // Encodes a tree to a single string.
   public String serialize(TreeNode root) {
       if (root == null) {
-          return "#";
+          return "#,";
       }
 
       StringBuilder sb = new StringBuilder();

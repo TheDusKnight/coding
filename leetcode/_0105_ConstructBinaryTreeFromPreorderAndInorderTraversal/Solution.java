@@ -21,20 +21,22 @@ class Solution {
         if (preStart >= preorder.length || inStart > inEnd) return null;
         
         TreeNode root = new TreeNode(preorder[preStart]);
+        // 如果没有map，每次需要花O(n)时间找一下inIndex
         int inIndex = map.get(root.val);
         
         // preStart+1 往左前进一个
         // inIndex-1 表示inorder范围缩小1
         root.left = helper(preStart + 1, inStart, inIndex-1);
+        // inIndex - inStart是左区间的长度
         root.right = helper(preStart + inIndex - inStart + 1, inIndex+1, inEnd);
         return root;
     }
 }
 
 // without hashmap
-// time: nlogn to n^2
+// time: n*log(n) to n^2?
 // space: O(1)
 
 // with hashmap
-// time: logn to n
+// time: O(n)
 // space:O(n)

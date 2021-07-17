@@ -9,7 +9,7 @@ import leetcode.TreeNode;
 // dfs 面试高频
 public class Codec {
     StringBuilder sb = new StringBuilder();
-    int idx = 0;
+    // int idx = 0;
 
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
@@ -17,6 +17,7 @@ public class Codec {
         return sb.toString();
     }
 
+    // 使用dfs preorder方法保存
     private void dfsSerialize(TreeNode root) {
         if (root == null) {
             sb.append("#,");
@@ -65,6 +66,7 @@ public class Codec {
     // return root;
     // }
 }
+
 // time: O(n)
 
 // Your Codec object will be instantiated and called as such:
