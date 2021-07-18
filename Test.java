@@ -21,7 +21,17 @@ public class Test {
         // String s2 = "b";
         // System.out.println(s2.compareTo(s1));
 
+        /** create array of arrayList */
+        // List<Integer>[] tmp = new List[3];
+        // for (int i = 0; i < tmp.length; i++) {
+        //     tmp[i] = new ArrayList<>();
+        // }
         
+        /** 反转arrayList */
+        // Collections.reverse(tmp);
+        /** convert arrayList to array使用toArray方法 */
+        /** 不存在convert List<Integer> to int[]的简单方法，int[] array = list.stream().mapToInt(i->i).toArray();*/
+
         /** bit operations */
         // System.out.println(12 << 2);
         // System.out.println(12 >> 2);
