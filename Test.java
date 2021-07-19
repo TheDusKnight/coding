@@ -1,3 +1,5 @@
+// check boolean可以不写== true or == false，但check null必须写
+
 public class Test {
     public static void main(String[] args) {
         /** Arrays.sort() inplace sort */
@@ -65,6 +67,8 @@ public class Test {
         // System.out.println(Integer.parseInt("55"));
         /* String to Integer */
         // System.out.println(Integer.valueOf("55"));
+
+        System.out.println('z'-'a'); 
     }
 
     public static void foo(int n) {

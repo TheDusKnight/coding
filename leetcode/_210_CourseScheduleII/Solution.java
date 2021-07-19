@@ -25,11 +25,16 @@ public class Solution {
     
     private List<Integer>[] buildGraph(int numCourses, int[][] prerequisites) {
         List<Integer>[] tmp = new List[numCourses];
-        for (int i = 0; i < tmp.length; i++) {
-            tmp[i] = new ArrayList<>();
-        }
+        // 一种无脑初始化所有array里的ArrayList复杂度可能高
+        // for (int i = 0; i < tmp.length; i++) {
+        //     tmp[i] = new ArrayList<>();
+        // }
         // 注意这里idx0代表pre，idx1代表cur，比如[a,b]，a依赖b所有b应该在a前面,b->a
         for (int i = 0; i < prerequisites.length; i++) {
+            // 一种优化，只有当prerequisites存在对应index才初始化但需要在dfs check nexts是否为null
+            if (tmp[prerequisites[i][1]] == null) {
+                tmp[prerequisites[i][1]] = new ArrayList<>();
+            }
             tmp[prerequisites[i][1]].add(prerequisites[i][0]);
         }
         return tmp;

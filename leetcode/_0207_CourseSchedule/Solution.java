@@ -28,7 +28,7 @@ public class Solution {
     private Map<Integer, List<Integer>> buildGraph(int[][] prerequisites) {
         Map<Integer, List<Integer>> map = new HashMap<>();
         for (int i = 0; i < prerequisites.length; i++) {
-            // 注意这里idx0代表pre，idx1代表cur，比如[a,b]，a依赖b所有b应该在a前面,b->a，记录拓扑的时候会先记录a，然后b，最后返回list先reverse
+            // 注意这里idx0代表pre，idx1代表cur，比如[a,b]，a依赖b所以b应该在a前面,b->a，记录拓扑的时候会先记录a，然后b，最后返回list先reverse
             List<Integer> nexts = map.getOrDefault(prerequisites[i][1], new ArrayList<Integer>());
             nexts.add(prerequisites[i][0]);
             map.put(prerequisites[i][1], nexts);
