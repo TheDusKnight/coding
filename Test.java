@@ -34,6 +34,9 @@ public class Test {
         /** convert arrayList to array使用toArray方法 */
         /** 不存在convert List<Integer> to int[]的简单方法，int[] array = list.stream().mapToInt(i->i).toArray();*/
 
+        /** HashSet转ArrayList */
+        // List<Integer> list = new ArrayList<>().addAll(hashSet);
+
         /** bit operations */
         // System.out.println(12 << 2);
         // System.out.println(12 >> 2);
@@ -68,7 +71,6 @@ public class Test {
         /* String to Integer */
         // System.out.println(Integer.valueOf("55"));
 
-        System.out.println('z'-'a'); 
     }
 
     public static void foo(int n) {
