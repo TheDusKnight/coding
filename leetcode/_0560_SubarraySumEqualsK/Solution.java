@@ -1,19 +1,32 @@
 package leetcode._0560_SubarraySumEqualsK;
-import java.util.*;
 
+// 如果Integer All Positive，sliding window版本
+// 无法用于有负数的情况因为右指针往右走有可能越走越小
 public class Solution {
     public int subarraySum(int[] nums, int k) {
-        int count = 0, sum = 0;
-        Map<Integer, Integer> map = new HashMap<>();
-        map.put(0, 1);
+        if (nums == null || nums.length == 0 || k < 0)
+            return -1;
 
-        for (int i = 0; i < nums.length; i++) {
-            sum += nums[i];
-            if (map.containsKey(sum - k)) {
-                count += map.get(sum - k);
+        int count = 0;
+        int l = 0, r = 0;
+        int len = nums.length;
+        int sum = nums[0];
+        while (l <= r) {
+            if (sum == k) { // 每找到一次k，就加一
+                count++;
             }
-            map.put(sum, map.getOrDefault(sum, 0) + 1); // getOrDefault的作用是为了防止出现数为0或负数
+            if (sum <= k) { // 等于判断可以放在小于也可以大于condition
+                if (++r >= len)
+                    break; // 防越界
+                sum += nums[r];
+            } else {
+                sum -= nums[l];
+                if (++l >= len)
+                    break; // 防越界
+            }
         }
         return count;
     }
 }
+
+// time: O(n); space: O(1)
