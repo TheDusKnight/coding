@@ -1,7 +1,10 @@
 package leetcode.MergeSort;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+// recursion
 // 这种写法不好，因为没有reuse同一个helper array,空间复杂度高
 public class MergeSort {
 	public ArrayList<Integer> mergeSort(ArrayList<Integer> array) {
@@ -37,6 +40,7 @@ public class MergeSort {
 				res.add(rightRes.get(rightIndex++));
 			}
 		}
+		// 注意只有一遍有可能有剩余，另一边绝无可能有剩余
 		// remaining elements on left side
 		while (leftIndex < leftRes.size()) {
 			res.add(leftRes.get(leftIndex++));
@@ -56,4 +60,4 @@ public class MergeSort {
 }
 
 // Time: O(nlogn) + O(n) = O(nlogn)
-// Space: O(n) + O(logn) = O(n) [系统栈空间]
+// Space: 大于O(n), 我估计是O(n*log(n))

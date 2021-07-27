@@ -1,51 +1,48 @@
 package leetcode.MergeSort;
 
-import java.util.*;
+import java.util.Arrays;
 
-// 没有reuse helper
 public class MyMergeSort {
-   public List<Integer> mergeSort(List<Integer> array) {
-       // cc
-       if (array == null || array.size() <= 1) return array;
-       return mergeSort(array, 0, array.size() - 1);
-   } 
+    public static int[] mergeSort(int[] array) {
+        if (array == null)
+            return null;
 
-   private List<Integer> mergeSort(List<Integer> array, int left, int right) {
-       // cc
-       List<Integer> res = new ArrayList<Integer>();
-       if (left == right) {
-           res.add(array.get(left));
-           return res;
-       }
+        int len = array.length;
+        int[] helper = new int[len];
+        mergeSort(array, helper, 0, len - 1);
+        return array;
+    }
 
-       int mid = left + (right - left) / 2;
-       List<Integer> leftRes = mergeSort(array, left, mid);
-       List<Integer> rightRes = mergeSort(array, mid+1, right);
-       merge(leftRes, rightRes, res);
-       return res;
-   }
+    private static void mergeSort(int[] array, int[] helper, int l, int r) {
+        if (l == r)
+            return;
 
-   private void merge(List<Integer> leftRes, List<Integer> rightRes, List<Integer> res) {
-       int leftIndex = 0;
-       int rightIndex = 0;
-       while (leftIndex < leftRes.size() && rightIndex < rightRes.size()) {
-           if (leftRes.get(leftIndex++) < rightRes.get(rightIndex++)) {
-               res.add(leftRes.get(leftIndex));
-           } else {
-               res.add(rightRes.get(rightIndex));
-           }
-       }
-       // add remaining to res list
-       while (leftIndex < leftRes.size()) {
-           res.add(leftRes.get(leftIndex++));
-       }
-       while (rightIndex < rightRes.size()) {
-           res.add(rightRes.get(rightIndex++));
-       }
-   }
-   public static void main(String[] args) {
-       ArrayList<Integer> list = new ArrayList<>(Arrays.asList(2,1,3,9,-4));
-       MergeSort instance = new MergeSort();
-       System.out.println(instance.mergeSort(list));
-   }
+        int m = l + (r - l) / 2;
+        mergeSort(array, helper, l, m);
+        mergeSort(array, helper, m + 1, r);
+        merge(array, helper, l, m, r);
+    }
+
+    private static void merge(int[] array, int[] helper, int l, int m, int r) {
+        for (int i = 0; i < array.length; i++) {
+            helper[i] = array[i];
+        }
+
+        int lIdx = l, rIdx = m + 1, cur = l;
+        while (lIdx <= m && rIdx <= r) {
+            if (helper[lIdx] < helper[rIdx]) {
+                array[cur++] = helper[lIdx++];
+            } else {
+                array[cur++] = helper[rIdx++];
+            }
+        }
+
+        while (lIdx <= m) {
+            array[cur++] = helper[lIdx++];
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(MyMergeSort.mergeSort(new int[] { 2, 5, 4, 8 })));
+    }
 }

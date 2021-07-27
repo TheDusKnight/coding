@@ -83,7 +83,7 @@ public class Test {
         // System.out.println(Integer.valueOf("55"));
     }
 
-    public static void foo(int n) {
-        n++;
-    }
+    // public static void foo(int n) {
+    //     n++;
+    // }
 }
