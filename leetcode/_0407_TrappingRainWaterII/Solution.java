@@ -1,5 +1,5 @@
 package leetcode._0407_TrappingRainWaterII;
-import java.util.*;
+import java.util.PriorityQueue;
 
 // BFS + minHeap
 public class Solution {
@@ -18,11 +18,12 @@ public class Solution {
         if (heights == null || heights.length == 0 || heights[0].length == 0) return 0;
         
         // min heap
-        PriorityQueue<Cell> queue = new PriorityQueue<>(1, new Comparator<Cell>() {
-            public int compare(Cell a, Cell b) {
-                return a.height - b.height;
-            }
-        });
+        // PriorityQueue<Cell> queue = new PriorityQueue<>(1, new Comparator<Cell>() {
+        //     public int compare(Cell a, Cell b) {
+        //         return a.height - b.height;
+        //     }
+        // });
+        PriorityQueue<Cell> queue = new PriorityQueue<>(1, (a, b) -> a.height - b.height);
 
         int m = heights.length;
         int n = heights[0].length;

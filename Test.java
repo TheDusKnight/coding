@@ -10,6 +10,7 @@ public class Test {
         /** copyOf必须有长度 */
         // int[] newCool = Arrays.copyOf(cool, cool.length * 2);
         // System.out.println(Arrays.toString(newCool));
+        // clone可以叫shallow copy也可以叫deep copy，但它的本质是call array dereference后的第一层
 
         /** method pass by value */
         // int n = 0;
