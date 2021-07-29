@@ -5,46 +5,45 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
 // 自己纯手写
-public class Solution2 {
+class Solution2 {
     public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
-        List<List<String>> result = new ArrayList<>();
         // cc
+        List<List<String>> res = new ArrayList<>();
         Set<String> set = new HashSet<>();
-        for (String word : wordList) {
-            set.add(word);
+        for (String s: wordList) {
+            set.add(s);
         }
         Queue<String> queue = new LinkedList<>();
         queue.offer(beginWord);
-        // queue offer one, set remove one, 根据题意
-        set.remove(beginWord);
-        HashMap<String, List<String>> graph = new HashMap<>();
+        Map<String, List<String>> graph = new HashMap<>();
         boolean flag = false;
+        
         while (!queue.isEmpty()) {
-            Set<String> visitedThisLev = new HashSet<>();
             int size = queue.size();
+            Set<String> visitedThisLevel = new HashSet<>();
             while (size-- > 0) {
                 String cur = queue.poll();
-                char[] arr = cur.toCharArray();
-                for (int i = 0; i < arr.length; i++) {
-                    char tmp = arr[i];
-                    for (char j = 'a'; j <= 'z'; j++) {
-                        arr[i] = j;
-                        String next = String.valueOf(arr);
-                        // 先不remove next等该层所有路径都保存后再把所有next删掉
-                        if (!next.equals(cur) && set.contains(next)) {  
-                            if (next.equals(endWord)) {
+                char[] chars = cur.toCharArray();
+                for (int i = 0; i < chars.length; i++) {
+                    char c = chars[i];
+                    for (char j = 'a'; j < 'z'; j++) {
+                        chars[i] = j;
+                        String next = String.valueOf(chars);
+                        if (j != c && set.contains(next)) {
+                            if (next.equals(endWord))
                                 flag = true;
-                            }
-                            if (!visitedThisLev.contains(next)) {
+                            
+                            if (!visitedThisLevel.contains(next)) {
                                 List<String> one = new ArrayList<>();
                                 one.add(cur);
                                 graph.put(next, one);
+                                visitedThisLevel.add(next);
                                 queue.offer(next);
-                                visitedThisLev.add(next);
                             } else {
                                 List<String> one = graph.get(next);
                                 one.add(cur);
@@ -52,31 +51,32 @@ public class Solution2 {
                             }
                         }
                     }
-                    arr[i] = tmp;
+                    chars[i] = c;
                 }
             }
-            set.removeAll(visitedThisLev);
+            set.removeAll(visitedThisLevel);
+            
             if (flag) {
-                List<String> one = new ArrayList<>();
+                List<String> one = new LinkedList<>();
                 one.add(endWord);
-                search(result, one, endWord, beginWord, graph);
-                return result;
+                search(res, one, endWord, beginWord, graph);
+                return res;
             }
         }
-        return result;
+        return res;
     }
-
-    private void search(List<List<String>> res, List<String> one,
-     String cur, String end, HashMap<String, List<String>> graph) {
-         if (cur.equals(end)) {
-             res.add(new ArrayList<String>(one));
-             return;
-         }
-         List<String> next = graph.get(cur);
-         for (String word: next) {
-             one.add(0, word);
-             search(res, one, word, end, graph);
-             one.remove(0);
-         }
-     }
+    
+    private void search(List<List<String>> res, List<String> one, String cur, String end, Map<String, List<String>> graph) {
+        if (cur.equals(end)) {
+            res.add(new LinkedList<>(one));
+            return;
+        }
+        
+        List<String> next = graph.get(cur);
+        for (String s: next) {
+            one.add(0, s);
+            search(res, one, s, end, graph);
+            one.remove(0);
+        }
+    }
 }

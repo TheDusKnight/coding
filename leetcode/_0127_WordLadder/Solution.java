@@ -7,12 +7,14 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
-// One way bfs
+// One way bfs，如果是伞状用two way bfs在content fact层面有优化
+// All the words in wordList are unique!
 public class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        if (beginWord.equals(endWord)) {
-            return 2;
-        }
+        // cc
+        // if (beginWord.equals(endWord)) { // 不需要加因为leetcode说了beginWord != endWord
+        //     return 2;
+        // }
         Set<String> set = new HashSet<>();
         for (String word: wordList) {
             set.add(word);
@@ -33,12 +35,11 @@ public class Solution {
                         // String next = Arrays.toString(arr); 不正确,有中括号
                         String next = String.valueOf(arr);
                         // String next = new String(arr);
-                        if (set.contains(next) && next.equals(endWord)) {
-                            return minLen;
-                        }
-                        if (set.contains(next)) {
+                        if (j != c && set.contains(next)) {
+                            if (next.equals(endWord))
+                                return minLen;
                             queue.offer(next);
-                            set.remove(next);
+                            set.remove(next); // set同时具有check exist和查环的功能
                         }
                     }
                     arr[i] = c;
@@ -58,5 +59,5 @@ public class Solution {
     }
 }
 
-// n是dict的长度
+// n是dict的长度，k是单词的平均长度
 // time: O(n + 26k*n) = O(n); space: O(n)

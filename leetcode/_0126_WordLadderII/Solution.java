@@ -51,7 +51,7 @@ class Solution {
                                 graph.put(str, one);
                                 queue.offer(str);
                                 visitedThisLev.add(str);
-                            } else {
+                            } else { // 如果contains，说明next node入度大于1
                                 List<String> one = graph.get(str);
                                 one.add(cur);
                                 graph.put(str, one);
@@ -86,11 +86,11 @@ class Solution {
             // 因为map是反着存，res要倒过来
             one.add(0, n);
             search(res, one, n, end, graph);
-            // 回溯
+            // 千万别忘了回溯！
             one.remove(0);
         }
     }
 }
 
 // time: BFS O(V+E) = O(n + 26k*n) = O(n), DFS O(V+E+L*P) L是shortest path长度，P是shortest path个数
-// 注意L*P一定大于V+E。想象一根线连着发散图每次deep copy线都要计算一次
+// 注意L*P一定大于V+E。想象一根线连着发散图每次deep copy这根线都要计算一次，所以有一些线重复计算了很多次

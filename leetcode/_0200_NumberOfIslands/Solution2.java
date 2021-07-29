@@ -3,43 +3,37 @@ package leetcode._0200_NumberOfIslands;
 import java.util.LinkedList;
 import java.util.Queue;
 
-// bfs
+// bfs, 非常标准的2d matrix bfs问题
 public class Solution2 {
+    private static final int[][] DIRECTIONS = new int[][] {{1,0}, {-1,0}, {0,1}, {0,-1}};
+    
     public int numIslands(char[][] grid) {
-        if (grid == null || grid.length == 0) {
+        if (grid == null || grid.length == 0 || grid[0] == null || grid[0].length == 0)
             return 0;
-        }
-
+        
         int row = grid.length, col = grid[0].length, count = 0;
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                // 每见到island就开始一次bfs
-                if (grid[i][j] == '1') {
+        for (int r = 0; r < row; r++) {
+            for (int c = 0; c < col; c++) {
+                if (grid[r][c] == '1') {
+                    Queue<Integer> queue = new LinkedList<>();
+                    queue.offer(r * col + c);
+                    grid[r][c] = '0';
                     count++;
-                    grid[i][j] = '0'; // mark as visited
-                    Queue<Integer> queue = new LinkedList<Integer>();
-                    queue.offer(i*col+j);
-                    while (!queue.isEmpty()) {
+                    // 上下左右找island并将其变为海水
+                    // bfs不是查环而是确保visit过的点不会revisit，把visit过的点设为0可以保证不会再次visit
+                    while(!queue.isEmpty()) {
                         int cur = queue.poll();
-                        int ii = cur / col, jj = cur % col;
-                        // 上下左右找island并将其变为海水
-                        if (ii-1 >= 0 && grid[ii-1][jj] == '1') { // 如果邻居是island
-                            queue.offer((ii-1)*col+jj); // 把邻居加入queue，check邻居的邻居
-                            grid[ii-1][jj] = '0'; // 把邻居变成海
+                        int i = cur / col;
+                        int j = cur % col;
+                        for (int[] dir: DIRECTIONS) {
+                            int ii = i + dir[0];
+                            int jj = j + dir[1];
+                            if (ii >= 0 && ii < row && jj >= 0 && jj < col && grid[ii][jj] == '1') {
+                                queue.offer(ii * col + jj);
+                                grid[ii][jj] = '0'; // 把看到的1变成0
+                            }
                         }
-                        if (ii+1 < row && grid[ii+1][jj] == '1') {
-                            queue.offer((ii+1)*col+jj);
-                            grid[ii+1][jj] = '0';
-                        }
-                        if (jj-1 >= 0 && grid[ii][jj-1] == '1') {
-                            queue.offer(ii*col+jj-1);
-                            grid[ii][jj-1] = '0';
-                        }
-                        if (jj+1 < col && grid[ii][jj+1] == '1') {
-                            queue.offer(ii*col+jj+1);
-                            grid[ii][jj+1] ='0';
-                        }
-                    }
+                    } 
                 }
             }
         }

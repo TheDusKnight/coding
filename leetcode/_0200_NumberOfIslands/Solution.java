@@ -1,6 +1,6 @@
 package leetcode._0200_NumberOfIslands;
 
-// dfs
+// dfs, 可以inplace不用visited但最好不要这么做
 public class Solution {
     public int numIslands(char[][] grid) {
         if (grid == null || grid.length == 0 || grid[0] == null) return 0;
