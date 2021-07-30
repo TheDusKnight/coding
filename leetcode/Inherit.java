@@ -1,3 +1,4 @@
+package leetcode;
 class Father {
     int a = 1;
 
@@ -8,6 +9,11 @@ class Father {
 
 class Son extends Father {
     int a = 2;
+
+    @Override
+    public void printFather() {
+        System.out.println("Father override.");
+    }
 
     public void printSon() {
         System.out.println(this.a);

@@ -1,8 +1,8 @@
-package ood;
+package leetcode;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
-public class Compare {
+public class CompareTest {
     class MyComparator implements Comparator<String> {
         @Override
         public int compare(String l1, String l2) {

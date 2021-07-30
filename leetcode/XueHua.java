@@ -1,4 +1,4 @@
-package ood;
+package leetcode;
 
 public class XueHua {
     public static void xueHua(int n) {

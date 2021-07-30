@@ -15,7 +15,7 @@ class Solution {
         int[][] cost = new int[row][col]; // reuse cost
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                if (grid[i][j] == 1) {
+                if (grid[i][j] == 1) { // 从1出发去找0
                     bfs(grid, i, j, cost);
                 }
             }
@@ -48,7 +48,7 @@ class Solution {
                 for (int[] dir : DIRECTIONS) {
                     int ii = i + dir[0];
                     int jj = j + dir[1];
-                    if (ii >= 0 && ii < row && jj >= 0 && jj < col && !visited[ii][jj] && grid[ii][jj] == 0) {
+                    if (ii >= 0 && ii < row && jj >= 0 && jj < col && !visited[ii][jj] && grid[ii][jj] == 0) { // 如果是1肯定不会visit
                         queue.offer(ii * col + jj);
                         visited[ii][jj] = true;
                         cost[ii][jj] += minLen;
@@ -58,7 +58,7 @@ class Solution {
             minLen++;
         }
 
-        // 注意没有visited到的0set成2
+        // 注意没有visited到的0 set成2
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (grid[i][j] == 0 && !visited[i][j]) {

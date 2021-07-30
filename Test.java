@@ -83,9 +83,16 @@ public class Test {
         // System.out.println(Integer.parseInt("55"));
         /* String to Integer */
         // System.out.println(Integer.valueOf("55"));
+
+        int a;
+        a = 3;
+
+        int[] b;
+        b = new int[] {1,2};
     }
 
     // public static void foo(int n) {
     //     n++;
     // }
+
 }

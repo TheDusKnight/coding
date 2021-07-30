@@ -1,4 +1,4 @@
-package ood;
+package leetcode;
 
 public class ThreadTest {
     public static void main(String[] args) {
