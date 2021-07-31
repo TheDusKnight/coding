@@ -9,7 +9,7 @@ public class XueHua {
             while (front-- > 0) {
                 System.out.print(" ");
             }
-            int center = i;
+            int center = i; // i代表每层雪花的数量
             while (center-- > 0) {
                 System.out.print("*");
                 System.out.print(" ");
@@ -38,6 +38,8 @@ public class XueHua {
             System.out.print("\n");
         }
     }
+
+
 
     public static void main(String[] args) {
         XueHua.xueHua(3);

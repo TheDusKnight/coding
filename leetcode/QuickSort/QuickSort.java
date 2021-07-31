@@ -2,6 +2,7 @@ package leetcode.QuickSort;
 
 import java.util.Arrays;
 
+// 某位大哥写的代码，lc912速度较慢
 public class QuickSort {
     public int[] quickSort(int[] nums) {
         if (nums == null || nums.length == 0)

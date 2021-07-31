@@ -15,7 +15,7 @@ public class Solution3 {
             sz = new int[len];
             // 初始化每个区域的代表root以及root的size
             for (int i = 0; i < len; i++) {
-                ids[i] = -1;
+                ids[i] = -1; // 一开始不知道是不是island所以先初始化成-1，等addIsland时再改
                 sz[i] = 1; // the size of root
             }
         }
@@ -29,7 +29,7 @@ public class Solution3 {
             if (sz[rootP] > sz[rootQ]) {
                 ids[rootQ] = rootP;
                 sz[rootP] += sz[rootQ];
-                this.size--;
+                this.size--; // 把两个岛屿union成一个，size-1
             } else {
                 ids[rootP] = rootQ;
                 sz[rootQ] += sz[rootP];
@@ -37,13 +37,13 @@ public class Solution3 {
             }
         }
 
-        private int root(int p) {
+        private int root(int p) { // 找到当前p的root
             int tempP = p;
             while(ids[p] != p) { // 当p的代表不是自己时
                 ids[p] = ids[ids[p]]; // 认爷做父
                 p = ids[p]; // p往前前进一格
             }
-            ids[tempP] = p;
+            ids[tempP] = p; // p现在是原始p的代表
             return p;
         }
 
@@ -53,7 +53,7 @@ public class Solution3 {
 
         public void addIsland(int p) {
             if (ids[p] == -1) {
-                ids[p] = p;
+                ids[p] = p; // add是把代表初始化成自己
                 size++;
             }
         }
@@ -92,3 +92,5 @@ public class Solution3 {
         return uf.size;
     }
 }
+
+// time: O(mn*log(mn));
