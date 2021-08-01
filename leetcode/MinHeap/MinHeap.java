@@ -83,7 +83,7 @@ public class MinHeap {
         if (index < 0 || index > array.length - 1)
             throw new IllegalArgumentException();
 
-        while (index > 0) {
+        while (index > 0) { // 不能等于0，否则没有parent
             int parent = (index - 1) / 2;
             if (array[parent] > array[index]) {
                 swap(parent, index);

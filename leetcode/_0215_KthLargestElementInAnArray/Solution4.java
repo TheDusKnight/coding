@@ -14,7 +14,7 @@ public class Solution4 {
     private static int findPosPartition(int[] array, int left, int right, int length, int k) {
         Random rand = new Random();
         int pivotRandIndex = left + rand.nextInt(right - left + 1);
-        // int pivotRandIndex = left + (int) (Math.random() * (right - left + 1));
+        // int pivotRandIndex = left + (int) (Math.random() * (right - left + 1)); // bad
         int pivotValue = array[pivotRandIndex];
         swap(array, pivotRandIndex, right);
 

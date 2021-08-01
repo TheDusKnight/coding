@@ -27,7 +27,7 @@ public class MergeSort2 {
     private static void merge(int[] array, int[] helper, int left, int mid, int right) {
         // reuse same helper array
         // 把当前区域的值赋给helper array
-        for (int i = 0; i <= right; i++) {
+        for (int i = 0; i <= right; i++) { // i <= right而不是 i < array.length!!!
             helper[i] = array[i];
         }
 

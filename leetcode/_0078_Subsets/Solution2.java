@@ -16,7 +16,7 @@ class Solution2 {
     private void dfs(List<List<Integer>> res, int[] nums, List<Integer> path, int idx) {
         int sLen = nums.length;
         int pLen = path.size();
-        if (idx == sLen) {
+        if (idx == sLen) { // 把所有位置的状态确定后输出
             res.add(new ArrayList<Integer>(path));
             return;
         }
@@ -39,3 +39,5 @@ class Solution2 {
         System.out.println(sol.subsets(input));
     }
 }
+
+// time: O(2^n)

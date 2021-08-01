@@ -1,7 +1,11 @@
 package leetcode._0078_Subsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 // 第二类搜索树bfs写法
+// 类似dfs答案出来leaf node
 public class Solution3 {
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
@@ -31,7 +35,7 @@ public class Solution3 {
             // 下一个index加或不加
             level++;
         }
-        result = (List) queue;
+        result = (List) queue; // result就是最后一层所有leave node
         return result;
     }
 }
