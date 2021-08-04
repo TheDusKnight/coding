@@ -23,7 +23,7 @@ public class Solution3 {
         queue.offer(new ArrayList<>(temp)); // (ArrayList) temp.clone()
         int size;
 
-        while (level < length) {
+        while (level < length) { // 不能写能!queue.isEmpty()因为leave node储存在queue里不能让queue empty
            size = queue.size();
             // 把每一层solution-so-far poll出啦，加或不加下一个元素
             while(size-- > 0) {

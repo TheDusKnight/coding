@@ -6,7 +6,9 @@ import java.util.Random;
 
 public class Test {
     public static void main(String[] args) {
-        /** Arrays.sort() inplace sort */
+        /** Arrays.sort() inplace sort array*/
+
+        /** Collections.sort() inplace sort List */
 
         /** shallow copy vs deep copy */
         // int[] cool = new int[2];

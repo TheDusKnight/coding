@@ -41,7 +41,8 @@ public class Solution3 {
             set.add(word);
         }
         boolean dp[] = new boolean[tLen+1];
-        dp[tLen] = true; // j走到头为true
+        // // j走到头为true; 看下Solution2，dp的初始化对应dfs base case
+        dp[tLen] = true;
         for (int i = tLen-1; i >= 0; i--) {
             for (int j = i; j < tLen; j++) {
                 String str = s.substring(i, j+1);

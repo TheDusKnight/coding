@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+// 返回任意一条路径
 class WordBreakIII {
-    // 返回任意一条路径
     public boolean wordBreak(String s, List<String> wordDict) {
         if (s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0)
             return false;

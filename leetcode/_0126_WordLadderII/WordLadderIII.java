@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
+// 返回任意一条路径
+// dfs + while loop
 class WordLadderIII {
     public List<String> findLadders(String beginWord, String endWord, List<String> wordList) {
         List<String> res = new ArrayList<>();
@@ -33,7 +35,7 @@ class WordLadderIII {
                         arr[i] = j;
                         String next = String.valueOf(arr);
                         if (!next.equals(cur) && dict.contains(next)) {
-                            if (next.equals(endWord)) {
+                            if (next.equals(endWord)) { // 找到一条路径立即返回
                                 res.add(next);
                                 graph.put(next, cur);
                                 return recoverPath(res, graph, endWord, beginWord);

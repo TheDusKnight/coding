@@ -1,4 +1,7 @@
 package leetcode._0364_NestedListWeightSummII;
+
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -37,7 +40,7 @@ class Solution2 {
     // 数学垫高bfs
     public int depthSumInverse(List<NestedInteger> nestedList) {
         Queue<NestedInteger> queue = new LinkedList<>();
-        for (NestedInteger nested: nestedList) {
+        for (NestedInteger nested : nestedList) {
             queue.offer(nested);
         }
         // tmpSum每层保留，意味着每次加sum都会加一遍之前所有从层的值
@@ -49,7 +52,7 @@ class Solution2 {
                 if (cur.isInteger()) {
                     tmpSum += cur.getInteger();
                 } else {
-                    for (NestedInteger next: cur.getList()) {
+                    for (NestedInteger next : cur.getList()) {
                         queue.offer(next);
                     }
                 }
@@ -59,5 +62,7 @@ class Solution2 {
         return sum;
     }
 }
+
+
 
 // time: O(n); space: O(n);

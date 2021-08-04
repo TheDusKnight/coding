@@ -1,8 +1,12 @@
 package leetcode._0047_PermutationsII;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-// dfs第二类搜索树
-// 只能用set做并且set不能reuse, 不能用指针因为swap位置会发生变化,重复的位置可能变得不连续,sort也只能保持初始状态sort
+// dfs第二类搜索树答案出在leaf node
+// 只能用set做并且set不能reuse, 不能用sort因为swap位置会发生变化,重复的位置可能变得不连续,sort也只能保持初始状态sort
 public class Solution {
     public List<List<Integer>> permuteUnique(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();

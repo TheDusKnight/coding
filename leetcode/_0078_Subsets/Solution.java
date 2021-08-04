@@ -4,7 +4,6 @@ import java.util.List;
 
 // 老刘 dfs1,无脑先加结果，答案在每个node
 // binary reduction
-
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         if (nums == null || nums.length == 0) return null; // 需要讨论
@@ -20,6 +19,8 @@ class Solution {
         // 永远都是add在存东西，remove只是在下一次add之前删去元素，它自己无法存入sol
         for (int i = index; i < nums.length; i++) { // 如果index越界，进入不了for loop直接return
             sub.add(nums[i]); // 也可以每次创建新的object不需要回溯但不推荐
+            // subset的逻辑是每次加完之后就不用管i，下一层逻辑是往i后面加或不加所以不是index+1!
+            // 如果是index+1那么比如index=0，i=1时，sub.add(nums[1])，下一层dfs index=1, i=1，sub.add(nums[1])会重复加同一元素
             dfs(nums, i+1, sub, sol);
             sub.remove(sub.size()-1); // 和solution2不一样在后面没有dfs直接把不加的结果存入sol,不重复
             // remove后的sub不能立即放入sol，例如_1不能变成__否则会有重复
