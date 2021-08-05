@@ -19,7 +19,7 @@ public class Followup {
         }
         int dp[] = new int[tLen+1]; // 可以改成Integer[]初始为null说明没走过
         // 根据面试官要求分析切一刀值为多少？
-        dp[tLen] = -1;
+        dp[tLen] = 0; // string为空是minCut是0
         for (int i = tLen-1; i >= 0; i--) {
             // 尝试不断更新dp[i]
             dp[i] = Integer.MAX_VALUE;

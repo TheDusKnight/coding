@@ -29,7 +29,7 @@ class Solution2 {
             res.add(path.toString().trim());
             return;
         }
-        if (!visited[idx])
+        if (!visited[idx]) // 只能在走不通的情况下节省时间，走得通的情况还要全套大保健一遍
             return;
         
         int curSize = res.size(); // cache res长度
