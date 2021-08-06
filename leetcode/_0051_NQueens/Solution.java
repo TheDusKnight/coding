@@ -1,5 +1,6 @@
 package leetcode._0051_NQueens;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 // 如果你用array不需要回溯因为是赋值操作
 // recursion
@@ -7,7 +8,7 @@ class Solution {
     public List<List<String>> solveNQueens(int n) {
         List<List<String>> res = new ArrayList<>();
         if (n <= 0) return res;
-        
+        // board初始化成'.''
         char[][] board = new char[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -36,6 +37,7 @@ class Solution {
     
     private boolean isValid(char[][] board, int x, int y) {
         for (int i = 0; i < board.length; i++) {
+            // column从小变大，所以check isValid的时候只需要check小于当前col idx即可
             for (int j = 0; j < y; j++) {
                 if (board[i][j] == 'Q' && (x == i || Math.abs(i-x) == Math.abs(j-y)))
                     return false;
@@ -44,6 +46,7 @@ class Solution {
         return true;
     }
     
+    // 把2d matrix压扁
     private List<String> convertMatrix(char[][] board) {
         List<String> tmp = new ArrayList<>();
         for (int i = 0; i < board.length; i++) {
@@ -54,3 +57,5 @@ class Solution {
         return tmp;
     }
 }
+
+// time: 一个棋子n种选择，第二个n-1，直到1。O(n!); space: O(n^2);

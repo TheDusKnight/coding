@@ -8,7 +8,7 @@ public class Solution {
     public boolean canCross(int[] stones) {
         if (stones == null || stones.length <= 1)
             return false;
-        if (stones[1] - stones[0] != 1)
+        if (stones[1] - stones[0] != 1) // 必须加否则跑不过去
             return false;
 
         Map<Integer, Boolean>[] memo = new HashMap[stones.length];
@@ -47,4 +47,4 @@ public class Solution {
     }
 }
 
-// time: O(n^2 * n) = O(n^3). memo size O(n^2) * for loop O(n)
+// time: O(n^2 * n) = O(n^3). memo size O(n^2)因为内部map最大长度为 * for loop O(n); 

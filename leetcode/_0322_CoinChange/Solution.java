@@ -1,5 +1,6 @@
 package leetcode._0322_CoinChange;
 
+// dfs + pruning
 public class Solution {
     public int coinChange(int[] coins, int amount) {
         if (amount < 1) return 0;

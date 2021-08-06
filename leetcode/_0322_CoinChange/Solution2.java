@@ -2,6 +2,7 @@ package leetcode._0322_CoinChange;
 
 import java.util.Arrays;
 
+// dp
 class Solution2 {
     public int coinChange(int[] coins, int amount) {
         if (coins == null || coins.length == 0) return -1;

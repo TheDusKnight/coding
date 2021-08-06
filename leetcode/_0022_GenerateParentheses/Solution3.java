@@ -20,7 +20,7 @@ class Solution3 {
             }
             return;
         }
-        if (delta < 0)
+        if (delta < 0) // delta小于0意味着r减得比l多
             return;
         
         int len = path.length();

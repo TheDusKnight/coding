@@ -12,7 +12,7 @@ class Solution {
         return res;
     }
     
-    // 不需要set visited因为是图没有环
+    // 不需要set visited因为没有环
     private void dfs(List<String> res, int l, int r, StringBuilder sb) {
         // success
         if (l == 0 && r == 0) { // 最终每个res的长度为2n并且l = r
@@ -21,7 +21,7 @@ class Solution {
         }
         // fail
         // 算法哥不成功的情况在下一层阻止，老刘在前一层阻止
-        if (l < 0 || r < l) return; // 左边加超过n或者右边加超过左边都fail
+        if (l < 0 || r < l) return; // 左边加超过n或者右边加超过左边都fail，右边剩余的数量要小于左边否则output出错
         
         // 老刘 if (l > 0)
         sb.append('(');
