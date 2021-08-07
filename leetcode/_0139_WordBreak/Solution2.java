@@ -37,5 +37,5 @@ class Solution2 {
     }
 }
 
-// time: O(n^2), (memo list length) * (time to calc one value in list, 在这道题就是计算一层dfs所需要的时间)
+// time: O(n^3), (memo list length) * (time to calc one value in list, 在这道题就是计算一层dfs所需要的时间)
 // 个人认为优化的原因是call dfs的次数降为n
