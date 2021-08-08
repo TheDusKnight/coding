@@ -1,7 +1,7 @@
 package leetcode._1041_RobotBoundedInCircle;
 
 // Amazon onsite
-// one pass
+// array one pass
 class Solution {
     private static final int[][] DIRECTIONS = new int[][] {{0,1}, {1,0}, {0,-1}, {-1,0}}; // 上右下左
     public boolean isRobotBounded(String instructions) {

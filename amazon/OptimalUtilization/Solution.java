@@ -1,4 +1,4 @@
-package leetcode.OptimalUtilization;
+package amazon.OptimalUtilization;
 
 import java.util.ArrayList;
 import java.util.Arrays;
