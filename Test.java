@@ -1,4 +1,5 @@
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 /** check boolean可以不写== true or == false，但check null必须写 */
 /** getOrDefault如果返回新的数据结构，记得要put回去否则不会保存在HashMap或HashSet里!! */
@@ -40,6 +41,9 @@ public class Test {
         // Collections.reverse(tmp);
         /** convert arrayList to array使用toArray方法 */
         /** 不存在convert List<Integer> to int[]的简单方法，int[] array = list.stream().mapToInt(i->i).toArray();*/
+        /** convert list of array to array of array */
+        // List<int[]> list = new ArrayList<>();
+        // int[][] array = list.toArray(new int[2][]); // 返回类型和传入类型match
 
         /** HashSet转ArrayList */
         // List<Integer> list = new ArrayList<>().addAll(hashSet);
@@ -89,14 +93,9 @@ public class Test {
         // System.out.println(Integer.valueOf("55"));
 
         /** 如何使用Random */
-        Random rand = new Random();
-        System.out.println(rand.nextInt(2));
+        // Random rand = new Random();
+        // System.out.println(rand.nextInt(2));
 
-        int a;
-        a = 3;
-
-        int[] b;
-        b = new int[] {1,2};
     }
 
     // public static void foo(int n) {

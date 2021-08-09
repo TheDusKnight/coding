@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 
+// 简洁版
 public class Solution2 {
     public int[][] merge(int[][] intervals) {
         if (intervals == null || intervals.length == 0 || intervals[0] == null || intervals[0].length == 0) return null;
