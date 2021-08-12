@@ -1,5 +1,7 @@
 package leetcode._0547_NumberOfProvinces;
 
+
+// dfs
 class Solution {
     int row, col;
 
@@ -32,5 +34,4 @@ class Solution {
     }
 }
 
-// time: O(n^2). touch every node at most twice, node number is n^2; space: O(n
-// ~ n^2)
+// time: O(n^2). touch every node at most twice, node number is n^2; space: O(n ~ n^2)
