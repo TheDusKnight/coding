@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// 拓扑
+// 拓扑查环
 // hashmap实现，可优化
 public class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
