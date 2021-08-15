@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-// 图的遍历bfs写法
+// 图的遍历bfs写法 
 class Solution {
     public boolean isBipartite(int[][] graph) {
         int len = graph.length;
