@@ -4,24 +4,26 @@ import java.util.Random;
 
 // 215 quick selection改进写法速度更快
 public class Solution {
+    Random rand;
     public int[] sortArray(int[] nums) {
         // cc
         
+        rand = new Random();
         int l = 0, r = nums.length - 1;
         quickSort(nums, l, r);
         return nums;
     }
     
     private void quickSort(int[] nums, int l, int r) {
-        if (r < l) return;
+        if (l > r) return; // l >= r也能通过
         
-        Random rand = new Random();
         int pivotIdx = l + rand.nextInt(r - l + 1);
         int pivotVal = nums[pivotIdx];
+
         swap(nums, pivotIdx, r);
         int slow = l, fast = l;
         
-        while (fast <= r) {
+        while (fast <= r) { // 把小于pivotVal的值都放大左边
             if (nums[slow] < pivotVal) {
                 slow++;
             } else if (nums[fast] < pivotVal) {

@@ -12,6 +12,8 @@ public class Solution4 {
     }
 
     private static int findPosPartition(int[] array, int left, int right, int length, int k) {
+        // 注意base case在下面
+
         Random rand = new Random(); // new Random最好放到初始化的时候
         int pivotRandIndex = left + rand.nextInt(right - left + 1);
         // int pivotRandIndex = left + (int) (Math.random() * (right - left + 1)); // bad
@@ -35,6 +37,7 @@ public class Solution4 {
 
         // After operation, the target(pivotRandIndex) 's index is slow;
         if (slow == length - k) { // length - k是kth largest的index
+            // 这里是base case，因为只走一边所以一定能touch到
             return array[slow];
             // pivot所在的位置就是从小到大sort之后的位置继续找也不需要包含pivot，由quick sort的先全局有序，后局部有序的性质决定
         } else if (slow < length - k) {

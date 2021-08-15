@@ -14,7 +14,7 @@ public class MergeSort2 {
     }
 
     private static void mergeSort(int[] array, int[] helper, int left, int right) {
-        if (left == right) {
+        if (left >= right) { // base case永远都是这个
             return;
         }
 

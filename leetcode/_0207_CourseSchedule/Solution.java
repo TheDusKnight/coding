@@ -10,6 +10,8 @@ import java.util.Map;
 public class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         // cc
+        
+        // 把input转换成graph
         Map<Integer, List<Integer>> graph = buildGraph(prerequisites);
         // 初始化statusMap
         Map<Integer, Integer> statusMap = new HashMap<>();
@@ -31,6 +33,7 @@ public class Solution {
             // 注意这里idx0代表pre，idx1代表cur，比如[a,b]，a依赖b所以b应该在a前面,b->a，记录拓扑的时候会先记录a，然后b，最后返回list先reverse
             List<Integer> nexts = map.getOrDefault(prerequisites[i][1], new ArrayList<Integer>());
             nexts.add(prerequisites[i][0]);
+            // 反向建图，也可以正向建图
             map.put(prerequisites[i][1], nexts);
         }
         return map;
@@ -47,7 +50,7 @@ public class Solution {
 
         statusMap.put(cur, 1); // 将cur状态改成ING
         List<Integer> nexts = graph.get(cur);
-        // 如果nexts不为null遍历nexts，如果为null，说明不可能有环return true
+        // 如果nexts不为null遍历nexts，如果为null，说明cur vertex是末端，不可能有环return true
         if (nexts != null) {
             for (Integer next : nexts) {
                 if (!dfs(graph, next, statusMap)) {

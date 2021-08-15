@@ -18,7 +18,7 @@ public class Solution {
             }
         }
         // 记录拓扑的时候会先记录a，然后b，最后返回list先reverse
-        Collections.reverse(out);
+        Collections.reverse(out); // 也可以不reverse直接用linkedList每次append头部！
         int[] res = out.stream().mapToInt(i->i).toArray();
         return res;
     }
@@ -26,9 +26,8 @@ public class Solution {
     private List<Integer>[] buildGraph(int numCourses, int[][] prerequisites) {
         List<Integer>[] tmp = new List[numCourses];
         // 一种无脑初始化所有array里的ArrayList复杂度可能高
-        // for (int i = 0; i < tmp.length; i++) {
-        //     tmp[i] = new ArrayList<>();
-        // }
+        // Arrays.setAll(graph, ele -> new ArrayList<>())
+
         // 注意这里idx0代表pre，idx1代表cur，比如[a,b]，a依赖b所有b应该在a前面,b->a
         for (int i = 0; i < prerequisites.length; i++) {
             // 一种优化，只有当prerequisites存在对应index才初始化但需要在dfs check nexts是否为null
@@ -64,4 +63,4 @@ public class Solution {
     }
 }
 // numCourses = n, prerequisites length = k
-// O(n+k+n*log(n))
+// O(n+k+n*log(n)) // sort可以不需要

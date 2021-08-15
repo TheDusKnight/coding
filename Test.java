@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 
 /** check boolean可以不写== true or == false，但check null必须写 */
 /** getOrDefault如果返回新的数据结构，记得要put回去否则不会保存在HashMap或HashSet里!! */
@@ -7,7 +6,7 @@ import java.util.List;
 
 public class Test {
     public static void main(String[] args) {
-        /** Arrays.sort() inplace sort array*/
+        /** Arrays.sort() inplace sort array, 注意如果array type是primitive 不能改写comparator 函数*/
 
         /** Collections.sort() inplace sort List */
 
@@ -33,16 +32,19 @@ public class Test {
 
         /** create array of arrayList */
         // List<Integer>[] tmp = new List[3];
-        // for (int i = 0; i < tmp.length; i++) {
+        // for (int i = 0; i < tmp.length; i++) { // 另一种写法：Arrays.setAll(tmp, element -> new ArrayList<>());
         //     tmp[i] = new ArrayList<>();
         // }
         
         /** 反转arrayList */
         // Collections.reverse(tmp);
+
         /** convert arrayList to array使用toArray方法 */
-        /** 不存在convert List<Integer> to int[]的简单方法，int[] array = list.stream().mapToInt(i->i).toArray();*/
+
+        /** 不存在convert List<Integer> to int[]的简单方法，toArray()的array对象必须是Object type。int[] array = list.stream().mapToInt(i->i).toArray();*/
+
         /** convert list of array to array of array */
-        // List<int[]> list = new ArrayList<>();
+        // List<int[]> list = new ArrayList<>(); // 这种方法能成功的原因在于toArray()的array对象必须是Object type
         // int[][] array = list.toArray(new int[2][]); // 返回类型和传入类型match
 
         /** HashSet转ArrayList */
@@ -92,9 +94,9 @@ public class Test {
         /* String to Integer */
         // System.out.println(Integer.valueOf("55"));
 
-        /** 如何使用Random */
-        // Random rand = new Random();
-        // System.out.println(rand.nextInt(2));
+        /** 使用Random，注意bound是exclude */
+        Random rand = new Random();
+        System.out.println(rand.nextInt(1));
 
     }
 

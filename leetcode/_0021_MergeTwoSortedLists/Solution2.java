@@ -33,3 +33,5 @@ public class Solution2 {
         return head;
     }
 }
+
+// time: O(n+m);
