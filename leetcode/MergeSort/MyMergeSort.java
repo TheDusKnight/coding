@@ -4,41 +4,38 @@ import java.util.Arrays;
 
 public class MyMergeSort {
     public static int[] mergeSort(int[] array) {
-        if (array == null)
-            return null;
-
-        int len = array.length;
-        int[] helper = new int[len];
-        mergeSort(array, helper, 0, len - 1);
+        // cc
+        int n = array.length;
+        int[] helper = new int[n];
+        mergeSort(array, helper, 0, n-1);
         return array;
     }
 
     private static void mergeSort(int[] array, int[] helper, int l, int r) {
-        if (l == r)
-            return;
+        if (l >= r) return;
 
-        int m = l + (r - l) / 2;
-        mergeSort(array, helper, l, m);
-        mergeSort(array, helper, m + 1, r);
-        merge(array, helper, l, m, r);
+        int mid = l + (r - l) / 2;
+        mergeSort(array, helper, l, mid);
+        mergeSort(array, helper, mid+1, r);
+        merge(array, helper, l, mid, r);
     }
 
-    private static void merge(int[] array, int[] helper, int l, int m, int r) {
-        for (int i = 0; i < array.length; i++) {
+    private static void merge(int[] array, int[] helper, int l, int mid, int r) {
+        for (int i = 0; i <= r; i++) {
             helper[i] = array[i];
         }
 
-        int lIdx = l, rIdx = m + 1, cur = l;
-        while (lIdx <= m && rIdx <= r) {
+        int lIdx = l, rIdx = mid+1, curIdx = l;
+        while (lIdx <= mid && rIdx <= r) {
             if (helper[lIdx] < helper[rIdx]) {
-                array[cur++] = helper[lIdx++];
+                array[curIdx++] = helper[lIdx++];
             } else {
-                array[cur++] = helper[rIdx++];
+                array[curIdx++] = helper[rIdx++];
             }
         }
 
-        while (lIdx <= m) {
-            array[cur++] = helper[lIdx++];
+        while (lIdx <= mid) {
+            array[curIdx++] = helper[lIdx++];
         }
     }
 

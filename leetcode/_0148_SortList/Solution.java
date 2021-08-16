@@ -4,6 +4,8 @@ import leetcode.ListNode;
 // CURD + Divide and Conquer
 public class Solution {
     public ListNode sortList(ListNode head) {
+        // base case必须写否则会报错，两个base case合并成一个了
+        // 真正的base case其实是head.next，head只有在list为空时才起作用
         if (head == null || head.next == null) return head;
 
         ListNode slow = head, fast = head, prev = null;
@@ -21,7 +23,7 @@ public class Solution {
         // Divide and Conquer
         ListNode l1 = sortList(head);
         ListNode l2 = sortList(slow);
-
+        // 分到不能再分（只剩一个元素）时墙击穿
         return mergeList(l1, l2); // 返回左半部分和右半部分merge好后的头节点
     }
 

@@ -1,5 +1,3 @@
-import java.util.Random;
-
 /** check boolean可以不写== true or == false，但check null必须写 */
 /** getOrDefault如果返回新的数据结构，记得要put回去否则不会保存在HashMap或HashSet里!! */
 /** LinkedList remove API input为int是remove by index，input为Object是remove by Element */
@@ -83,11 +81,12 @@ public class Test {
         // System.out.println('1' - '0' + 1);
 
         /** int to char */
-        // char t = 1 + '0';
+        // char t = 1 + '0'; // sb.append的时候一定要注意类型转换
         // System.out.println(t);
 
         /** int to String */
         // String s = 1 + "k";
+        // String k = String.valueOf(1) + "k";
 
         /* String to int */
         // System.out.println(Integer.parseInt("55"));
@@ -95,8 +94,8 @@ public class Test {
         // System.out.println(Integer.valueOf("55"));
 
         /** 使用Random，注意bound是exclude */
-        Random rand = new Random();
-        System.out.println(rand.nextInt(1));
+        // Random rand = new Random();
+        // System.out.println(rand.nextInt(1));
 
     }
 

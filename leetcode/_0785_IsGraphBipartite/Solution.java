@@ -11,7 +11,7 @@ class Solution {
         int notColored = -1;
         Arrays.fill(color, notColored); // 把每个点标记成-1
         
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < len; i++) { // 遍历每一个点，因为图可能disconnect
             // 找没有被color过的node作为新的root
             if (color[i] == notColored) {
                 color[i] = 0;

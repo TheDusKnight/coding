@@ -37,7 +37,7 @@ class Solution {
             return memo.get(node);
         
         Node cloneNode = new Node(node.val, new ArrayList<>());
-        memo.put(node, cloneNode);
+        memo.put(node, cloneNode); // 防止revisit
         
         List<Node> neighbors = node.neighbors;
         for (Node neighbor: neighbors) {

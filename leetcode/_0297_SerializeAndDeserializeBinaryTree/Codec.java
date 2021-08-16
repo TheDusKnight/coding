@@ -24,7 +24,7 @@ public class Codec {
             return;
         }
 
-        sb.append(String.valueOf(root.val) + ",");
+        sb.append(String.valueOf(root.val) + ","); // 写成root.val + ","也可以
         dfsSerialize(root.left);
         dfsSerialize(root.right);
     }
@@ -67,7 +67,7 @@ public class Codec {
     // }
 }
 
-// time: O(n)
+// time: O(n); space: size + #('#') + #(',') = size + size + 2size = O(4n);
 
 // Your Codec object will be instantiated and called as such:
 // Codec ser = new Codec();

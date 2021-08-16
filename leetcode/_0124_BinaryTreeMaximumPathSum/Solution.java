@@ -7,10 +7,10 @@ class Solution {
     int max = Integer.MIN_VALUE;
     public int maxPathSum(TreeNode root) {
         maxSum(root);
-        return max;
+        return max; // 注意return的不是maxSum return的值
     }
     
-    private int maxSum(TreeNode node) {
+    private int maxSum(TreeNode node) { // return 含义：从叶子结点到当前node的max path max
         if (node == null) return 0;
         int left = maxSum(node.left);
         int right = maxSum(node.right);
@@ -23,3 +23,6 @@ class Solution {
         // return any to curNode max path sum 不return公共祖先路径
     }
 }
+
+// time: O(N). N is number of nodes, since we visit each node not more than 2 times;
+// space: O(log(N) ~ N);

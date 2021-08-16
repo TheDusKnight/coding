@@ -8,7 +8,7 @@ import leetcode.TreeNode;
 // bfs; Same with TreeGenerator
 public class Codec1 {
     // Encodes a tree to a single string
-    public String serialize(TreeNode root) {
+    public static String serialize(TreeNode root) {
         if (root == null)
             return "#,";
 
@@ -29,9 +29,9 @@ public class Codec1 {
     }
 
     // Decodes your encoded data to tree.
-    public TreeNode deserialize(String data) {
+    public static TreeNode deserialize(String data) {
         String ss[] = data.split(",");
-        if (ss.length == 0) {
+        if (ss == null || ss.length == 0) {
             throw new IllegalArgumentException();
         }
         if (ss.length == 1 && ss[0].equals("#")) {
@@ -45,6 +45,7 @@ public class Codec1 {
         while (i < ss.length) { // 或者!queue.isEmpty()
             TreeNode cur = queue.poll();
             TreeNode left = ss[i].equals("#") ? null : new TreeNode(Integer.valueOf(ss[i]));
+            // 防止越界
             TreeNode right = (++i >= ss.length || ss[i].equals("#") ? null : new TreeNode(Integer.valueOf(ss[i])));
             cur.left = left;
             cur.right = right;
@@ -59,4 +60,4 @@ public class Codec1 {
     }
 }
 
-// time: O(n)
+// time: O(n); space: size + #('#') + #(',') = size + size + 2size = O(4n);)

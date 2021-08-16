@@ -60,18 +60,19 @@ public class Codec {
         return helper(0, 0, in.length-1);
     }
     
+    // lc105.Construct Binary Tree from Preorder and Inorder Traversal
     private TreeNode helper(int preStart, int inStart, int inEnd) {
         if (preStart >= pre.length || inStart > inEnd) return null;
         
         TreeNode root = new TreeNode(pre[preStart]);
         int inIndex = map.get(root.val);
         root.left = helper(preStart+1, inStart, inIndex-1);
-        root.right = helper(preStart+(inIndex-inStart)+1, inIndex+1, inEnd);
+        root.right = helper(preStart+1+(inIndex-inStart), inIndex+1, inEnd);
         return root;
     }
 }
 
-// time: O(n*log(n)), space: O(size+#(,)) = O(2*size) = O(2n)
+// time: O(n*log(n)), space(serialize size): O(size+#(,)) = O(2*size) = O(2n)
 
 // Your Codec object will be instantiated and called as such:
 // Codec ser = new Codec();
