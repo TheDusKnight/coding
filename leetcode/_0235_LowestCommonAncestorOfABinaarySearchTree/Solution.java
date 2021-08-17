@@ -1,6 +1,7 @@
 package leetcode._0235_LowestCommonAncestorOfABinaarySearchTree;
 import leetcode.TreeNode;
 
+// All Node.val are unique.
 // 这题可以直接用recursion自下而上返回公共祖先做，但时间复杂度高
 // dfs 类似for loop
 // 公共祖先node一定不会碰到null，因为在此之前一定会被找到
@@ -21,3 +22,5 @@ class Solution {
         }
     }
 }
+
+// time: O(N)

@@ -2,7 +2,7 @@ package leetcode._0235_LowestCommonAncestorOfABinaarySearchTree;
 import leetcode.TreeNode;
 
 // 因为只有一条路径，所以不需要stack或者recursion
-class Solution {
+class Solution2 {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || p == null || q == null) return null;
         
@@ -23,3 +23,5 @@ class Solution {
         return node;
     }
 }
+
+// time: O(N)
