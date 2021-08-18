@@ -1,21 +1,25 @@
 package leetcode._0283_MoveZeroes;
 
-// in-place
-// 指针问题，背下来
-public class Solution {
+// sort two unstable solution leetcode过不去
+class Solution {
     public void moveZeroes(int[] nums) {
-        if (nums == null || nums.length <= 1) return;
-        int zero = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if(nums[i] != 0) {
-                swap(nums, zero++, i);
-            }
+        // cc
+        
+        int l = 0, r = nums.length - 1;
+        while (l + 1 < r) {
+            if (nums[l] != 0) l++;
+            else if (nums[r] == 0) r--;
+            else swap(nums, l, r);
         }
+        if (nums[l] == 0 && nums[r] != 0)
+            swap(nums, l, r);
     }
-
-    private void swap(int[] nums, int i, int j) {
-        int tmp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = tmp;
+    
+    private void swap(int[] nums, int l, int r) {
+        int tmp = nums[l];
+        nums[l] = nums[r];
+        nums[r] = tmp;
     }
 }
+
+// time: O(n);

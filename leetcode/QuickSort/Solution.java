@@ -3,6 +3,7 @@ package leetcode.QuickSort;
 import java.util.Random;
 
 // 215 quick selection改进写法速度更快
+// 也可以用双指针站肩
 public class Solution {
     Random rand;
     public int[] sortArray(int[] nums) {
@@ -23,6 +24,7 @@ public class Solution {
         swap(nums, pivotIdx, r);
         int slow = l, fast = l;
         
+        // 用for loop更好？
         while (fast <= r) { // 把小于pivotVal的值都放大左边
             if (nums[slow] < pivotVal) {
                 slow++;

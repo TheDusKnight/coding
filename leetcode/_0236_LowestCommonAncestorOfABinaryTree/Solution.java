@@ -22,3 +22,4 @@ class Solution {
 }
 
 // time: O(N); space: O(log(N) ~ N);
+// followup: lc1664
