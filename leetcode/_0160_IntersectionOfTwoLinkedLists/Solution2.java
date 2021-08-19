@@ -1,9 +1,10 @@
 package leetcode._0160_IntersectionOfTwoLinkedLists;
-import leetcode.ListNode;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
 
-// hashmap
+import leetcode.ListNode;
+
+// hashset
 public class Solution2 {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) return null;

@@ -1,14 +1,15 @@
 package leetcode._0283_MoveZeroes;
 
 // in-place
-// 指针问题，背下来
+// 快慢针
 public class Solution2 {
     public void moveZeroes(int[] nums) {
         if (nums == null || nums.length <= 1) return;
-        int zero = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if(nums[i] != 0) {
-                swap(nums, zero++, i);
+
+        int slow = 0;
+        for (int fast = 0; fast < nums.length; fast++) {
+            if(nums[fast] != 0) {
+                swap(nums, slow++, fast);
             }
         }
     }

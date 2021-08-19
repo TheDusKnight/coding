@@ -1,17 +1,12 @@
 package leetcode._0070_ClimbineStairs;
 
-// DP
+// recursion -> memoization -> dp with O(n) space -> dp with O(1) space -> dp with O(0) inplace
 class Solution {
     public int climbStairs(int n) {
-        if (n <= 0) throw new IllegalArgumentException();
-        if (n <= 2) return n;
-        int first = 1, second = 2, curr = 3, tmp;
-        for (int i = 3; i <= n; i++) {
-            curr = first + second;
-            tmp = second;
-            second = curr;
-            first = tmp;
-        }
-        return curr;
+        // cc
+        
+        if (n == 1 || n == 2) return n;
+        
+        return climbStairs(n-1) + climbStairs(n-2);
     }
 }

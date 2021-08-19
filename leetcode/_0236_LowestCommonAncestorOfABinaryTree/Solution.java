@@ -12,6 +12,7 @@ class Solution {
 
         TreeNode left = lowestCommonAncestor(root.left, p, q);
         TreeNode right = lowestCommonAncestor(root.right, p, q);
+        
         if (left != null && right != null) return root;
         // 找到代表一路向上返回代表
         if (left != null) return left;

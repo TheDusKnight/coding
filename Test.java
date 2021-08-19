@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.List;
+
 /** check boolean可以不写== true or == false，但check null必须写 */
 /** getOrDefault如果返回新的数据结构，记得要put回去否则不会保存在HashMap或HashSet里!! */
 /** LinkedList remove API input为int是remove by index，input为Object是remove by Element */
@@ -5,6 +8,7 @@
 public class Test {
     public static void main(String[] args) {
         /** Arrays.sort() inplace sort array, 注意如果array type是primitive 不能改写comparator 函数*/
+        /** Arrays.sort() 如何反向sort？class才能用lambda表达式反响sort，将int[]换成Integer[] */
 
         /** Collections.sort() inplace sort List */
 
@@ -71,6 +75,8 @@ public class Test {
         // System.out.println("123".substring(0, 2));
 
         /** Difference between Arrays.asList() and List.of() */
+        Integer[] nums = {1,2,3}; // nums不能是int[]，必须是Integer[]
+        List<Integer> list = Arrays.asList(nums);
         // List<Integer> list = Arrays.asList(1, 2, null); // mutable, allow null
         // list.set(1, 10); // OK
         // List<Integer> list2 = List.of(1, 2, 3); // immutable, doesn't allow null
