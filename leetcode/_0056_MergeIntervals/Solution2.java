@@ -9,7 +9,7 @@ public class Solution2 {
     public int[][] merge(int[][] intervals) {
         if (intervals == null || intervals.length == 0 || intervals[0] == null || intervals[0].length == 0) return null;
         
-        Collections.sort(Arrays.asList(intervals), (a, b) -> a[0] - b[0]);
+        Collections.sort(Arrays.asList(intervals), (a, b) -> a[0] - b[0]); // 用Arrays.sort也行
         
         LinkedList<int[]> merged = new LinkedList<>();
         for (int[] interval: intervals) {
@@ -20,6 +20,6 @@ public class Solution2 {
             }
         }
         
-        return merged.toArray(new int[merged.size()][]);
+        return merged.toArray(new int[merged.size()][]); // 注意toArray要传object 参数和size不然会变成Object[]
     }
 }
