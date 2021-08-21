@@ -25,6 +25,6 @@ class Solution2 {
         
         return minHeap.size();
     }
-}
+} 
 
 // time: O(N*log(N) for sort + N*log(N) for extract min)
