@@ -8,10 +8,10 @@ class Solution {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         
-        ListNode pre1 = dummy, cur1 = head;
+        ListNode pre1 = dummy, cur1 = head; // 注意cur1一开始的position就是0
         for (int i = 0; i < m - 1; i++) {
             pre1 = cur1;
-            cur1 = cur1.next;
+            cur1 = cur1.next; // i等于0时，cur1 position就是1了
         }
         pre1.next = null; // 断开
         
@@ -24,7 +24,7 @@ class Solution {
         
         ListNode temp = reverseLinkedList(cur1);
         
-        pre1.next = temp; // 连接
+        pre1.next = temp; // 连接，或者pre1.next = pre2也行
         cur1.next = cur2; // 连接
         
         return dummy.next;

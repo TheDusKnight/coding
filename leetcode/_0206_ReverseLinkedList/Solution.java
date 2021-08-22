@@ -17,3 +17,5 @@ public class Solution {
         return prev;
     }
 }
+
+// time: O(n)

@@ -21,7 +21,7 @@ class Solution {
         ListNode left = head;
         ListNode right = mid.next;
         
-        mid.next = null;
+        mid.next = null; // left多了一个mid node
         merge(left, reverse(right));
     }
     
@@ -60,16 +60,16 @@ class Solution {
         ListNode cur = dummy;
         
         while (left != null && right != null) {
-            cur.next = left;
+            cur.next = left; 
             left = left.next;
-            cur = cur.next;
-            
+            cur = cur.next; // cur变成left，但left也变了，所以之后的操作不会影响left node
+            //必须分开写
             cur.next = right;
             right = right.next;
             cur = cur.next;
         }
         
-        cur.next = left;
+        cur.next = left; // 注意最后放的是left因为如果input是偶数，left多一个node
     }
 }
 

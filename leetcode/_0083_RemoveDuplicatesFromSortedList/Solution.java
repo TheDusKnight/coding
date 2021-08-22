@@ -1,6 +1,7 @@
 package leetcode._0083_RemoveDuplicatesFromSortedList;
 import leetcode.ListNode;
 
+// CRUD
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
         if (head == null) return head;
