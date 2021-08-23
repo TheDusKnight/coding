@@ -12,7 +12,7 @@ import leetcode.ListNode;
  * }
  */
 
-// 非常经典的一道题，结合的很多linkedlist的知识点
+// 非常经典的一道题，结合的很多linked list的知识点
 class Solution {
     public void reorderList(ListNode head) {
         if (head == null || head.next == null) return;

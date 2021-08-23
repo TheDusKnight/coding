@@ -1,7 +1,7 @@
 package leetcode._0328_OddEvenLinkedList;
 import leetcode.ListNode;
 
-// techbow
+// tech bow
 class Solution {
     public ListNode oddEvenList(ListNode head) {
         if (head == null) return head;

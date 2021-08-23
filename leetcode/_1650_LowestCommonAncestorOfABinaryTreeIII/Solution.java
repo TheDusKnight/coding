@@ -1,4 +1,4 @@
-package leetcode._1650LowestCommonAncestorOfABinaryTreeIII;
+package leetcode._1650_LowestCommonAncestorOfABinaryTreeIII;
 
 // Definition for a Node.
 class Node {
