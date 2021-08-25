@@ -1,6 +1,5 @@
 package leetcode.MergeSort;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 // 带test的array形式的MergeSort
