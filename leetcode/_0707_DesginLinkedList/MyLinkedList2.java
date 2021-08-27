@@ -1,5 +1,6 @@
 package leetcode._0707_DesginLinkedList;
 
+// doubly linked list
 class MyLinkedList2 {
     int size;
     // sentinel nodes as pseudo-head and pseudo-tail
@@ -10,7 +11,7 @@ class MyLinkedList2 {
         size = 0;
         head = new ListNode();
         tail = new ListNode();
-        head.next = tail;
+        head.next = tail; // 一定要连起来！
         tail.prev = head;
     }
     
@@ -52,7 +53,6 @@ class MyLinkedList2 {
         add.next = next;
         prev.next = add;
         next.prev = add;
-        
     }
     
     /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
@@ -61,7 +61,7 @@ class MyLinkedList2 {
         
         // find predecessor and successor of the node to be added
         ListNode prev, next;
-        if (index < size - index) { // 分类讨论缩短时间
+        if (index < size - index) { // 分类讨论缩短时间，也可以不讨论
             prev = head;
             for (int i = 0; i < index; i++) prev = prev.next;
             next = prev.next;
@@ -84,7 +84,6 @@ class MyLinkedList2 {
     public void deleteAtIndex(int index) {
         if (index < 0 || index >= size) return;
         
-        size--;
         // find predecessor and successor of the node to be deleted
         ListNode prev, next;
         if (index < size - index) {
@@ -93,10 +92,12 @@ class MyLinkedList2 {
             next = prev.next.next;
         } else {
             next = tail;
-            for (int i = 0; i < size - index; i++) next = next.prev;
+            // 找到curr前面一个node
+            for (int i = 0; i < size - index - 1; i++) next = next.prev;
             prev = next.prev.prev;
         }
         
+        size--;
         prev.next = next;
         next.prev = prev;
     }
