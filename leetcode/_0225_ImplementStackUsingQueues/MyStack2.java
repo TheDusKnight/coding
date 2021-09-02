@@ -1,13 +1,14 @@
 package leetcode._0225_ImplementStackUsingQueues;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
-// 使用一个queue比两个queue更好
-class MyStack {
+// S3 一个queue, push heavy
+class MyStack2 {
     Queue<Integer> queue;
     int size;
 
     /** Initialize your data structure here. */
-    public MyStack() {
+    public MyStack2() {
         queue = new LinkedList<>();
         size = 0;
     }

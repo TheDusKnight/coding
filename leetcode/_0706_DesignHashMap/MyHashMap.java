@@ -55,7 +55,7 @@ class Bucket {
         bucket = new LinkedList<>();
     }
     
-    public Integer get(Integer key) {
+    public Integer get(Integer key) { // 注意传的是Integer
         for (Pair<Integer, Integer> pair: bucket) {
             if (pair.first.equals(key))
                 return pair.second;

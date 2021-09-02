@@ -3,26 +3,30 @@ package leetcode._0227_BasicCalculatorII;
 // one pass with lastVal without stack
 class Solution {
     public int calculate(String s) {
-        if (s == null || s.isEmpty()) return 0;
+        // cc
         
+        int lastVal = 0, curVal = 0, res = 0;
+        char lastOprt = '+';
         int len = s.length();
-        int curVal = 0, lastVal = 0, res = 0;
-        char oprt = '+'; // ?
+        
         for (int i = 0; i < len; i++) {
-            char curChar = s.charAt(i);
-            if (Character.isDigit(curChar)) { // 合并数字
-                curVal = (curVal * 10) + (curChar - '0');
+            char c = s.charAt(i);
+            if (Character.isDigit(c)) {
+                while (i < len && Character.isDigit(s.charAt(i))) // 合并数字
+                    curVal = curVal * 10 + (s.charAt(i++) - '0');
+                i--;
+                
             }
-            if (!Character.isDigit(curChar) && !Character.isWhitespace(curChar) || i == len - 1) {
-                if (oprt == '+' || oprt == '-') {
+            if (!Character.isDigit(c) && !Character.isWhitespace(c) || i == len - 1) {
+                if (lastOprt == '+' || lastOprt == '-') {
                     res += lastVal;
-                    lastVal = (oprt == '+') ? curVal : -curVal;
-                } else if (oprt == '*') {
+                    lastVal = lastOprt == '+' ? curVal : -curVal;
+                } else if (lastOprt == '*') {
                     lastVal = lastVal * curVal;
-                } else if (oprt == '/') {
+                } else if (lastOprt == '/') {
                     lastVal = lastVal / curVal;
                 }
-                oprt = curChar;
+                lastOprt = c;
                 curVal = 0;
             }
         }
