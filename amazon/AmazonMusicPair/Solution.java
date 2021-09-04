@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// 不好
 public class Solution {
     public static List<Integer> musicPair(List<Integer> songDurations, int rideDuration) {
         // cc
