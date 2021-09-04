@@ -32,7 +32,7 @@ public class Turnsites {
                 prevDir = 1;
                 exit.remove(0);
                 curTime = curExitTime + 1;
-            } else {
+            } else { 
                 if (prevDir == 0) {
                     ret[curEntry] = curEnterTime;
                     entry.remove(0);
