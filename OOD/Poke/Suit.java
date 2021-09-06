@@ -1,4 +1,4 @@
-package OOD_2004.Poke;
+package OOD.Poke;
 
 public enum Suit {
     Diamond("Diamond", 1),

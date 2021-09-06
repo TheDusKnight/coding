@@ -1,15 +1,13 @@
 package Class2.ElevatorDesign;
 
-import com.sun.javafx.tools.packager.Log;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
-
 import static Class2.ElevatorDesign.Direction.STOP;
 import static Class2.ElevatorDesign.ElevatorSystem.MAX_FLOOR;
 import static java.awt.Event.DOWN;
 import static java.awt.Event.UP;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
 
 public class Elevator {
 
@@ -63,7 +61,7 @@ public class Elevator {
         }
     }
 
-
+    // 核心
     public boolean handleInternalRequest(final Request request) {
         //Check Edge case
         if (!checkVaildRequest(request)) return false;
@@ -98,6 +96,7 @@ public class Elevator {
      * @param externalRequest
      * @throws InvalidRequestException
      */
+    // 核心
     public void handleExternalRequest (final ExternalRequest externalRequest) throws InvalidRequestException {
         if(!checkVaildRequest(externalRequest)) return;
 

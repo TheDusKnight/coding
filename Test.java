@@ -101,8 +101,8 @@ public class Test {
 
         /** 使用Random，注意bound是exclude */
         // Random rand = new Random();
-        // System.out.println(rand.nextInt(1));
-
+        // System.out.println(ra
+        
     }
 
     // public static void foo(int n) {

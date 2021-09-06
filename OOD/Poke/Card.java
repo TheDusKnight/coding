@@ -1,4 +1,4 @@
-package OOD_2004.Poke;
+package OOD.Poke;
 
 public class Card implements Comparable<Card>{
     private final int val;
