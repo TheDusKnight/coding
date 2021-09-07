@@ -1,25 +1,14 @@
-package OOD.Poke;
-
 public enum Suit {
     Diamond("Diamond", 1),
-    Club("Club", 2),
+    Club("Clue", 2),
     Heart("Heart", 3),
-    Spade("Spade", 4);
+    Spade("Club", 4);
 
-    private final String suitName;
-    private final int suitValue;
+    private String suitName;
+    private int suitValue;
 
-    private Suit(String suitName, int suitValue) {
+    Suit(String suitName, int suitValue) {
         this.suitName = suitName;
         this.suitValue = suitValue;
     }
-
-    public String toString() {
-        return suitName;
-    }
-
-    public int getSuitValue() {
-        return suitValue;
-    } 
-
 }

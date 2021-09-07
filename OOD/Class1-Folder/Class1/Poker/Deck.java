@@ -15,7 +15,7 @@ public class Deck {
     public void init() {
         cards.clear();
         for(int i = 2; i <= 14; i++) {
-            for(Suit suit : Suit.values()) {
+            for(Suit suit : Suit.values()) { // set形式遍历
                 cards.add(new Card(suit, i));
             }
         }

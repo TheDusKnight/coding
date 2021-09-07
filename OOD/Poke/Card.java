@@ -1,29 +1,17 @@
-package OOD.Poke;
+public class Card {
+   private final int value;
+   private final Suit suit; 
 
-public class Card implements Comparable<Card>{
-    private final int val;
-    private final Suit suit;
+   public Card(int value, Suit suit) {
+       this.value = value;
+       this.suit = suit;
+   }
 
-    public Card(int val, Suit suit) {
-        this.val = val;
-        this.suit = suit;
-    }
+   public int getValue() {
+       return value;
+   }
 
-    public int getValue() {
-        return val;
-    }
-
-    public Suit getSuit() {
-        return suit;
-    }
-
-    @Override
-    public int compareTo(Card o) {
-        if (val == o.val) {
-            return suit.getSuitValue() - o.suit.getSuitValue();
-        }
-        return val - o.val;
-    }
-
-
+   public Suit getSuit() {
+       return suit;
+   }
 }

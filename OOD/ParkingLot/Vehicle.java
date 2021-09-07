@@ -1,17 +1,17 @@
 public abstract class Vehicle {
-   protected final long id;
-   protected final VehicleType type;
-   
-   public Vehicle(long id, VehicleType type) {
-       this.id = id;
-       this.type = type;
-   }
+    protected final long id;
+    protected Type type;
 
-   public long getId() {
-       return id;
-   }
+    public Vehicle(long id, Type type) {
+        this.id = id;
+        this.type = type;
+    }
+    
+    public long getId() {
+        return id;
+    }
 
-   public VehicleType getType() {
-       return type;
-   }
+    public Type getType() {
+        return type;
+    }
 }
