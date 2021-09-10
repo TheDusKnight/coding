@@ -47,4 +47,4 @@ class Solution2 {
     }
 }
 
-// time: O(m*n*words*4^L)
+// time: O(m*n*words长度*4^L)

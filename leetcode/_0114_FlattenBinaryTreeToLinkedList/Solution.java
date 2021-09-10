@@ -2,7 +2,7 @@ package leetcode._0114_FlattenBinaryTreeToLinkedList;
 import leetcode.TreeNode;
 
 // Similar LC426
-// recursion
+// recursion，需要单独记忆
 public class Solution {
     TreeNode pre;
     public void flatten (TreeNode root) {

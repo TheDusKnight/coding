@@ -14,7 +14,7 @@ class Solution {
             if (Character.isDigit(c)) {
                 while (i < len && Character.isDigit(s.charAt(i))) // 合并数字
                     curVal = curVal * 10 + (s.charAt(i++) - '0');
-                i--;
+                i--; // 防止加出界
                 
             }
             if (!Character.isDigit(c) && !Character.isWhitespace(c) || i == len - 1) {
