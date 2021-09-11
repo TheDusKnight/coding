@@ -1,31 +1,27 @@
 package leetcode._0116_PopulatingNextRightPontersInEachNode;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
-// Level Order Traversal
-public class Solution {
+// BFS
+class Solution {
   public Node connect(Node root) {
-    if (root == null) return root;
-
-    Queue<Node> Q = new LinkedList<>();
-    Q.add(root);
-
-    while (!Q.isEmpty()) {
-      int size = Q.size();
-      for (int i = 0; i < size; i++) {
-        Node curr = Q.poll();
-        
-        if (i < size - 1) {
-          curr.next = Q.peek();
-        }
-
-        if (curr.left != null) {
-          Q.add(curr.left);
-        }
-        if (curr.right != null) {
-          Q.add(curr.right);
-        }
+      if (root == null) return root;
+      
+      Queue<Node> queue = new LinkedList<>();
+      queue.offer(root);
+      
+      while (!queue.isEmpty()) {
+          int size = queue.size();
+          while (size-- > 0) {
+              Node cur = queue.poll();
+              if (size != 0) cur.next = queue.peek();
+              if (cur.left != null) queue.offer(cur.left);
+              if (cur.right != null) queue.offer(cur.right);
+          }
       }
-    }
-    return root;
+      
+      return root;
   }
 }
+
+// time: O(N); space: O(N);

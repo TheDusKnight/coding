@@ -7,29 +7,23 @@ import java.util.Queue;
 
 import leetcode.TreeNode;
 
-public class Solution {
+// bfs
+class Solution {
     public List<Integer> rightSideView(TreeNode root) {
-        List<Integer> output = new ArrayList<>();
-        if (root == null) return output;
-
+        List<Integer> res = new ArrayList<>();
+        if (root == null) return res;
+        
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
             int size = queue.size();
             while (size-- > 0) {
-                TreeNode curr = queue.poll();
-                if (size == 0) {
-                    output.add(curr.val);
-                }
-                if (curr.left != null) {
-                    queue.offer(curr.left);
-                }
-                if (curr.right != null) {
-                    queue.offer(curr.right);
-                }
-
+                TreeNode cur = queue.poll();
+                if (size == 0) res.add(cur.val);
+                if (cur.left != null) queue.offer(cur.left);
+                if (cur.right != null) queue.offer(cur.right);
             }
         }
-        return output;
+        return res;
     }
 }
