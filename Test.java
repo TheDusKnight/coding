@@ -77,6 +77,7 @@ public class Test {
         /** Difference between Arrays.asList() and List.of() */
         Integer[] nums = {1,2,3}; // nums不能是int[]，必须是Integer[]
         List<Integer> list = Arrays.asList(nums);
+        List<Integer>[] res = new List[200];
         // List<Integer> list = Arrays.asList(1, 2, null); // mutable, allow null
         // list.set(1, 10); // OK
         // List<Integer> list2 = List.of(1, 2, 3); // immutable, doesn't allow null

@@ -3,7 +3,7 @@ package leetcode._0285_InorderSuccessorInBST;
 import leetcode.TreeNode;
 
 public class Solution {
-    // bst特性
+    // bst特性, result一定出现在bst路径上，所以只要找到路径上的比p大的最小值即可
     public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
         // cc
         TreeNode res = null;
