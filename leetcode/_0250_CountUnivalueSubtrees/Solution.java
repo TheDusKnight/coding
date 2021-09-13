@@ -2,6 +2,7 @@ package leetcode._0250_CountUnivalueSubtrees;
 
 import leetcode.TreeNode;
 
+// recursion把parent指针传下去
 public class Solution {
     int count = 0;
     public int countUnivalSubtrees(TreeNode root) {

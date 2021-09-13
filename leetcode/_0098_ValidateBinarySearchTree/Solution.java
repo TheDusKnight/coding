@@ -8,13 +8,14 @@ class Solution {
     public boolean isValidBST(TreeNode root) {
         if (root == null) return true;
         
-        if (!isValidBST(root.left)) return false;
+        boolean left = isValidBST(root.left);
+        if (!left) return false;
         
-        if (pre == null || pre.val < root.val) {
-            pre = root;
-        } else return false;
+        if (pre != null && root.val <= pre.val) return false;
+        pre = root;
         
-        return isValidBST(root.right);
+        boolean right = isValidBST(root.right);
+        return right;
     }
 }
 

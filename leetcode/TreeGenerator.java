@@ -21,7 +21,7 @@ import java.util.Queue;
 public class TreeGenerator { // LC449
 
   // Encodes a tree to a single string.
-  public String serialize(TreeNode root) {
+  public static String serialize(TreeNode root) {
       if (root == null) {
           return "#,";
       }
@@ -47,7 +47,7 @@ public class TreeGenerator { // LC449
   }
 
   // Decodes your encoded data to tree.
-  public TreeNode deserialize(String data) {
+  public static TreeNode deserialize(String data) {
     String ss[] = data.split(",");
     if (ss.length == 0) {
       throw new IllegalArgumentException();
@@ -81,16 +81,10 @@ public class TreeGenerator { // LC449
 
     return root;
   }
+
+  public static void main(String[] args) {
+    String data = "1,#,2";
+    TreeGenerator treeGenerator = new TreeGenerator();
+    System.out.println(treeGenerator.serialize(treeGenerator.deserialize(data)));
+  }
 }
-
-// class TreeNode {
-
-//   public int val;
-//   public TreeNode left, right;
-
-//   public TreeNode(int val) {
-//     this.val = val;
-//     this.left = null;
-//     this.right = null;
-//   }
-// }

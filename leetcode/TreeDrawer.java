@@ -93,7 +93,7 @@ public class TreeDrawer {
         {
             System.out.println("build a binary by String like leetcode.com, # as null pointer");
             // String data = "1,2,3,#,4,#,#,5";
-            String data = "1,2,4,5,3";
+            String data = "1,2,3,4,5";
             // TreeGenerator from SuanFaGe
             TreeGenerator tg = new TreeGenerator(); 
             TreeNode root = tg.deserialize(data);

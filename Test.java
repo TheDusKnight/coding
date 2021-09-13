@@ -102,7 +102,9 @@ public class Test {
 
         /** 使用Random，注意bound是exclude */
         // Random rand = new Random();
-        // System.out.println(ra
+        // System.out.println(rand);
+
+        System.out.println('1' - '0');
         
     }
 
