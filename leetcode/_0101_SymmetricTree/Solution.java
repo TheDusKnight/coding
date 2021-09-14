@@ -1,6 +1,7 @@
 package leetcode._0101_SymmetricTree;
 import leetcode.TreeNode;
 
+// dfs
 class Solution {
     public boolean isSymmetric(TreeNode root) {
         if (root == null) return true;

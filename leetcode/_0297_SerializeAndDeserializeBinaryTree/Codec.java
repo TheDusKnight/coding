@@ -32,7 +32,7 @@ public class Codec {
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
         String[] ss = data.split(",");
-        Queue<String> queue = new LinkedList<>(Arrays.asList(ss));
+        Queue<String> queue = new LinkedList<>(Arrays.asList(ss)); // array to list
         return dfsDeserialize(queue);
     }
 

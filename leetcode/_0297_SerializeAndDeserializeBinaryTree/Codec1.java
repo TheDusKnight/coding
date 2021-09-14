@@ -42,6 +42,7 @@ public class Codec1 {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         int i = 1;
+        // queue poll一个，idx前进两个
         while (i < ss.length) { // 或者!queue.isEmpty()
             TreeNode cur = queue.poll();
             TreeNode left = ss[i].equals("#") ? null : new TreeNode(Integer.valueOf(ss[i]));
