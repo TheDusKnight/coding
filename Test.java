@@ -104,7 +104,7 @@ public class Test {
         // Random rand = new Random();
         // System.out.println(rand);
 
-        System.out.println('1' - '0');
+        System.out.println("a".compareTo("b"));
         
     }
 

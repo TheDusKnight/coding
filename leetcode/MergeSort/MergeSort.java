@@ -1,63 +1,51 @@
 package leetcode.MergeSort;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-// recursion
-// 这种写法不好，因为没有reuse同一个helper array,空间复杂度高
-public class MergeSort {
-	public ArrayList<Integer> mergeSort(ArrayList<Integer> array) {
-		// Corner case
-		if (array == null || array.size() <= 1) {
-			return array;
-		}
-		return mergeSort(array, 0, array.size() - 1);
-	}
-
-	private ArrayList<Integer> mergeSort(ArrayList<Integer> array, int left, int right) { // overloading
-		ArrayList<Integer> res = new ArrayList<>();
-        // base case, 只有到root node时会触发
-		if (left == right) {
-			res.add(array.get(left));
-			return res;
-		}
-
-		int mid = left + (right - left) / 2;
-		ArrayList<Integer> leftRes = mergeSort(array, left, mid);
-		ArrayList<Integer> rightRes = mergeSort(array, mid + 1, right);
-		merge(leftRes, rightRes, res);
-		return res;
-	}
-
-	private void merge(ArrayList<Integer> leftRes, ArrayList<Integer> rightRes, List<Integer> res) {
-		int leftIndex = 0;
-		int rightIndex = 0;
-		while(leftIndex < leftRes.size() && rightIndex < rightRes.size()) {
-			if (leftRes.get(leftIndex) < rightRes.get(rightIndex)) {
-				res.add(leftRes.get(leftIndex++));
-			} else {
-				res.add(rightRes.get(rightIndex++));
-			}
-		}
-		// 注意只有一遍有可能有剩余，另一边绝无可能有剩余
-		// remaining elements on left side
-		while (leftIndex < leftRes.size()) {
-			res.add(leftRes.get(leftIndex++));
-		}
-		// remaining elements on right side
-		while (rightIndex < rightRes.size()) {
-			res.add(rightRes.get(rightIndex++));
-		}
-		// return
+// merge sort
+class MergeSort {
+    int[] helper;
+    int[] nums;
+    public int[] sortArray(int[] nums) {
+        // cc
+        
+        this.nums = nums;
+        int n = nums.length;
+        helper = new int[n];
+        sortArray(0, n-1);
+        return nums;
     }
+    
+    private void sortArray(int l, int r) {
+        if (l >= r) return;
+        
+        int mid = l + (r - l) / 2;
+        sortArray(l, mid);
+        sortArray(mid+1, r);
+        merge(l, mid, r);
+    }
+    
+    private void merge(int l, int mid, int r) {
+        for (int i = l; i <= r; i++) {
+            helper[i] = nums[i];
+        }
+        
+        int curL = l, curR = mid+1, cur = l;
+        while (curL <= mid && curR <= r) {
+            if (helper[curL] < helper[curR]) {
+                nums[cur++] = helper[curL++];
+            } else {
+                nums[cur++] = helper[curR++];
+            }
+        }
+        
+        while (curL <= mid) {
+            nums[cur++] = helper[curL++];
+        }
 
-    public static void main(String[] args) {
-        MergeSort merge = new MergeSort();
-        ArrayList<Integer> array = new ArrayList<>(Arrays.asList(6, 4, 2, 0, 1, 3, 5, 7));
-        System.out.println(merge.mergeSort(array));
+		// remaining elements on right side, not possible
+        // 因为用的是inplace操作，左边走完，右边没走完但合计消耗掉了leftIndex之前的所有位置，
+        // 右边剩余的元素在array里不需要改变
+        // 例子：[2, 5, 3, 6]剩下的6正好在正确的位置
     }
 }
 
-// Time: O(nlogn) + O(n) = O(nlogn)
-// Space: 大于O(n), 我估计是O(n*log(n))
+// time: O(n*log(n)); space: O(n)
