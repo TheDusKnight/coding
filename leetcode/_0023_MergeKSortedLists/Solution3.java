@@ -15,6 +15,8 @@ import leetcode.ListNode;
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+
+ // minHeap
 class Solution3 {
     public ListNode mergeKLists(ListNode[] lists) {
         if (lists == null || lists.length == 0) return null;

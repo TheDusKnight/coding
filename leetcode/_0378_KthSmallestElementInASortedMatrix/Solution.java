@@ -1,7 +1,7 @@
 package leetcode._0378_KthSmallestElementInASortedMatrix;
-import java.util.*;
+import java.util.PriorityQueue;
 
-// bfs + min-heap
+// bfs + min-heap。可以但是有更好的方法
 public class Solution {
     private static final int[][] DIRECTIONS = {{1,0}, {0,1}};
 

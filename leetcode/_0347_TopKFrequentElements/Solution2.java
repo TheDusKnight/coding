@@ -32,7 +32,7 @@ class Solution2 {
     }
     
     private void quickSelect(int l, int r) {
-        if (l > r) return;
+        // if (l > r) return; // 非必要
         
         int pivotIdx = l + rand.nextInt(r - l +1);
         int pivotVal = map.get(unique[pivotIdx]);
@@ -51,7 +51,7 @@ class Solution2 {
         swap(slow, r);
         
         if (slow == unique.length - k) return;
-        if (slow < unique.length - k) quickSelect(slow+1, r);
+        else if (slow < unique.length - k) quickSelect(slow+1, r);
         else quickSelect(l, slow-1);
     }
     
