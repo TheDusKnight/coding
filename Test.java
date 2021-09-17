@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -104,7 +105,11 @@ public class Test {
         // Random rand = new Random();
         // System.out.println(rand);
 
-        System.out.println("a".compareTo("b"));
+        List<Integer> l = new ArrayList<>();
+        l.add(1);
+        l.add(3);
+        l.add(1, 2);
+        System.out.println(l.toString());
         
     }
 

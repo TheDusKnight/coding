@@ -21,6 +21,7 @@ class Solution3 {
     private int search(int start, int end) {
         if (start == end) return end; // 当left side有重复会出现lCount != k
         
+        // 虚拟出来的mid point，将board分成大于mid和小于mid两个部分
         int mid = start + (end - start) / 2;
         int lCount = 0;
         int lMax = Integer.MIN_VALUE, rMin = Integer.MAX_VALUE;
