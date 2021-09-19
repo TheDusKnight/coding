@@ -6,9 +6,9 @@ class Solution2 {
         if (haystack == null || needle == null) {
             return -1;
         }
-        if (haystack.length() == 0 && needle.length() == 0) return 0;
-        if (needle.length() == 0) return 0;
-        if (haystack.length() < needle.length()) return -1;
+        // if (haystack.length() == 0 && needle.length() == 0) return 0;
+        // if (needle.length() == 0) return 0;
+        // if (haystack.length() < needle.length()) return -1;
         // Determine which one is needle
         // if (haystack.length() < needle.length()) return strStr(needle, haystack);
         

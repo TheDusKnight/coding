@@ -1,6 +1,6 @@
 package leetcode._0028_ImplementstrStr;
 
-// two pointers
+// 定长sliding window
 class Solution {
     public int strStr(String haystack, String needle) {
         // cc

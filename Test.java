@@ -1,7 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /** check boolean可以不写== true or == false，但check null必须写 */
 /** getOrDefault如果返回新的数据结构，记得要put回去否则不会保存在HashMap或HashSet里!! */
 /** LinkedList remove API input为int是remove by index，input为Object是remove by Element */
@@ -76,9 +72,9 @@ public class Test {
         // System.out.println("123".substring(0, 2));
 
         /** Difference between Arrays.asList() and List.of() */
-        Integer[] nums = {1,2,3}; // nums不能是int[]，必须是Integer[]
-        List<Integer> list = Arrays.asList(nums);
-        List<Integer>[] res = new List[200];
+        // Integer[] nums = {1,2,3}; // nums不能是int[]，必须是Integer[]
+        // List<Integer> list = Arrays.asList(nums);
+        // List<Integer>[] res = new List[200];
         // List<Integer> list = Arrays.asList(1, 2, null); // mutable, allow null
         // list.set(1, 10); // OK
         // List<Integer> list2 = List.of(1, 2, 3); // immutable, doesn't allow null
@@ -105,12 +101,10 @@ public class Test {
         // Random rand = new Random();
         // System.out.println(rand);
 
-        List<Integer> l = new ArrayList<>();
-        l.add(1);
-        l.add(3);
-        l.add(1, 2);
-        System.out.println(l.toString());
-        
+        /** convert hashmap values to ArrayList */
+        // new ArrayList<>(map.vaues());
+
+        System.out.println(Integer.MAX_VALUE / 10 + 7);
     }
 
     // public static void foo(int n) {

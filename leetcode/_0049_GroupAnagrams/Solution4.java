@@ -6,16 +6,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// hashMap sort string as key
-class Solution {
+// 根据一个string最多不超过100优化Solution3
+class Solution4 {
     public List<List<String>> groupAnagrams(String[] strs) {
         // cc
+        if (strs.length == 0) return new ArrayList<>();
         
         Map<String, List<String>> map = new HashMap<>();
+        char[] count = new char[26];
+        
         for (String s: strs) {
-            char[] tmp = s.toCharArray();
-            Arrays.sort(tmp);
-            String key = String.valueOf(tmp);
+            Arrays.fill(count, 'a');
+            for (int i = 0; i < s.length(); i++) count[s.charAt(i) - 'a']++;
+            
+            
+            String key = String.valueOf(count);
+            System.out.println(key);
+            
             if (!map.containsKey(key)) map.put(key, new ArrayList<>());
             map.get(key).add(s);
         }
@@ -24,4 +31,4 @@ class Solution {
     }
 }
 
-// time: O(N*K*log(K)), K is the longest string length; space: O(N*K);
+// time: O(KN); space: O(KN)
