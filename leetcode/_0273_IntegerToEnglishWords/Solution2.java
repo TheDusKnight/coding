@@ -39,11 +39,11 @@ public class Solution2 {
     }
 
     public static void main(String[] args) {
-        long a = 123456789;
-        long b = 987654321;
-        long num = a * b;
+        // long a = 123456789;
+        // long b = 1000000;
+        // long num = a * b;
         Solution2 sol = new Solution2();
-        String res = sol.numberToWords(num);
+        String res = sol.numberToWords((long)900);
         System.out.println(res);
     }
 }

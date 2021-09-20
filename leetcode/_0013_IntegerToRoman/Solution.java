@@ -1,5 +1,6 @@
 package leetcode._0013_IntegerToRoman;
 
+// switch + array 2 for loop
 class Solution {
     public int romanToInt(String s) {
         // cc
@@ -28,14 +29,15 @@ class Solution {
         
         int res = 0;
         for (int i = 0; i < vals.length; i++) {
-            if (i == vals.length - 1) {
-                res += vals[i];
-            } else if (vals[i] < vals[i+1]) {
+            if (i+1 < vals.length && vals[i] < vals[i+1]) {
                 res -= vals[i];
             } else {
                 res += vals[i];
             }
         }
+        
         return res;
     }
 }
+
+// time: O(2N); space: O(1);

@@ -1,35 +1,34 @@
 package leetcode._0205_IsomorphicStrings;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-// prefer two hashmap -> key value pair, index as value, check if char1 and char2 has same index before (不好写)
+// 同型异构词，用两个hashMap分别存对应char
 class Solution {
     public boolean isIsomorphic(String s, String t) {
-        Map<Character, Character> map_s = new HashMap<>();
-        Map<Character, Character> map_t = new HashMap<>();
+        if (s == null || t == null || s.length() != t.length()) return false;
+        if (s.length() == 0 && t.length() == 0) return true;
         
-        for (int i = 0; i < s.length(); i++) {
-            char sCurr = s.charAt(i);
-            char tCurr = t.charAt(i);
-            char s2t;
-            
-            if (!map_s.containsKey(sCurr)) {
-                map_s.put(sCurr, tCurr);
-                s2t = tCurr;
+        int n = s.length();
+        Map<Character, Character> sMap = new HashMap<>();
+        Map<Character, Character> tMap = new HashMap<>();
+        
+        for (int i = 0; i < n; i++) {
+            char sChar = s.charAt(i);
+            char tChar = t.charAt(i);
+            if (sMap.containsKey(sChar)) {
+                if (sMap.get(sChar) != tChar) return false;
             } else {
-                s2t = map_s.get(sCurr);
+                sMap.put(sChar, tChar);
             }
-            
-            char t2s;
-            if (!map_t.containsKey(tCurr)) {
-                map_t.put(tCurr, sCurr);
-                t2s = sCurr;
+            if (tMap.containsKey(tChar)) {
+                if (tMap.get(tChar) != sChar) return false;
             } else {
-                t2s = map_t.get(tCurr);
+                tMap.put(tChar, sChar);
             }
-            
-            
-            if (sCurr != t2s || tCurr != s2t) return false;
         }
+        
         return true;
     }
 }
+
+// time: O(N); space: O(n+m);

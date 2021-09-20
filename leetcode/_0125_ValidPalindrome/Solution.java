@@ -1,14 +1,26 @@
 package leetcode._0125_ValidPalindrome;
 
+// 双指针站肩
 class Solution {
     public boolean isPalindrome(String s) {
-        for (int i = 0, j = s.length()-1; i < j; i++, j--) {
-            while (i < j && !Character.isLetterOrDigit(s.charAt(i))) i++;
-            while (i < j && !Character.isLetterOrDigit(s.charAt(j))) j--;
-            // 最好check一下是否越界
-            if (Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))) return false;
+        if (s == null || s.length() <= 1) return true;
+        
+        int l = 0, r = s.length()-1;
+        while (l < r) { // 左右越过，左右相邻也可
+            while (l < r && !Character.isLetterOrDigit(s.charAt(l))) l++;
+            while (l < r && !Character.isLetterOrDigit(s.charAt(r))) r--;
+            
+            char lChar = s.charAt(l);
+            char rChar = s.charAt(r);
+            if (Character.toLowerCase(lChar) != Character.toLowerCase(rChar)) return false;
+            l++;
+            r--;
         }
+        
         return true;
     }
 }
+
+// time: O(N); space: O(1)
+
  
