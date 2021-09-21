@@ -1,34 +1,32 @@
 package leetcode._0438_FindAllAnagramsInAString;
-import java.util.*;
 
-// count sort + sliding windows
-// 类似LC242 ValidAnagram
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+// Brute Force每个idx check是否是valid Anagrams
 class Solution {
     public List<Integer> findAnagrams(String s, String p) {
+        // cc
+        
         List<Integer> res = new ArrayList<>();
-        int ns = s.length(), np = p.length();
-        if (s == null || s.length() == 0 || ns < np) return res;
+        int sLen = s.length(), pLen = p.length();
+        char[] pArr = p.toCharArray();
+        Arrays.sort(pArr);
         
-        int[] pCount = new int[26];
-        int[] sCount = new int[26];
-        
-        // add p count sort
-        for (int i = 0; i < np; i++) {
-            pCount[p.charAt(i) - 'a']++;
-        }
-        // add s count sort
-        for (int i = 0; i < ns; ++i) {
-            sCount[s.charAt(i) - 'a']++;
-            // 加一个减一个模拟滑动窗口
-            if (i >= np) {
-                sCount[s.charAt(i - np) - 'a']--;
-            }
-            
-            if (Arrays.equals(pCount, sCount)) {
-                // Add start index to result
-                res.add(i - np + 1);
+        for (int i = 0; i < sLen; i++) {
+            if (i + pLen - 1 < sLen) {
+                String sub = s.substring(i, i+pLen);
+                char[] sArr = sub.toCharArray();
+                Arrays.sort(sArr);
+                int j = 0;
+                for (j = 0; j < pLen; j++) {
+                    if (pArr[j] != sArr[j]) break;
+                }
+                if (j == pLen) res.add(i);
             }
         }
+        
         return res;
     }
 }

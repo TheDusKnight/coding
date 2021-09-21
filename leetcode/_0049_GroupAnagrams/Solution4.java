@@ -21,7 +21,6 @@ class Solution4 {
             
             
             String key = String.valueOf(count);
-            System.out.println(key);
             
             if (!map.containsKey(key)) map.put(key, new ArrayList<>());
             map.get(key).add(s);
