@@ -24,7 +24,7 @@ class Solution2 {
     private int expandCenter(String s, int l, int r) {
         while (l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) {
             l--;
-            r++; 
+            r++;  
         }
         
         // r,l都出界，减完再减一才是len
