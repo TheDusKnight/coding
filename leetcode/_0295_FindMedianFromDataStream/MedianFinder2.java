@@ -20,7 +20,7 @@ class MedianFinder2 {
         // 通过binary search左右越过找到需要insert的地方
         // O(log(n))
         int l = 0, r = list.size() - 1;
-        while (l <= r) {
+        while (l <= r) { // 左右越过确保left永远是更大的数，insert num to left idx
             int mid = l + (r - l) / 2;
             if (list.get(mid) == num) {
                 list.add(mid, num);
@@ -37,11 +37,9 @@ class MedianFinder2 {
     }
     
     public double findMedian() { // O(1)
-        if (list.size() % 2 == 1) {
-            return (double)list.get(list.size() / 2);
-        } else {
-            return (double)(list.get(list.size() / 2 - 1) + list.get(list.size() / 2)) / 2;
-        }
+        // if (list.size() == 0) return -1.0;
+        int mid = (list.size() - 1) / 2;
+        return (list.size() % 2 == 1) ? (double)list.get(mid) : (double)(list.get(mid) + list.get(mid+1)) / 2.0;
     }
 }
 

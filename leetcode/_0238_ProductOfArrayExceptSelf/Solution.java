@@ -1,34 +1,30 @@
 package leetcode._0238_ProductOfArrayExceptSelf;
 
-// dp
-// 向左看乘左边，向右看存右边，最后左边乘右边
+// prefix sum (product)
+// array记录每个num的prefix product，之后找每个num的suffix product同时相乘，最后返回
 class Solution {
     public int[] productExceptSelf(int[] nums) {
-        // int[] dpLeft = new int[nums.length];
-        int[] dpRight = new int[nums.length];
-        int[] dp = new int[nums.length];
+        // cc
+        if (nums.length == 1) return new int[] {1};
         
-        // dpLeft[0] = 1;
-        // for (int i = 1; i < nums.length; i++) {
-        //     dpLeft[i] = dpLeft[i-1] * nums[i-1];
-        // }
+        int n = nums.length;
+        int[] res = new int[n];
         
-        dpRight[nums.length-1] = 1;
-        for (int i = nums.length-2; i >= 0; i--) {
-            dpRight[i] = dpRight[i+1] * nums[i+1];
+        int product = nums[0];
+        res[0] = 1;
+        for (int i = 1; i < n; i++) {
+            res[i] = product;
+            product *= nums[i];
         }
         
-        int dpLeft = 1;
-        dp[0] = dpLeft * dpRight[0];
-        
-        for (int i = 1; i < nums.length; i++) {
-            // 实时算出dpLeft的值
-            dpLeft = dpLeft * nums[i-1];
-            dp[i] = dpLeft * dpRight[i];
+        product = nums[n-1];
+        for (int i = n-2; i >= 0; i--) {
+            res[i] *= product;
+            product *= nums[i];
         }
-        return dp;
+        
+        return res;
     }
 }
 
-// time: O(n)
-// space: O(n)
+// time: O(n); space: O(1);

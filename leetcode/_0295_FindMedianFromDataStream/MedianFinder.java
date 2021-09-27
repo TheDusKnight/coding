@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// brute force
+// brute force sort when findMedian()
 class MedianFinder {
     List<Integer> list;
     /** initialize your data structure here. */
@@ -27,7 +27,7 @@ class MedianFinder {
     }
 }
 
-// time: O(N*log(N)); space: O(N)
+// time: addNum O(1), findMedian O(N*log(N)); space: O(N)
 
 /**
  * Your MedianFinder object will be instantiated and called as such:
