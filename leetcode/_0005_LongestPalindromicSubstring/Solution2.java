@@ -12,10 +12,13 @@ class Solution2 {
             int evenLen = expandCenter(s, i, i+1); // 中心为even
             int maxLen = Math.max(oddLen, evenLen);
             
-            if (maxLen > (end - start +1)) {
+            if (maxLen > end - start) {
                 start = i - (maxLen - 1) / 2; // even i在靠左的位置
                 end = i + maxLen / 2;
             }
+            //     i
+            // 0,1,2,3,4,5
+            // c,a,b,b,a,c
         }
         
         return s.substring(start, end+1);
@@ -28,6 +31,7 @@ class Solution2 {
         }
         
         // r,l都出界，减完再减一才是len
+        // 左开右开减完再减一
         return r-l-1;
     }
 }
