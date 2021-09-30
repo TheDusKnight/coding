@@ -1,5 +1,7 @@
 package leetcode._0438_FindAllAnagramsInAString;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 // count sort + sliding windows
 // 类似LC242 ValidAnagram
@@ -32,3 +34,5 @@ class Solution2 {
         return res;
     }
 }
+
+// time: O(S + P) compare 26 size array O(1)
