@@ -1,6 +1,7 @@
 package leetcode._0028_ImplementstrStr;
 
 // 定长sliding window
+// 讨论当needle为空时返回什么，此处返回0
 class Solution {
     public int strStr(String haystack, String needle) {
         // cc

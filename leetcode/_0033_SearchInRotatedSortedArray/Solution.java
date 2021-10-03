@@ -43,4 +43,4 @@ class Solution {
     }
 }
 
-// time: O(log(N)); space: O(1);
+// time: O(2 * log(N)); space: O(1);

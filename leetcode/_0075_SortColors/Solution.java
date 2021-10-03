@@ -1,6 +1,8 @@
 package leetcode._0075_SortColors;
 
 // sort three, 背下来
+
+// [0,zero) -> 0 [zero, i) -> 0 or 1 [i, n-1] -> ?
 class Solution {
     public void sortColors(int[] nums) {
         int len = nums.length;

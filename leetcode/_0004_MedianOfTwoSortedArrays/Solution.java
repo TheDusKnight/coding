@@ -15,6 +15,7 @@ class Solution {
         int i = 0, j = 0, imin = 0, imax = m, half = (m + n + 1) / 2;
         int maxLeft = 0, minRight = 0;
         while (imin <= imax) {
+            // i代表左区间上半部分的长度，j代表左区间下半部分的长度，合起来是做区间的长度
             i = (imin + imax) / 2; // 找mid idx
             j = half - i;
             if (j > 0 && i < m && nums2[j - 1] > nums1[i]) {
