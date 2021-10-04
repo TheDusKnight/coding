@@ -1,5 +1,5 @@
 package leetcode._0232_ImplementQueueUsingStacks;
-import java.util.*;
+import java.util.Stack;
 
 class MyQueue {
     // fields
@@ -36,7 +36,7 @@ class MyQueue {
     }
     
     private void helper() {
-        if (stackOut.isEmpty()) {
+        if (stackOut.isEmpty()) { // 如果stackOut是empty，意味着什么都不用做，直接从stackOut拿值
             while (!stackIn.isEmpty()) {
                 stackOut.push(stackIn.pop());
             }

@@ -2,10 +2,12 @@ package leetcode._0045_JumpGameII;
 
 // recursion 超时
 class Solution {
-    int minG = Integer.MAX_VALUE;
+    // int minG = Integer.MAX_VALUE;
+    int minG;
     public int jump(int[] nums) {
         // cc ?
         
+        minG = nums.length;
         jump(nums, 0, 0);
         return minG;
     }

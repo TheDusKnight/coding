@@ -1,10 +1,10 @@
 package leetcode._0053_MaximumSubarray;
 
-// dp
+// dp 正向贡献，负向贡献
 class Solution {
     public int maxSubArray(int[] nums) {
-        if (nums == null || nums.length == 0) throw new IllegalArgumentException();
-        if (nums.length == 1) return nums[0];
+        // if (nums == null || nums.length == 0) throw new IllegalArgumentException();
+        // if (nums.length == 1) return nums[0];
         
         int len = nums.length;
         int dp = nums[0];

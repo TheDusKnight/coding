@@ -33,6 +33,8 @@ class Solution3 {
         //     }
         // }
         
-        return dp[0] == true;
+        return dp[0];
     }
 }
+
+// time: O(k*N); space: O(N);
