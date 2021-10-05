@@ -1,27 +1,25 @@
 package leetcode._0152_MaximumProductSubarray;
 
-// dp
+// 讨论正负，是否有0，比较和53的异同
+// dp保存两个极值
 class Solution {
     public int maxProduct(int[] nums) {
-        if (nums.length == 0) return 0;
+        // cc
         
-        int max_so_far = nums[0];
-        int min_so_far = nums[0];
-        int global_max = nums[0];
+        // dpMax, dpMin
+        int curMax = nums[0], curMin = nums[0], max = nums[0], n = nums.length;
         
-        for (int i = 1; i < nums.length; i++) {
+        for (int i = 1; i < n; i++) {
             int cur = nums[i];
-            // 有可能cur单值最大或最小
-            int tmp_max = Math.max(cur, Math.max(max_so_far * cur, min_so_far * cur));
-            min_so_far = Math.min(cur, Math.min(max_so_far * cur, min_so_far * cur));
+            int tmpMax = Math.max(cur, Math.max(curMax * cur, curMin * cur));
+            curMin = Math.min(cur, Math.min(curMax * cur, curMin * cur));
+            curMax = tmpMax;
             
-            max_so_far = tmp_max;
-            // global_max为max_so_far中最大的值
-            global_max = Math.max(max_so_far, global_max);
+            max = Math.max(max, curMax);
         }
-        return global_max;
+        
+        return max;
     }
 }
 
-// time: O(n)
-// space: O(1)
+// time: O(N); space: O(1);

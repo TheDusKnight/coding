@@ -1,19 +1,20 @@
 package leetcode._0198_HouseRobber;
 
-public class Solution {
+// 二维dp
+class Solution {
     public int rob(int[] nums) {
-        if (nums == null || nums.length == 0) return 0;
         if (nums.length == 1) return nums[0];
-
-        int prevMax = nums[0];
-        int curMax = Math.max(nums[0], nums[1]);
         
-        for (int i = 2; i < nums.length; i++) {
-            int tmp = curMax;
-            // 从前一个index过来说明curMax没变，从其他位置过来说明之前max加当前房子价值
-            curMax = Math.max(prevMax + nums[i], curMax);
-            prevMax = tmp;
+        int n = nums.length;
+        int[] dp = new int[n];
+        dp[0] = nums[0]; dp[1] = Math.max(nums[0], nums[1]); // 注意初始化如何填值
+        
+        for (int i = 2; i < n; i++) {
+            dp[i] = Math.max(dp[i-1], dp[i-2] + nums[i]);
         }
-        return curMax;
+        
+        return dp[n-1];
     }
 }
+
+// time: O(N); space: O(N);
