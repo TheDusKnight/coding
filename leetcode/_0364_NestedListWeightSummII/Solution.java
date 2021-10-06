@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+// brute force使用getHeight()
 class Solution {
     int maxDepth = Integer.MIN_VALUE;
     public int depthSumInverse(List<NestedInteger> nestedList) {
@@ -32,6 +33,7 @@ class Solution {
         return res;
     }
     
+    // dfs写法
     private void getMaxDepth(NestedInteger nested, int curDepth) {
         if (nested.isInteger()) {
             maxDepth = Math.max(maxDepth, curDepth);
@@ -42,6 +44,20 @@ class Solution {
             getMaxDepth(next, curDepth+1);
         }
     }
+
+    // recursion写法
+    // private int getMaxDepth(NestedInteger nested) {
+    //     if (nested.isInteger()) {
+    //         return 1;
+    //     }
+        
+    //     int max = 0;
+    //     for (NestedInteger next: nested.getList()) {
+    //         max = Math.max(max, getMaxDepth(next));
+    //     }
+        
+    //     return max+1;
+    // }
 }
 // n为所有nestInteger的个数, 边的个数不会超过点(nestInteger)的个数
 // time: dfs O(n+n) + bfs O(n+n) = O(n); space: stack O(log(n)) to O(n) + queue O(1) to O(n) = O(n)

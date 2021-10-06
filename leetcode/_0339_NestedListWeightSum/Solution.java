@@ -7,10 +7,10 @@ import java.util.Queue;
 // You should not implement it, or speculate about its implementation
 interface NestedInteger {
     // Constructor initializes an empty nested list.
-    NestedInteger();
+    // NestedInteger();
 
     // Constructor initializes a single integer.
-    NestedInteger(int value);
+    // NestedInteger(int value);
 
     // @return true if this NestedInteger holds a single integer, rather than a
     // nested list.
