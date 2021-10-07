@@ -21,7 +21,7 @@ class MinStack {
         }
     }
     
-    public void pop() {
+    public void pop() { // 是否throw runtime exception需要讨论
         if (!stack.isEmpty()) {
             int out = stack.pop();
             if (out == minStack.peek()) minStack.pop();
