@@ -20,6 +20,12 @@ class Solution {
         
         return max;
     }
+
+    public static void main(String[] args) {
+        int[] nums = {0,1,2,3,-1,-2};;
+        Solution sol = new Solution();
+        System.out.println(sol.maxProduct(nums));
+    }
 }
 
 // time: O(N); space: O(1);
