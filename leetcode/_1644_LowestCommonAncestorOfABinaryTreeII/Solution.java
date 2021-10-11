@@ -3,6 +3,7 @@ package leetcode._1644_LowestCommonAncestorOfABinaryTreeII;
 import leetcode.TreeNode;
 
 // p and/or q may not exist
+// 先搜一遍看p或者q是否存在，再LCA
 class Solution {
     int num = 0;
     TreeNode p;

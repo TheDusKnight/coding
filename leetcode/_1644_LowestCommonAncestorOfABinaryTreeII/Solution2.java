@@ -8,16 +8,16 @@ class Solution2 {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         // cc
         
-        TreeNode res = dfs(root, p, q);
+        TreeNode res = recursion(root, p, q);
         if (count != 2) return null;
         return res;
     }
     
-    private TreeNode dfs(TreeNode root, TreeNode p, TreeNode q) {
+    private TreeNode recursion(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null) return root;
         
-        TreeNode left = dfs(root.left, p, q);
-        TreeNode right = dfs(root.right, p, q);
+        TreeNode left = recursion(root.left, p, q);
+        TreeNode right = recursion(root.right, p, q);
         
         if (root == p || root == q) { // bottom up
             count++;

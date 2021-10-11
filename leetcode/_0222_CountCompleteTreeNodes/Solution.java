@@ -10,9 +10,10 @@ public class Solution {
         
         int hL = getHeight(root.left);
         int hR = getHeight(root.right);
-        if (hL == hR + 1) { // right is full
+        if (hL == hR + 1) { // 最后一个leave node在左边
+            // 左边的数量加当前node本身加右边perfect tree算出来的数量
             return countNodes(root.left) + 1 + (int)Math.pow(2, hR)-1;
-        } else if (hL == hR) { // left is full
+        } else if (hL == hR) { // 最后一个leave node在右边
             return countNodes(root.right) + 1 + (int)Math.pow(2, hL)-1;
         } else {
             throw new IllegalArgumentException("Invalid complete binary tree");

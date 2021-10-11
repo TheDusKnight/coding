@@ -1,37 +1,39 @@
 package leetcode._0059_SpiralMatrixII;
 
-// recursion
-public class Solution {
+// dfs
+class Solution {
+    int count;
     public int[][] generateMatrix(int n) {
-        if (n <= 0) return null;
-        int[][] res = new int[n][n];
-
-        int size = n;
-        int num = 1;
-        generate(res, 0, size, num);
-        return res;
+        int[][] matrix = new int[n][n];
+        if (n < 1) return matrix;
+        
+        count = 1;
+        dfs(matrix, 0, n);
+        return matrix;
     }
-
-    private void generate(int[][] res, int offset, int size, int num) {
-        if (size == 0) return;
-        if (size == 1) {
-            res[offset][offset] = num;
+    
+    private void dfs(int[][] matrix, int offset, int n) {
+        if (n == 1) {
+            matrix[offset][offset] = count; // ?
             return;
         }
-
-        for (int i = 0; i < size-1; i++) {
-            res[offset][offset+i] = num++;
+        if (n <= 0) {
+            return;
         }
-        for (int i = 0; i < size-1; i++) {
-            res[offset+i][offset+size-1] = num++;
+        
+        for (int i = 0; i < n-1; i++) {
+            matrix[offset][offset+i] = count++;
         }
-        for (int i = 0; i < size-1; i++) {
-            res[offset+size-1][offset+size-1-i] = num++;
+        for (int i = 0; i < n-1; i++) {
+            matrix[offset+i][offset+n-1] = count++;
         }
-        for (int i = 0; i < size-1; i++) {
-            res[offset+size-1-i][offset] = num++;
+        for (int i = 0; i < n-1; i++) {
+            matrix[offset+n-1][offset+n-1-i] = count++;
         }
-
-        generate(res, offset+1, size-2, num);
+        for (int i = 0; i < n-1; i++) {
+            matrix[offset+n-1-i][offset] = count++;
+        }
+        
+        dfs(matrix, offset+1, n-2);
     }
 }

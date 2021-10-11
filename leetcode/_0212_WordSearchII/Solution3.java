@@ -1,87 +1,87 @@
 package leetcode._0212_WordSearchII;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-// build trie + recursion search trie
-// can be improved, read leetcode solution
+// dfs + trie
 class TrieNode {
+    Map<Character, TrieNode> children;
+    String word;
     char ch;
-    boolean isLeaf;
-    TrieNode[] nexts;
     
     public TrieNode(char ch) {
         this.ch = ch;
-        nexts = new TrieNode[26];
+        word = null;
+        children = new HashMap<>();
     }
 }
 
 class Solution3 {
+    TrieNode root;
     char[][] board;
-    String[] words;
-    boolean[][] visited;
     int row, col;
+    boolean[][] visited;
     List<String> res;
+    private static final int[][] DIRECTIONS = {{1,0}, {-1,0}, {0,1}, {0,-1}};
+    
     public List<String> findWords(char[][] board, String[] words) {
         // cc
-        
         this.board = board;
-        this.words = words;
         row = board.length;
         col = board[0].length;
         visited = new boolean[row][col];
-        
-        TrieNode root = buildTrie(words);
-        
         res = new ArrayList<>();
+        
+        root = new TrieNode('\0');
+        TrieNode cur;
+        for (String word: words) {
+            cur = root;
+            for (char ch: word.toCharArray()) {
+                TrieNode next = cur.children.get(ch);
+                if (next == null) cur.children.put(ch, new TrieNode(ch));
+                cur = cur.children.get(ch);
+            }
+            cur.word = word;
+        }
+        
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                dfs(root, i, j, new StringBuilder());
+                if (root.children.containsKey(board[i][j])) {
+                    dfs(i, j, root);
+                }
             }
         }
         
         return res;
     }
     
-    private void dfs(TrieNode cur, int i, int j, StringBuilder sb) {
-        if (i < 0 || i >= row || j < 0 || j >= col || visited[i][j] || cur.nexts[board[i][j] - 'a'] == null) return;
+    private void dfs(int i, int j, TrieNode parent) {
+        // 失败的base case
+        if (i < 0 || i >= row || j < 0 || j >= col || visited[i][j] || parent.children.get(board[i][j]) == null) {
+            return;
+        }
+        // 成功的base case
+        TrieNode cur = parent.children.get(board[i][j]);
+        if (cur.word != null) {
+            res.add(cur.word);
+            cur.word = null;
+        }
+        // remove if leave node and return
+        if (cur.children.isEmpty()) {
+            parent.children.remove(board[i][j]);
+            return;
+        }
         
-        TrieNode next = cur.nexts[board[i][j] - 'a'];
-        int len = sb.length();
-        sb.append(next.ch);
         visited[i][j] = true;
-        
-        if (next.isLeaf) {
-            res.add(sb.toString());
-            next.isLeaf = false;
+        for (int[] dir: DIRECTIONS) {
+            int ii = i + dir[0];
+            int jj = j + dir[1];
+            dfs(ii, jj, cur);
         }
-        
-        dfs(next, i+1, j, sb); dfs(next, i-1, j, sb); dfs(next, i, j+1, sb); dfs(next, i, j-1, sb);
-        
-        sb.setLength(len);
         visited[i][j] = false;
-    }
-    
-    private TrieNode buildTrie(String[] words) {
-        TrieNode root = new TrieNode('\0');
-        for (String w: words) {
-            TrieNode cur = root;
-            for (char c: w.toCharArray()) {
-                if (cur.nexts[c - 'a'] == null) cur.nexts[c - 'a'] = new TrieNode(c);
-                cur = cur.nexts[c - 'a'];
-            }
-            cur.isLeaf = true;
-        }
-        
-        return root;
-    }
-
-    public static void main(String[] args) {
-        char[][] board = new char[][] {{'o', 'a', 'a', 'n'}, {'e', 't', 'a', 'e'}, {'i', 'h', 'k', 'r'}, {'i', 'f', 'l', 'v'}};
-        String[] words = new String[] {"oath", "oathk", "pea", "eat", "rain"};
-        Solution3 sol = new Solution3();
-        System.out.println(sol.findWords(board, words).toString());
     }
 }
 
-
+// time: O(n*m*4^L); space: O(N) N is the total number of letters in dictionary;

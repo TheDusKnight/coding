@@ -1,28 +1,25 @@
 package leetcode._0124_BinaryTreeMaximumPathSum;
 import leetcode.TreeNode;
 
-// 面经题
-// recursion, any node to any node
+// recursion leave node to any node加剪枝，在每个node拼接并更新max path
 class Solution {
     int max = Integer.MIN_VALUE;
     public int maxPathSum(TreeNode root) {
-        maxSum(root);
-        return max; // 注意return的不是maxSum return的值
+        recursion(root);
+        return max;
     }
     
-    private int maxSum(TreeNode node) { // return 含义：从叶子结点到当前node的max path max
-        if (node == null) return 0;
-        int left = maxSum(node.left);
-        int right = maxSum(node.right);
-        // any to curNode一条路径
-        int curMax = Math.max(Math.max(left, right), 0) + node.val;
-        // update global max if needed
-        // left and right to curNode公共祖先路径
-        max = Math.max(max, Math.max(left + right + node.val, curMax));
-        return curMax;
-        // return any to curNode max path sum 不return公共祖先路径
+    private int recursion(TreeNode root) {
+        if (root == null) return 0;
+        
+        int left = recursion(root.left);
+        int right = recursion(root.right);
+        if (left < 0) left = 0;
+        if (right < 0) right = 0;
+        max = Math.max(max, left + right + root.val);
+        // 返回并不是max path，而是一条路径的max height
+        return Math.max(left, right) + root.val;
     }
 }
 
-// time: O(N). N is number of nodes, since we visit each node not more than 2 times;
-// space: O(log(N) ~ N);
+// time: O(N); space: O(1)

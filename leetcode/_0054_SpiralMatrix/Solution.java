@@ -1,7 +1,7 @@
 package leetcode._0054_SpiralMatrix;
 import java.util.*;
 
-// recursion
+// dfs
 class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> res = new LinkedList<>();
