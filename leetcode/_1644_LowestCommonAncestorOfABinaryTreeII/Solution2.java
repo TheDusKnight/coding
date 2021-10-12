@@ -3,6 +3,7 @@ package leetcode._1644_LowestCommonAncestorOfABinaryTreeII;
 import leetcode.TreeNode;
 
 // only traverse once
+// 和LCA逻辑一样，只是必定遍历整棵树，最后查看count是否等于2
 class Solution2 {
     int count = 0;
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {

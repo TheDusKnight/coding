@@ -1,51 +1,39 @@
 package leetcode._0426_ConvertBinarySearchTreeToSortedDoublyLinkedList;
 
-// Definition for a Node.
-class Node {
-    public int val;
-    public Node left;
-    public Node right;
-
-    public Node() {}
-
-    public Node(int _val) {
-        val = _val;
-    }
-
-    public Node(int _val,Node _left,Node _right) {
-        val = _val;
-        left = _left;
-        right = _right;
-    }
-};
-
-
-// in-order recursion similar LC114
-public class Solution {
-    Node pre = null;
-    Node head = null;
+// recursion传递child的首尾，cur node拼接再向上传递
+class Solution {
     public Node treeToDoublyList(Node root) {
-        // cc
         if (root == null) return null;
         
-        inOrder(root);
-        // 最后首尾相连
-        head.left = pre;
-        pre.right = head;
-        return head;
+        Node[] headTail = recursion(root);
+        headTail[0].left = headTail[1];
+        headTail[1].right = headTail[0];
+        
+        return headTail[0];
     }
-
-    private void inOrder(Node node) {
-        // base case
-        if (node == null) return;
-
-        inOrder(node.left);
-        // do sth
-        if (pre != null) pre.right = node;
-        else head = node;
-        node.left = pre;
-
-        pre = node; // pre++
-        inOrder(node.right); // node++
+    
+    private Node[] recursion(Node root) {
+        if (root == null) return null;
+        
+        Node[] left = recursion(root.left);
+        Node[] right = recursion(root.right);
+        
+        if (left == null && right == null) {
+            return new Node[] {root, root};
+        }
+        
+        if (left != null) {
+            left[1].right = root;
+            root.left = left[1];
+        }
+        if (right != null) {
+            right[0].left = root;
+            root.right = right[0];
+        }
+        
+        Node[] ret = new Node[2];
+        ret[0] = left != null ? left[0] : root;
+        ret[1] = right != null ? right[1] : root;
+        return ret;
     }
 }

@@ -6,7 +6,7 @@ import leetcode.TreeNode;
 class Solution {
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
         List<List<Integer>> res = new ArrayList<>();
-        if (root == null) return res; // 不需要
+        // if (root == null) return res; // 不需要
         
         getSum(root, sum, 0, new ArrayList<>(), res);
         return res;

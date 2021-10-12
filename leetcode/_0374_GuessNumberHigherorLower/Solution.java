@@ -9,23 +9,26 @@ package leetcode._0374_GuessNumberHigherorLower;
  * int guess(int num);
  */
 
+abstract class GuessGame {
+    public int guess(int input) {
+        return 1;
+    }
+}
+
+// binary search左右越过
 public class Solution extends GuessGame {
     public int guessNumber(int n) {
-        if (n <= 0) throw new RuntimeException("Wrong input");
+        int lower = 1, upper = n;
+        int mid = 0;
         
-        int left=0, right=n, mid;
-        while (left+1 < right) {
-            mid = left + (right - left) / 2;
-            if (guess(mid) == 0) return mid;
-            else if (guess(mid) == -1) {
-                right = mid;
-            } else {
-                left = mid;
-            }
+        while (lower <= upper) {
+            mid = lower + (upper - lower) / 2;
+            int res = guess(mid);
+            if (res == 0) return mid;
+            else if (res == 1) lower = mid+1;
+            else upper = mid-1;
         }
-        if (guess(left) == 0) return left;
-        if (guess(right) == 0) return right;
-        // not found
-        throw new RuntimeException("Result not Found");
+        
+        return -1;
     }
 }
