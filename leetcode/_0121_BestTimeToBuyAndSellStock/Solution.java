@@ -1,27 +1,22 @@
 package leetcode._0121_BestTimeToBuyAndSellStock;
 
-public class Solution {
-    // dp 股票问题
+// 一维dp
+class Solution {
     public int maxProfit(int[] prices) {
-        if (prices == null)
-            return -1;
-        if (prices.length == 0)
-            return 0;
+        if (prices.length == 1) return 0;
         
-        int len = prices.length;
-        // 初始化buy和sell第0天的值
-        int buy = -prices[0];
-        int sell = 0;
-        for (int i = 1; i < len; i++) {
-            // i可以初始化为0或者1,
-            // 只要确保第0天buy初始化为-prices[0], sell初始化为0就行
-            int nextBuy = Math.max(buy, -prices[i]);
-            int nextSell = Math.max(sell, buy + prices[i]);
-            buy = nextBuy;
-            sell = nextSell;
+        int n = prices.length;
+        int[] buys = new int[n];
+        int[] sells = new int[n];
+        
+        buys[0] = -prices[0]; sells[0] = 0; // 一开始sell没买
+        for (int i = 1; i < n; i++) {
+            buys[i] = Math.max(buys[i-1], -prices[i]);
+            sells[i] = Math.max(sells[i-1], buys[i-1] + prices[i]);
         }
-        return sell;
+        
+        return sells[n-1]; // sell又可能到最后都没买
     }
 }
 
-// time: O(n)
+// time: O(N); space: O(N);
