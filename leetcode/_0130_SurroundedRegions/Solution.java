@@ -1,67 +1,65 @@
 package leetcode._0130_SurroundedRegions;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
-// BFS
-public class Solution {
-    protected Integer ROWS = 0;
-    protected Integer COLS = 0;
-
+// BFS/DFS
+class Solution {
+    int row, col;
+    private static final int[][] DIRECTIONS = {{1,0}, {-1,0}, {0,1}, {0,-1}};
+    Queue<Integer> queue = new LinkedList<>();
     public void solve(char[][] board) {
-        if (board == null || board.length == 0) {
-            return;
-        }
-        this.ROWS = board.length;
-        this.COLS = board[0].length;
-
-        List<Pair<Integer, Integer>> borders = new LinkedList<>();
-        // Step 1, construct the list of border cells
-        for (int r = 0; r < this.ROWS; r++) {
-            borders.add(new Pair<Integer,Integer>(r, 0));
-            borders.add(new Pair<Integer,Integer>(r, this.COLS - 1));
-        }
-        for (int c = 0; c < this.COLS; c++) {
-            borders.add(new Pair<Integer,Integer>(0, c));
-            borders.add(new Pair<Integer,Integer>(this.ROWS - 1, c));
-        }
-        // Step 2, mark the escaped cells
-        for (Pair<Integer, Integer> pair : borders) {
-            this.BFS(board, pair.first, pair.second);
-        }
-
-        // Step 3, flip the cells to their correct final states
-        for (int r = 0; r < this.ROWS; r++) {
-            for (int c = 0; c < this.COLS; c++) {
-                if (board[r][c] == 'O') board[r][c] = 'X';
-                if (board[r][c] == 'E') board[r][c] = 'O';
+        // cc
+        
+        row = board.length;
+        col = board[0].length;
+        
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if ((i == 0 || j == 0 || i == row-1 || j == col-1) && board[i][j] == 'O') {
+                    // bfs(board, i, j);
+                    dfs(board, i, j);
+                }
             }
         }
-    }
-
-    protected void BFS(char[][] board, int r, int c) {
-        LinkedList<Pair<Integer, Integer>> queue = new LinkedList<>();
-        queue.offer(new Pair<>(r, c));
-
-        while (!queue.isEmpty()) {
-            Pair<Integer, Integer> pair = queue.poll();
-            int row = pair.first, col = pair.second;
-            if (board[row][col] != 'O') continue;
-
-            board[row][col] = 'E';
-            if (col < this.COLS - 1) queue.offer(new Pair<>(row, col + 1));
-            if (row < this.ROWS - 1) queue.offer(new Pair<>(row + 1, col));
-            if (col > 0) queue.offer(new Pair<>(row, col - 1));
-            if (row > 0) queue.offer(new Pair<>(row - 1, col));
+        
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (board[i][j] == 'O') board[i][j] = 'X';
+                else if (board[i][j] == 'Y') board[i][j] = 'O';
+            }
         }
+        
     }
+    
+    private void dfs(char[][] board, int r, int c) {
+        if (r < 0 || r >= row || c < 0 || c >= col || board[r][c] != 'O') {
+            return;
+        }
+        
+        board[r][c] = 'Y';
+        for (int[] dir: DIRECTIONS) dfs(board, r+dir[0], c+dir[1]);
+    }
+    
+    // private void bfs(char[][] board, int r, int c) {
+    //     board[r][c] = 'Y';
+    //     queue.offer(r * col + c);
+        
+    //     while (!queue.isEmpty()) {
+    //         int cur = queue.poll();
+    //         int i = cur / col;
+    //         int j = cur % col;
+            
+    //         for (int[] dir: DIRECTIONS) {
+    //             int ii = i + dir[0];
+    //             int jj = j + dir[1];
+                
+    //             if (ii >= 0 && ii < row && jj >= 0 && jj < col && board[ii][jj] == 'O') {
+    //                 board[ii][jj] = 'Y';
+    //                 queue.offer(ii * col + jj);
+    //             }
+    //         }
+    //     }
+    // }
 }
 
-class Pair<U, V> {
-    public U first;
-    public V second;
-
-    public Pair(U first, V second) {
-        this.first = first;
-        this.second = second;
-    }
-}
-
+// time: O(m*n); space: O(m*n);

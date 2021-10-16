@@ -24,5 +24,5 @@ class Solution {
         return sell[k][len-1];
     }
 
-    // time: O(n^2)
+    // space: O(N*K); time: O(N*K);
 }

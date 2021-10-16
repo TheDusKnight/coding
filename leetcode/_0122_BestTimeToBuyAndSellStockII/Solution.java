@@ -1,7 +1,7 @@
 package leetcode._0122_BestTimeToBuyAndSellStockII;
 
 public class Solution {
-    // 一维dp，和121唯一的变化就是nextBuy从sell-prices[i]转移过来而不是-prices[i]
+    // O(1) dp，和121唯一的变化就是nextBuy从sell-prices[i]转移过来而不是-prices[i]
     public int maxProfit(int[] prices) {
         if (prices == null)
             return -1;
@@ -19,4 +19,4 @@ public class Solution {
     }
 }
 
-// time: O(n)
+// time: O(n); space: O(1);
