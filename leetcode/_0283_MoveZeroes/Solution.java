@@ -1,26 +1,26 @@
 package leetcode._0283_MoveZeroes;
 
-// sort two unstable solution leetcode过不去
-// 双指针站肩 sort two
-class Solution {
+// 0以外的数stable
+// 快慢针
+// [0,left] 0
+// [left, i) 1
+// [i, right] ?
+// (right,n-1] 2
+public class Solution {
     public void moveZeroes(int[] nums) {
-        // cc
-        
-        int l = 0, r = nums.length - 1;
-        while (l + 1 < r) { // 注意不要写成内部只有if或者while loop的形式，因为这会导致外部的while check失效
-            if (nums[l] != 0) l++; // 看到非0，不需要办事，++
-            else if (nums[r] == 0) r--; // 看到0，不需要办事，--
-            else swap(nums, l, r);
+        if (nums == null || nums.length <= 1) return;
+
+        int slow = 0;
+        for (int fast = 0; fast < nums.length; fast++) {
+            if(nums[fast] != 0) {
+                swap(nums, slow++, fast);
+            }
         }
-        if (nums[l] == 0 && nums[r] != 0)
-            swap(nums, l, r);
     }
-    
-    private void swap(int[] nums, int l, int r) {
-        int tmp = nums[l];
-        nums[l] = nums[r];
-        nums[r] = tmp;
+
+    private void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
     }
 }
-
-// time: O(n);

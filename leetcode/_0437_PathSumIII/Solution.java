@@ -1,7 +1,7 @@
 package leetcode._0437_PathSumIII;
 import leetcode.TreeNode;
 
-// dfs
+// recursion
 public class Solution {
     public int pathSum(TreeNode root, int sum) {
         if (root == null) return 0;
@@ -16,5 +16,5 @@ public class Solution {
     }
 }
 
-// time: O(n) due to recursion
+// time: O(n?) due to recursion
 // space: O(n^2)

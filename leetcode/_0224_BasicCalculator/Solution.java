@@ -30,8 +30,7 @@ class Solution {
                 stack.push(0);
                 signStack.push(1);
                 // check括号开头是负数
-                int tmp = i;
-                tmp++;
+                int tmp = i+1;
                 while (tmp < len) {
                     if (s.charAt(tmp) == ' ') tmp++;
                     else if (s.charAt(tmp) == '-') {

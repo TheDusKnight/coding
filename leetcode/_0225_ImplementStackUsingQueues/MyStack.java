@@ -6,7 +6,6 @@ import java.util.Queue;
 // S1 Deque is Queue?
 // S2 两个queue
 // S3 一个queue
-// S2 两个queue
 
 // two queues, push heavy
 class MyStack {

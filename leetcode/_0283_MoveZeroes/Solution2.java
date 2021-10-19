@@ -1,22 +1,21 @@
 package leetcode._0283_MoveZeroes;
 
-// in-place
-// 快慢针
-public class Solution2 {
+// slow补0实现真stable
+class Solution2 {
     public void moveZeroes(int[] nums) {
-        if (nums == null || nums.length <= 1) return;
-
-        int slow = 0;
-        for (int fast = 0; fast < nums.length; fast++) {
-            if(nums[fast] != 0) {
-                swap(nums, slow++, fast);
+        // cc
+        
+        int slow = 0, n = nums.length;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] != 0) {
+                nums[slow++] = nums[i];
             }
         }
-    }
-
-    private void swap(int[] nums, int i, int j) {
-        int tmp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = tmp;
+        
+        while (slow < n) {
+            nums[slow++] = 0;
+        }
     }
 }
+
+// time: O(N); space: O(1);
