@@ -1,4 +1,4 @@
-package leetcode._0036_ValidSudku;
+package leetcode._0036_ValidSudoku;
 import java.util.*;
 
 // hashset
