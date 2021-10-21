@@ -1,31 +1,34 @@
 package leetcode._0322_CoinChange;
 
 // dfs + pruning
-public class Solution {
+class Solution {
     public int coinChange(int[] coins, int amount) {
         if (amount < 1) return 0;
-        return dfs(coins, amount, new int[amount + 1]);
+        
+        int[] memo = new int[amount+1];
+        return recursion(coins, amount, memo);
     }
     
-    private int dfs(int[] coins, int rem, int[] minCount) { // minCount指当前remaining amount所需的最小coins
-        if (rem == 0) {
+    private int recursion(int[] coins, int remains, int[] memo) {
+        if (remains == 0) {
             return 0;
         }
-        if (rem < 0) {
+        if (remains < 0) {
             return -1;
         }
-        if (minCount[rem] != 0) return minCount[rem];
         
-        int min = Integer.MAX_VALUE;
+        if (memo[remains] != 0) return memo[remains];
+        
+        int min = remains+1;
         for (int coin: coins) {
-            int res = dfs(coins, rem - coin, minCount);
+            int res = recursion(coins, remains-coin, memo);
             if (res >= 0 && res < min) {
-                min = res + 1; // 尝试更新这一层dfs的min
+                min = res + 1;
             }
         }
         
-        minCount[rem] = (min == Integer.MAX_VALUE) ? -1 : min;
-        return minCount[rem];
+        memo[remains] = (min == remains+1 ? -1 : min);
+        return memo[remains];
     }
 }
 
