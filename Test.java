@@ -1,6 +1,3 @@
-import java.util.Map;
-import java.util.TreeMap;
-
 /** check boolean可以不写== true or == false，但check null必须写 */
 /** getOrDefault如果返回新的数据结构，记得要put回去否则不会保存在HashMap或HashSet里!! */
 /** LinkedList remove API input为int是remove by index，input为Object是remove by Element */
@@ -107,7 +104,7 @@ public class Test {
         /** convert hashmap values to ArrayList */
         // new ArrayList<>(map.vaues());
 
-        System.out.println(Integer.MAX_VALUE / 10 + 7);
+        System.out.println(1/2);
 
     }
 
