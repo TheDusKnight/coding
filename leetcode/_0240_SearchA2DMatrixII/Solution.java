@@ -4,21 +4,19 @@ package leetcode._0240_SearchA2DMatrixII;
 // 从左下往右或者上找target
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
-        // cc
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return false;
         
-        int row = matrix.length;
-        int col = matrix[0].length;
-        int rIdx = row-1, cIdx = 0;
+        int row = matrix.length, col = matrix[0].length;
+        int i = row-1, j = 0;
         
-        while (rIdx >= 0 && cIdx < col) {
-            int curVal = matrix[rIdx][cIdx];
-            if (curVal == target) return true;
-            else if (curVal < target) cIdx++;
-            else rIdx--;
+        while (i >= 0 && j < col) {
+            if (matrix[i][j] == target) return true;
+            else if (matrix[i][j] < target) j++;
+            else i--;
         }
         
         return false;
     }
 }
 
-// time: O(m+n); space: O(1)
+// time: O(m+n); space: O(1);
