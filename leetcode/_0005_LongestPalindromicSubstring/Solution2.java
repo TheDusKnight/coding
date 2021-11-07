@@ -1,6 +1,6 @@
 package leetcode._0005_LongestPalindromicSubstring;
 
-// 双指针两边往中间走
+// 双指针中间往两边走
 class Solution2 {
     public String longestPalindrome(String s) {
         // cc
@@ -12,7 +12,7 @@ class Solution2 {
             int evenLen = expandCenter(s, i, i+1); // 中心为even
             int maxLen = Math.max(oddLen, evenLen);
             
-            if (maxLen > end - start) {
+            if (maxLen > end - start + 1) {
                 start = i - (maxLen - 1) / 2; // even i在靠左的位置
                 end = i + maxLen / 2;
             }

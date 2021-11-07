@@ -5,14 +5,14 @@ class Solution {
     public boolean isPalindrome(String s) {
         if (s == null || s.length() <= 1) return true;
         
-        int l = 0, r = s.length()-1;
-        while (l < r) { // 左右越过，左右相邻也可
+        s = s.toLowerCase().trim();
+        int n = s.length(), l = 0, r = n-1;
+        
+        while (l < r) {
             while (l < r && !Character.isLetterOrDigit(s.charAt(l))) l++;
             while (l < r && !Character.isLetterOrDigit(s.charAt(r))) r--;
             
-            char lChar = s.charAt(l);
-            char rChar = s.charAt(r);
-            if (Character.toLowerCase(lChar) != Character.toLowerCase(rChar)) return false;
+            if (s.charAt(l) != s.charAt(r)) return false;
             l++;
             r--;
         }

@@ -12,7 +12,7 @@ public class Solution4 {
     }
 
     private static int findPosPartition(int[] array, int left, int right, int length, int k) {
-        // 注意base case在下面
+        if (left == right) return array[left]; // 可以不加
 
         Random rand = new Random(); // new Random最好放到初始化的时候
         int pivotRandIndex = left + rand.nextInt(right - left + 1);
