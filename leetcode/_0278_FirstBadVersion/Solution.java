@@ -1,22 +1,22 @@
 package leetcode._0278_FirstBadVersion;
 
-// binary search 左右相邻做法
+/* The isBadVersion API is defined in the parent class VersionControl.
+      boolean isBadVersion(int version); */
+
+// binary search
 public class Solution extends VersionControl {
     public int firstBadVersion(int n) {
-        if (n <= 0) throw new RuntimeException("Invalid input");
-
-        int left = 0, right = n, mid;
-        while (left+1 < right) {
-            mid = left + (right - left) / 2;
-            if (isBadVersion(mid)) {
-                right = mid;
-            } else {
-                left = mid;
-            }
+        // cc
+        
+        int start = 1, end = n;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (isBadVersion(mid)) end = mid-1;
+            else start = mid+1;
         }
-        // post processing
-        if (isBadVersion(left)) return left;
-        if (isBadVersion(right)) return right;
-        throw new RuntimeException("No badversion found.");
+        
+        if (start <= n) return start;
+        // start跑出界还没找到
+        throw new RuntimeException("No bad version");
     }
 }
