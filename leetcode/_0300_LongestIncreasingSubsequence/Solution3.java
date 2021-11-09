@@ -1,6 +1,6 @@
 package leetcode._0300_LongestIncreasingSubsequence;
 
-// 一维dp
+// 一维dp空间无法优化
 class Solution3 {
     public int lengthOfLIS(int[] nums) {
         if (nums.length == 1) return 1;
@@ -11,11 +11,11 @@ class Solution3 {
         dp[0] = 1;
         
         for (int i = 1; i < n; i++) {
-            int curMax = 0;
             for (int j = 0; j < i; j++) {
-                if (nums[i] > nums[j]) curMax = Math.max(curMax, dp[j]);
+                if (nums[i] > nums[j])
+                    dp[i] = Math.max(dp[i], dp[j]); // 找到最大的dp[j]
             }
-            dp[i] = curMax + 1;
+            dp[i] += 1;
             globalMax = Math.max(globalMax, dp[i]);
         }
         

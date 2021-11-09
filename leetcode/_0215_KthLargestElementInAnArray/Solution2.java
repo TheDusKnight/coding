@@ -17,4 +17,4 @@ class Solution2 {
     }
 }
 
-// time: O(N + Nlog(K)); space: O(K);
+// time: Heapify + (N-k)*ExtractMin() = k + (N-k)*log(k) = N*log(k); space: O(K);

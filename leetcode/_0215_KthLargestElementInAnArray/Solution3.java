@@ -17,4 +17,4 @@ class Solution3 {
     }
 }
 
-// time: O(N*log(N)); space: O(N);
+// time: Heapify+k*ExtractMax() = O(N + k*log(N)); space: O(N);
