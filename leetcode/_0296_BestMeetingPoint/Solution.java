@@ -1,5 +1,7 @@
 package leetcode._0296_BestMeetingPoint;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 // bfs similar to LC317, 超时，以下为数学解
 public class Solution {
@@ -29,3 +31,5 @@ public class Solution {
         return res;
     }
 }
+
+// time: O(m*n);
