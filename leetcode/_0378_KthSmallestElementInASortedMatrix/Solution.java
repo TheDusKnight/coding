@@ -37,5 +37,5 @@ public class Solution {
     }
 }
 
-// time O(k*log(k))
-// space: O(k) heap + O(n*m) boolean 2d array || O(k) heap + min(m+n-1, k) hashset查重
+// time O(k*log(min(m+n, k)));
+// space: heap O(min(m+n, k)) + visited O(m*n) [visited可以使用set优化成O(k)]

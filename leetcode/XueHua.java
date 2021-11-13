@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.util.Arrays;
+
 public class XueHua {
     public static void xueHua(int n) {
         if (n <= 0) throw new IllegalArgumentException();
@@ -42,7 +44,9 @@ public class XueHua {
 
 
     public static void main(String[] args) {
-        XueHua.xueHua(3);
+        int[] arr = new int[] {2,5,1};
+        Arrays.sort(arr);
+        System.out.println(Arrays.toString(arr));
     }
     
 }
