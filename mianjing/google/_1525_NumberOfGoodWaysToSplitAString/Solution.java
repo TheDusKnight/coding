@@ -1,6 +1,9 @@
 package mianjing.google._1525_NumberOfGoodWaysToSplitAString;
 
-// google oa
+import java.util.HashSet;
+import java.util.Set;
+
+// google oa: Ways to Split String
 // prefix calc
 class Solution {
     public int numSplits(String s) {

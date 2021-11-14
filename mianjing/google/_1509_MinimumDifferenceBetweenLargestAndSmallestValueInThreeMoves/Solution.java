@@ -2,7 +2,7 @@ package mianjing.google._1509_MinimumDifferenceBetweenLargestAndSmallestValueInT
 
 import java.util.Arrays;
 
-// Google OA
+// Google OA: Min Amplitude
 // sort后找4种可能性
 class Solution {
     public int minDifference(int[] nums) {
