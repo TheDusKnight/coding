@@ -2,20 +2,23 @@ package leetcode._0252_MeetingRooms;
 
 import java.util.Arrays;
 
-// Array + sort
+// interval sort by start
 class Solution {
     public boolean canAttendMeetings(int[][] intervals) {
-        if (intervals.length == 0) return true;
+        if (intervals.length <= 1) return true;
         
-        Arrays.sort(intervals, (a, b) -> a[1] - b[1]);
-        
-        int cur = 0;
-        for (int i = 0; i < intervals.length; i++) {
-            if (intervals[i][0] < cur) return false;
-            cur = intervals[i][1];
+        Arrays.sort(intervals, (o1, o2) -> (o1[0] - o2[0]));
+        for (int i = 0; i < intervals.length - 1; i++) {
+            if (intervals[i][1] > intervals[i+1][0]) return false;
         }
         return true;
     }
 }
+
+// |-----|
+//     |-----|
+
+// |-----|
+//         |------|
 
 // time: O(Nlog(N));

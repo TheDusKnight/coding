@@ -1,30 +1,56 @@
 package leetcode._0253_MettingRoomsII;
 
-import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-// PriorityQueue标准答案
+// 算法哥sort by start and end，注意tie的情况！！！！
 class Solution2 {
+    class EndPoint implements Comparable<EndPoint> {
+        int val;
+        boolean isStart;
+
+        public EndPoint(int val, boolean isStart) {
+            this.val = val;
+            this.isStart = isStart;
+        }
+
+        @Override
+        public int compareTo(EndPoint that) {
+            if (this.val != that.val) {
+                return this.val - that.val;
+            } else {
+                return this.isStart == true ? 1 : -1;
+            }
+        }
+    }
+
     public int minMeetingRooms(int[][] intervals) {
         // cc
-        
-        Arrays.sort(intervals, (a, b) -> a[0]-b[0]);
-        Queue<Integer> minHeap = new PriorityQueue<>((a, b) -> a - b);
-        minHeap.offer(intervals[0][1]);
-        
-        for (int i = 1; i < intervals.length; i++) {
-            int minEnd = minHeap.peek(); // 结束时间最快的meeting
-            if (minEnd <= intervals[i][0]) {
-                minHeap.poll();
-            }
-            // 如果有重合，新开一个room的end time放入heap
-            // 如果没有重合更新end time为intervals[i][1]因为minEnd <= intervals[i][0]所以minEnd < intervals[i][1]
-            minHeap.offer(intervals[i][1]);
-        }
-        
-        return minHeap.size();
-    }
-} 
 
-// time: O(N*log(N) for sort + N*log(N) for extract min)
+        List<EndPoint> list = loadPoints(intervals);
+        Collections.sort(list); // 另一种方法是使用lambda表达式
+
+        int count = 0, max = 0;
+        for (EndPoint point : list) {
+            if (point.isStart) {
+                count++;
+                max = Math.max(max, count);
+            } else
+                count--;
+        }
+
+        return max;
+    }
+
+    private List<EndPoint> loadPoints(int[][] intervals) {
+        List<EndPoint> list = new ArrayList<>();
+
+        for (int[] pair : intervals) {
+            list.add(new EndPoint(pair[0], true));
+            list.add(new EndPoint(pair[1], false));
+        }
+
+        return list;
+    }
+}

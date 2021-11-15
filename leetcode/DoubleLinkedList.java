@@ -1,6 +1,6 @@
 package leetcode;
 
-public class DoubleLinkedList { // TODO: Generics
+public class DoubleLinkedList {
     // fields
     ListNode head;
     ListNode tail;
