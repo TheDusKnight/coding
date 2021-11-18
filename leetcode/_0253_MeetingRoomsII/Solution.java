@@ -1,4 +1,4 @@
-package leetcode._0253_MettingRoomsII;
+package leetcode._0253_MeetingRoomsII;
 
 import java.util.Arrays;
 import java.util.PriorityQueue;
