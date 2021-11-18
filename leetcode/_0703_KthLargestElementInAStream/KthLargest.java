@@ -5,12 +5,16 @@ import java.util.Queue;
 
 // minHeap find kth largest
 class KthLargest {
-    Queue<Integer> minHeap = new PriorityQueue<>();
+    Queue<Integer> minHeap;
     int k;
     public KthLargest(int k, int[] nums) {
+        // cc
+        
+        minHeap = new PriorityQueue<>((o1, o2) -> (o1 - o2));
         this.k = k;
-        for (int i: nums) {
-            minHeap.offer(i);
+        
+        for (int num: nums) {
+            minHeap.offer(num);
             if (minHeap.size() > k) minHeap.poll();
         }
     }

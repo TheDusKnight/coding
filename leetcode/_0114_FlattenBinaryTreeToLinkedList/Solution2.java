@@ -19,3 +19,5 @@ class Solution2 {
         flatten(r);
     }
 }
+
+// time: O(N);
