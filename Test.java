@@ -1,6 +1,7 @@
 /** check boolean可以不写== true or == false，但check null必须写 */
 /** getOrDefault如果返回新的数据结构，记得要put回去否则不会保存在HashMap或HashSet里!! */
 /** LinkedList remove API input为int是remove by index，input为Object是remove by Element */
+import java.util.*;
 
 public class Test {
     public static void main(String[] args) {
@@ -104,7 +105,15 @@ public class Test {
         /** convert hashmap values to ArrayList */
         // new ArrayList<>(map.vaues());
 
-        System.out.println(1/2);
+        // System.out.println(Integer.toBinaryString(-2147483648+1));
+        // System.out.println(Integer.toBinaryString(-1));
+        System.out.println(-1/2);
+
+        List<List<Boolean>> list = new ArrayList<>();
+        boolean[] arr = new boolean[] {false, true};
+        // list.add(Arrays.asList(true, false));
+        List<Boolean> l = Arrays.asList(arr);
+        list.add(Arrays.asList(arr));
 
     }
 
