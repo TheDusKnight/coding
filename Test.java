@@ -106,15 +106,12 @@ public class Test {
         // new ArrayList<>(map.vaues());
 
         // System.out.println(Integer.toBinaryString(-2147483648+1));
-        // System.out.println(Integer.toBinaryString(-1));
-        System.out.println(-1/2);
+        System.out.println(Integer.toBinaryString(99));
+        System.out.println(Integer.toBinaryString(49));
+        System.out.println(Integer.toBinaryString(12));
+        // System.out.println(-1/2);
 
-        List<List<Boolean>> list = new ArrayList<>();
-        boolean[] arr = new boolean[] {false, true};
-        // list.add(Arrays.asList(true, false));
-        List<Boolean> l = Arrays.asList(arr);
-        list.add(Arrays.asList(arr));
-
+        // System.out.println(1 << 2);
     }
 
     // public static void foo(int n) {

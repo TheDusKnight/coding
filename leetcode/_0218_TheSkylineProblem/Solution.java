@@ -70,3 +70,4 @@ class Solution {
 }
 
 // time: O(N^2); space: O(N);
+// 这个题可以用BST优化，BST存index所以没有duplicate, time: O(N*log(N)) 
