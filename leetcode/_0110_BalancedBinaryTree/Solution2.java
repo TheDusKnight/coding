@@ -2,7 +2,7 @@ package leetcode._0110_BalancedBinaryTree;
 import leetcode.TreeNode;
 
 // recursion
-class Solution {
+class Solution2 {
     public boolean isBalanced(TreeNode root) {
         if (root == null) return true;
         

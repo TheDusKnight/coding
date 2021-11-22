@@ -106,9 +106,10 @@ public class Test {
         // new ArrayList<>(map.vaues());
 
         // System.out.println(Integer.toBinaryString(-2147483648+1));
-        System.out.println(Integer.toBinaryString(99));
-        System.out.println(Integer.toBinaryString(49));
-        System.out.println(Integer.toBinaryString(12));
+        // System.out.println(Integer.toBinaryString(99));
+        // System.out.println(Integer.toBinaryString(49));
+        // System.out.println(Integer.toBinaryString(Integer.MAX_VALUE));
+        System.out.println(Math.abs(Integer.MIN_VALUE));
         // System.out.println(-1/2);
 
         // System.out.println(1 << 2);
