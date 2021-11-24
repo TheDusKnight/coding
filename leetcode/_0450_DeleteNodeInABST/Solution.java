@@ -2,6 +2,7 @@ package leetcode._0450_DeleteNodeInABST;
 
 import leetcode.TreeNode;
 
+// https://leetcode.com/problems/delete-node-in-a-bst/discuss/93296/Recursive-Easy-to-Understand-Java-Solution
 // tree CRUD recursion
 class Solution {
     public TreeNode deleteNode(TreeNode root, int key) {
