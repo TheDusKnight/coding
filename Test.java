@@ -116,7 +116,7 @@ public class Test {
 
 
         Integer[] intergers = new Integer[3];
-        System.out.println(intergers[1]);
+        System.out.println(intergers[1]); 
     }
 
     // public static void foo(int n) {
