@@ -34,7 +34,7 @@ class Solution2 {
             // 尽量不要在for loop中check base case，时间复杂度高
             // if (curSum + i >= desiredTotal)
             //     return true;
-            if ((choosable & mask) != 0) {
+            if ((choosable & mask) != 0) { // can choose
                 if (!dfs(desiredTotal, choosable ^ mask, maxChoosableInteger, memo, curSum+i)) {
                     memo.put(choosable, true);
                     return true;
@@ -51,4 +51,4 @@ class Solution2 {
     }
 }
 
-// time: O(2^n * n) = O(2^n)
+// time: O(2^n * n) = O(2^n). n为maxChoosableInteger, 2^n是map存的所有可能的状态

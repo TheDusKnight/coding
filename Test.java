@@ -109,10 +109,14 @@ public class Test {
         // System.out.println(Integer.toBinaryString(99));
         // System.out.println(Integer.toBinaryString(49));
         // System.out.println(Integer.toBinaryString(Integer.MAX_VALUE));
-        System.out.println(Math.abs(Integer.MIN_VALUE));
+        // System.out.println(Math.abs(Integer.MIN_VALUE));
         // System.out.println(-1/2);
 
         // System.out.println(1 << 2);
+
+
+        Integer[] intergers = new Integer[3];
+        System.out.println(intergers[1]);
     }
 
     // public static void foo(int n) {
