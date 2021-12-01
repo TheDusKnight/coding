@@ -10,7 +10,7 @@ public class Solution {
         while (root != null) {
             // 往小（左）区间找
             if (root.val > p.val) {
-                res = root; // mark一下当前node为可能为结果因为只有值更大的node才有可能是结果，可能p在左下还没走过，也可能在左上走过头了
+                res = root; // 记录路径上比p大的值，每次更新得越来越小
                 root = root.left;
             } else {
                 // 往大（右）的区间找
@@ -21,7 +21,7 @@ public class Solution {
         return res;
     }
 }
-// time: O(log(n))
+// time: O(log(n)) if balanced, O(N) worst case
 
 /**
  *          2

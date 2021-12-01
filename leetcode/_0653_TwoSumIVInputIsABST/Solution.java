@@ -5,36 +5,32 @@ import java.util.List;
 
 import leetcode.TreeNode;
 
-public class Solution {
-    // dfs inorder拉平后two pointers
-    List<Integer> list;
+// 最brute force用hash set
+// 次brute force用inorder拉直 + two pointer
+class Solution {
     public boolean findTarget(TreeNode root, int k) {
-        // check bst是否size为1很重要，否则edge case出错
-        if (root == null || (root.left == null && root.right == null))
-            return false;
-        list = new ArrayList<>();
-        dfs(root);
-        int l = 0, r = list.size()-1;
-        while (l+1 < r) {
-            int cur = list.get(l) + list.get(r);
-            if (cur == k) {
-                return true;
-            } else if (cur > k) {
-                r--;
-            } else {
-                l++;
-            }
+        // cc
+        
+        List<Integer> list = new ArrayList<>();
+        inOrder(list, root);
+        
+        int start = 0, end = list.size() - 1;
+        while (start < end) { // 左右相邻，相等没搞清楚
+            int curVal = list.get(start) + list.get(end);
+            if (curVal == k) return true;
+            else if (curVal < k) start++;
+            else end--;
         }
-        return list.get(l) + list.get(r) == k;
+        
+        return false;
     }
     
-    private void dfs(TreeNode root) {
-        if (root == null)
-            return;
+    private void inOrder(List<Integer> list, TreeNode root) {
+        if (root == null) return;
         
-        dfs(root.left);
+        inOrder(list, root.left);
         list.add(root.val);
-        dfs(root.right);
+        inOrder(list, root.right);
     }
 }
 

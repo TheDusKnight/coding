@@ -2,9 +2,8 @@ package leetcode._0285_InorderSuccessorInBST;
 
 import leetcode.TreeNode;
 
+// inorder return
 public class Solution3 {
-    // dfs inorder binary tree keep global variable O(n) constant factor优化
-    // 找到结果马上返回TreeNode
     private TreeNode pre;
     private boolean flag = false;
     public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
@@ -27,8 +26,7 @@ public class Solution3 {
         TreeNode l = dfs(root.left, p);
         if (l != null) // 如果找到结果马上返回，否则继续找
             return l;
-        if (pre == p)
-            return root;
+        if (pre == p) return root;
         pre = root;
         return dfs(root.right, p);
     }
