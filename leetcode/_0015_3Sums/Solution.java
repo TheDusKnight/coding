@@ -32,10 +32,6 @@ class Solution {
                 // 当l++或r--，变的元素只能和上次一样才能加和不变，而题目不需要duplicate triplets所以直接l++,r--
                 res.add(Arrays.asList(nums[i], nums[l++], nums[r--]));
                 // 即使l++,r--还是有可能出现两个元素完全和上次一样的情况
-                // while (r > 0 && nums[r] == nums[r + 1]) // 留一个即可
-                //     r--;
-                // while (l < nums.length && nums[l] == nums[l - 1]) // 留一个即可
-                //     l++;
                 while (l < r && nums[l] == nums[l - 1]) // 留一个即可
                     l++;
                 while (l < r && nums[r] == nums[r + 1]) // 留一个即可

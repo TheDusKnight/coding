@@ -6,8 +6,8 @@ class Solution {
     public int strStr(String haystack, String needle) {
         // cc
         if (haystack == null || needle == null) return -1;
-        // if (haystack.length() == 0 && needle.length() == 0) return 0;
-        // if (needle.length() == 0) return 0;
+        if (needle.length() == 0) return 0;
+        if (needle.length() > haystack.length()) return -1;
         
         for (int i = 0; i <= haystack.length() - needle.length(); i++) {
             int j;

@@ -15,6 +15,7 @@ public class Solution {
             int y = (p2 != null) ? p2.val : 0;
             int sum = x + y + carry;
             carry = sum / 10;
+            // 忘记给curr.next赋值导致null pointer error
             curr.next = new ListNode(sum % 10);
             curr = curr.next;
             if (p1 != null) p1 = p1.next;

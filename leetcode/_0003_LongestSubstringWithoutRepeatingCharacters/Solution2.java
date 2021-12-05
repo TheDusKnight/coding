@@ -1,27 +1,22 @@
 package leetcode._0003_LongestSubstringWithoutRepeatingCharacters;
-import java.util.*;
 
-// hashmap
-class Solution2 {
+// sliding window hashmap O(N)
+class Solution2ß {
     public int lengthOfLongestSubstring(String s) {
-        int len = s.length();
-        if (len == 0) return 0;
-        if (len == 1) return 1;
+        if (s == null || s.length() == 0) return 0;
         
-        int res = 0;
-        Map<Character, Integer> map = new HashMap<>();
-        for (int fast = 0, slow = 0; fast < len; fast++) {
-            char curVal = s.charAt(fast);
-            if (map.containsKey(curVal)) {
-                // update slow [a,b,b,a]
-                slow = Math.max(map.get(s.charAt(fast)), slow);
-            }
-            // 左闭右闭区间长度 fast - slow + 1。 fast++后左闭右开区间 fast - slow
-            res = Math.max(res, fast - slow + 1);
-            map.put(s.charAt(fast), fast + 1);
+        Integer[] ascii = new Integer[256]; // 使用map记录char出现的位置
+        int len = s.length(), longest = 0, l = 0;
+        for (int r = 0; r < len; r++) {
+            char c = s.charAt(r);
+            if (ascii[c] != null) l = Math.max(l, ascii[c] + 1);
+            
+            ascii[c] = r;
+            longest = Math.max(longest, r - l + 1);
         }
-        return res;
+        
+        return longest;
     }
 }
 
-// time: O(n)
+// time: O(N); space: O(1);
