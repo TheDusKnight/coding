@@ -12,7 +12,7 @@ class Solution {
             if (r > l) l = r = 0;
             if (l != 0 && r != 0 && l == r) maxLen = Math.max(maxLen, l * 2);
         }
-        l = 0; r = 0;
+        l = 0; r = 0; // 忘记set back l和r
         for (int i = len-1; i >= 0; i--) {
             char c = s.charAt(i);
             if (c == '(') l++;

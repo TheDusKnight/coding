@@ -30,7 +30,7 @@ class Solution2 {
             // if (set.add(nums[i])) {
                 path.add(nums[i]);
                 res.add(new ArrayList<Integer>(path));
-                dfs(res, nums, path, i+1);
+                dfs(res, nums, path, i+1); // idx还是i没搞清楚
                 path.remove(pLen);
             // }
         }

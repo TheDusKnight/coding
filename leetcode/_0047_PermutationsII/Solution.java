@@ -22,8 +22,9 @@ public class Solution {
     private void dfs(List<Integer> nums_l, int index, List<List<Integer>> res) {
         if (index == nums_l.size() - 1) {
             res.add(new ArrayList<>(nums_l));
+            return;
         }
-
+        // 忘记只能用set去做，用的错误的sort做法
         Set<Integer> set = new HashSet<>();
         for (int i = index; i < nums_l.size(); i++) {
             if (set.add(nums_l.get(i))) {
@@ -34,3 +35,5 @@ public class Solution {
         }
     }
 }
+
+// time: O(n*n^n); space: O(n);
