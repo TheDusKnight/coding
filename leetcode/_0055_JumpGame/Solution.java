@@ -1,25 +1,31 @@
 package leetcode._0055_JumpGame;
 
-// 自己 recursion写法, 应该就是greedy
-public class Solution {
+// recursion
+class Solution {
     public boolean canJump(int[] nums) {
-        return recursion(nums, 0, 0);
+        // cc
+        
+        boolean[] memo = new boolean[nums.length];
+        return recursion(nums, 0, memo);
     }
-
-    private boolean recursion(int[] nums, int index, int step) {
-        if (index == nums.length - 1) return true;
+    
+    private boolean recursion(int[] nums, int idx, boolean[] memo) {
+        if (idx >= nums.length-1) {
+            return true;
+        }
         
-        // 从上层传下来的剩余步数和当前index可以走的步数取最大的一个
-        int longestJump = Math.max(nums[index], step);
-        // if (longestJump <= 0) return false;
+        if (memo[idx]) return false;
         
-        // for (int i = 1; i <= longestJump; i++) {
-        //     return helper(nums, index + i, longestJump - i);
-        // }
-
-        if (1 <= longestJump)
-            return recursion(nums, index+1, longestJump-1);
-
+        int steps = nums[idx];
+        for (int i = 1; i <= steps; i++) {
+            if (recursion(nums, idx+i, memo)) {
+                return true;
+            }
+        }
+        
+        memo[idx] = true;
         return false;
     }
 }
+
+// // time: O(k^N) 不加memo -> O(k*N). k是最大步数; space: O(N);

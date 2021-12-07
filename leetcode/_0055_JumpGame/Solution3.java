@@ -1,40 +1,28 @@
 package leetcode._0055_JumpGame;
 
-// dp速度慢，为什么？
+// dp inplace
 class Solution3 {
     public boolean canJump(int[] nums) {
-        if (nums == null || nums.length == 0) return false;
-        if (nums.length == 1) return true;
-        
+        // cc
+        if (nums == null) return false;
+        if (nums.length == 0 || nums.length == 1) return true;
         int len = nums.length;
-        // dp[0] == true; dp[i] == true if any of position it can see is true
-        boolean[] dp = new boolean[len];
-        dp[len-1] = true;
         
-        for (int i = len - 2; i >= 0; i--) {
-            for (int j = 1; j <= nums[i]; j++) { //从近到远
-                // if (i+j >= len || dp[i+j]) {
-                //     dp[i] = true;
-                //     break;
-                // }
-                if (dp[i+j]) { // 可以不用加condition因为有break，并且dp[len-1]一定为true
-                    dp[i] = true;
+        nums[len-1] = -1;
+        for (int i = len-2; i >= 0; i--) {
+            int jump = nums[i];
+            // 由近及远或者由远及近都可以
+            for (int j = jump; j > 0; j--) {
+                // 如果由近及远可以不用check i+j < nums.length 因为base case就是-1会挡住
+                if (i+j < nums.length && nums[i+j] == -1) {
+                    nums[i] = -1;
                     break;
                 }
             }
         }
-        
-        // for (int i = len - 2; i >= 0; i--) {
-        //     for (int j = nums[i]; j > 0; j--) { // 从远到近
-        //         if (i+j >= len-1 || dp[i+j]) {
-        //             dp[i] = true;
-        //             break;
-        //         }
-        //     }
-        // }
-        
-        return dp[0];
+        return nums[0] == -1 ? true : false;
     }
 }
 
-// time: O(k*N); space: O(N);
+// time: O(kn)
+// space: O(1)

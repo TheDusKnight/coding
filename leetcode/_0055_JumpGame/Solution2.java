@@ -1,31 +1,40 @@
 package leetcode._0055_JumpGame;
 
-// recursion
+// dp
 class Solution2 {
     public boolean canJump(int[] nums) {
-        // cc
+        if (nums == null || nums.length == 0) return false;
+        if (nums.length == 1) return true;
         
-        boolean[] memo = new boolean[nums.length];
-        return recursion(nums, 0, memo);
-    }
-    
-    private boolean recursion(int[] nums, int idx, boolean[] memo) {
-        if (idx >= nums.length-1) {
-            return true;
-        }
+        int len = nums.length;
+        // dp[0] == true; dp[i] == true if any of position it can see is true
+        boolean[] dp = new boolean[len];
+        dp[len-1] = true;
         
-        if (memo[idx]) return false;
-        
-        int steps = nums[idx];
-        for (int i = 1; i <= steps; i++) {
-            if (recursion(nums, idx+i, memo)) {
-                return true;
+        for (int i = len - 2; i >= 0; i--) {
+            for (int j = 1; j <= nums[i]; j++) { //从近到远
+                // if (i+j >= len || dp[i+j]) {
+                //     dp[i] = true;
+                //     break;
+                // }
+                if (dp[i+j]) { // 可以不用加condition因为有break，并且dp[len-1]一定为true
+                    dp[i] = true;
+                    break;
+                }
             }
         }
         
-        memo[idx] = true;
-        return false;
+        // for (int i = len - 2; i >= 0; i--) {
+        //     for (int j = nums[i]; j > 0; j--) { // 从远到近
+        //         if (i+j >= len-1 || dp[i+j]) {
+        //             dp[i] = true;
+        //             break;
+        //         }
+        //     }
+        // }
+        
+        return dp[0];
     }
 }
 
-// // time: O(k^N) 不加memo -> O(k*N). k是最大步数; space: O(N);
+// time: O(k*N); space: O(N);

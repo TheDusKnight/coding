@@ -6,7 +6,7 @@ class Solution3 {
         // cc
         if (nums == null || nums.length == 0) throw new IllegalArgumentException();
         int len = nums.length;
-        // 重要不能省略
+        // 忘加corner case
         if (len == 1) return 0;
         
         int preMax = 0;
