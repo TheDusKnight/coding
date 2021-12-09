@@ -21,6 +21,7 @@ class Solution {
         for (int i = 1; i < choosable.length; i++) {
             if (choosable[i]) {
                 choosable[i] = false;
+                // 必须先记录res否则无法还原visited
                 boolean res = dfs(desiredTotal, max+i, choosable);
                 choosable[i] = true;
                 // 不通才通

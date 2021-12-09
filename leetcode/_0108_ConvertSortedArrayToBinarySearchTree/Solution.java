@@ -27,7 +27,7 @@ class Solution {
     }
     
     private TreeNode formBST(int[] nums, int start, int end) {
-        if (start > end) return null;
+        if (start > end) return null; // 错加了等于号，等于的时候也要生成node
         
         int mid = start + (end - start) / 2;
         TreeNode cur = new TreeNode(nums[mid]);

@@ -1,7 +1,7 @@
 package leetcode._0121_BestTimeToBuyAndSellStock;
 
+// dp 股票问题
 public class Solution2 {
-    // dp 股票问题
     public int maxProfit(int[] prices) {
         if (prices == null)
             return -1;

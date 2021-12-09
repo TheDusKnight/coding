@@ -11,8 +11,7 @@ class Solution2 {
         // 当desiredTotal为0时，直接宣布胜利
         if (desiredTotal <= 0)
             return true;
-        // 检查所有可选数字加起来能否达到target
-        // 问题问的是first player是否能win，答案是不能
+        // 必须检查所有可选数字加起来能否达到target，因为会有tie的情况
         int sum = (1+maxChoosableInteger) * maxChoosableInteger / 2;
         if (sum < desiredTotal)
             return false;

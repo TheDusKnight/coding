@@ -1,7 +1,8 @@
 package leetcode._0122_BestTimeToBuyAndSellStockII;
 
+// 想要再次buy，必须先sell
+// O(1) dp，和121唯一的变化就是nextBuy从sell-prices[i]转移过来而不是-prices[i]
 public class Solution {
-    // O(1) dp，和121唯一的变化就是nextBuy从sell-prices[i]转移过来而不是-prices[i]
     public int maxProfit(int[] prices) {
         if (prices == null)
             return -1;
