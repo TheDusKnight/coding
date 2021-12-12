@@ -9,7 +9,8 @@ import java.util.List;
 public class Solution {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         // cc
-        List<Integer>[] graph = buildGraph(numCourses, prerequisites);
+        List<Integer>[] graph = new List[numCourses];
+        buildGraph(prerequisites, graph);
         int[] statusMap = new int[numCourses];
         List<Integer> out = new ArrayList<>();
         for (int i = 0; i < numCourses; i++) {
@@ -23,21 +24,19 @@ public class Solution {
         return res;
     }
     
-    private List<Integer>[] buildGraph(int numCourses, int[][] prerequisites) {
-        List<Integer>[] tmp = new List[numCourses];
+    private void buildGraph(int[][] prerequisites, List<Integer>[] graph) {
         // 一种无脑初始化所有array里的ArrayList复杂度可能高
         // Arrays.setAll(graph, ele -> new ArrayList<>())
 
         // 注意这里idx0代表pre，idx1代表cur，比如[a,b]，a依赖b所有b应该在a前面,b->a
         for (int i = 0; i < prerequisites.length; i++) {
             // 一种优化，只有当prerequisites存在对应index才初始化但需要在dfs check nexts是否为null
-            if (tmp[prerequisites[i][1]] == null) {
-                tmp[prerequisites[i][1]] = new ArrayList<>();
+            if (graph[prerequisites[i][1]] == null) {
+                graph[prerequisites[i][1]] = new ArrayList<>();
             }
             // 如果反着建图不用reverse
-            tmp[prerequisites[i][1]].add(prerequisites[i][0]);
+            graph[prerequisites[i][1]].add(prerequisites[i][0]);
         }
-        return tmp;
     }
     
     private boolean dfs(List<Integer>[] graph, int cur, int[] statusMap, List<Integer> out) {

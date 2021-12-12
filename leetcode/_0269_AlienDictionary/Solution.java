@@ -1,83 +1,65 @@
 package leetcode._0269_AlienDictionary;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
-// 拓扑，["z","z"] test case过不去
-public class Solution {
+// 拓扑排序
+class Solution {
+    private static final int N = 26;
     public String alienOrder(String[] words) {
-        if (words == null || words.length == 0)
-            return "";
-        if (words.length == 1)
-            return words[0];
+        // cc
         
-        List<Character>[] graph = new List[26];
-        // hasPrefix表示，有前缀的时候，return true
-        // 就是words[i]是words[i-1]的前缀的特殊例子（不包含本身），这种情况要return "";
-        boolean hashPrefix = buildGraph(words, graph);
-        if (hashPrefix) return "";
+        boolean[][] graph = new boolean[N][N];
+        int[] stMap = new int[N];
+        buildGraph(words, graph, stMap);
+        
         StringBuilder sb = new StringBuilder();
-        char[] statusMap = new char[26];
-        for (int i = 0; i < 26; i++) {
-            if (graph[i].size() > 0) {
-                if (!dfs(graph, i, statusMap, sb)) {
+        for (int i = 0; i < N; i++) {
+            if (stMap[i] == 0)
+                if (dfs(graph, stMap, sb, i))
                     return "";
-                }
-            }
         }
+        
         return sb.reverse().toString();
     }
     
-    private boolean buildGraph(String[] words, List<Character>[] graph) {
-        for (int i = 0; i < graph.length; i++) {
-            graph[i] = new ArrayList<>();
-        }
+    private boolean dfs(boolean[][] graph, int[] stMap, StringBuilder sb, int i) {
+        int status = stMap[i];
+        if (status == 1) return true;
+        if (status == 2) return false;
         
-        for (int i = 0; i < words.length-1; i++) {
-            String word1 = words[i];
-            String word2 = words[i+1];
-            int len1 = word1.length();
-            int len2 = word2.length();
-            if (len1 > len2 && word1.startsWith(word2)) {
-                return true;
+        stMap[i] = 1;
+        for (int j = 0; j < N; j++) {
+            if (graph[i][j]) { // 有connection说明status一定不为-1
+                if (dfs(graph, stMap, sb, j)) return true;
+            }
+        }
+        stMap[i] = 2;
+        sb.append((char)(i + 'a')); // 忘记加进sb
+        return false;
+    }
+    
+    private void buildGraph(String[] words, boolean[][] graph, int[] stMap) {
+        Arrays.fill(stMap, -1); // -1表示还不存在
+        for (char c: words[0].toCharArray()) stMap[c - 'a'] = 0;
+        for (int i = 1; i < words.length; i++) {
+            for (char c: words[i].toCharArray()) stMap[c - 'a'] = 0;
+            // 防止["abc","ab"]错误
+            String w1 = words[i-1], w2 = words[i];
+            if (!w1.equals(w2) && w1.startsWith(w2)) {
+                Arrays.fill(stMap, 2);
+                return;
             }
             
-            int lenMin = Math.min(len1, len2);
-            for (int j = 0; j < lenMin; j++) {
-                char ch1 = word1.charAt(j);
-                char ch2 = word2.charAt(j);
-                if (ch1 != ch2) {
-                    if (!graph[ch1-'a'].contains(ch2)) {
-                        graph[ch1-'a'].add(ch2);
-                    }
+            for (int j = 0; j < Math.min(w1.length(), w2.length()); j++) {
+                char c1 = w1.charAt(j), c2 = w2.charAt(j);
+                if (c1 != c2) {
+                    // 忘记转换
+                    graph[c1 - 'a'][c2 - 'a'] = true;
                     break;
                 }
             }
         }
-        return false;
-    }
-    
-    private boolean dfs(List<Character>[] graph, int cur, char[] statusMap, StringBuilder sb) {
-        int status = statusMap[cur];
-        if (status == 1) {
-            return false;
-        }
-        if (status == 2) {
-            return true;
-        }
-        
-        statusMap[cur] = 1;
-        List<Character> nexts = graph[cur];
-        for (Character next: nexts) {
-            if (!dfs(graph, next-'a', statusMap, sb)) {
-                return false;
-            }
-        }
-        statusMap[cur] = 2;
-        sb.append((char)(cur+'a'));
-        return true;
     }
 }
 
 // time: O(V+E) = O(26+k); k是input words的长度
-
