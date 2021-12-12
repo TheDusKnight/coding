@@ -34,6 +34,7 @@ public class Solution {
             if (tmp[prerequisites[i][1]] == null) {
                 tmp[prerequisites[i][1]] = new ArrayList<>();
             }
+            // 如果反着建图不用reverse
             tmp[prerequisites[i][1]].add(prerequisites[i][0]);
         }
         return tmp;
@@ -63,4 +64,4 @@ public class Solution {
     }
 }
 // numCourses = n, prerequisites length = k
-// O(n+k+n*log(n)) // sort可以不需要
+// O(n+k) // sort可以不需要

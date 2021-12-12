@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-// bfs 搜图的最短路径
+// bfs 搜图的最短路径不需要加visited
 class Solution {
     private static final int[][] DIRECTIONS = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
 

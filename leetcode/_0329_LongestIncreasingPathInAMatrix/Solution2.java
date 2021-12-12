@@ -1,5 +1,6 @@
 package leetcode._0329_LongestIncreasingPathInAMatrix;
 
+// dfs with pruning
 class Solution2 {
     int[][] DIRECTIONS = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
     public int longestIncreasingPath(int[][] matrix) {
@@ -16,9 +17,9 @@ class Solution2 {
     }
 
     private int dfs(int[][] matrix, int i, int j, int[][] memo) {
-        if (i < 0 || i > matrix.length || j < 0 || j > matrix[0].length ) {
-            return 0;
-        }
+        // if (i < 0 || i > matrix.length || j < 0 || j > matrix[0].length ) {
+        //     return 0;
+        // }
         if (memo[i][j] > 0)
             return memo[i][j];
 
@@ -35,4 +36,6 @@ class Solution2 {
     }
 }
 
-// time: O(m*n) amortized cost, first dfs O(m*n), after all dfs O(1)
+// time: 
+// 两种分析方式，第一种看memo的size O(m*n)
+// O(m*n) amortized cost, first dfs O(m*n), after all dfs O(1)

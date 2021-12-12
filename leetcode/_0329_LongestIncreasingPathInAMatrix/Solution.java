@@ -1,7 +1,7 @@
 package leetcode._0329_LongestIncreasingPathInAMatrix;
 
+// dfs 题目不可能出环。无pruning超时
 class Solution {
-    // dfs 无环 无pruning超时
     int[][] DIRECTIONS = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
 
     public int longestIncreasingPath(int[][] matrix) {

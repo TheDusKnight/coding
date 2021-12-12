@@ -115,13 +115,23 @@ public class Test {
         // System.out.println(1 << 2);
 
 
-        Integer[] intergers = new Integer[3];
-        System.out.println(3176750 % 26); 
-        System.out.println('R' - 'A' + 1); 
+        // Integer[] intergers = new Integer[3];
+        // int[] a = new int[3];
+        // a[0]++;
+        // System.out.println(a[0]); 
+        // System.out.println('R' - 'A' + 1); 
+
+        // System.out.println(foo(12));
+
+        System.out.println(0 ^ 0);
     }
 
-    // public static void foo(int n) {
-    //     n++;
+    // public static int foo(int n) {
+        // if (n < 10) return n;
+
+        // int curDigit = foo(n / 10);
+        // System.out.println(curDigit);
+        // return n % 10;
     // }
 
 }

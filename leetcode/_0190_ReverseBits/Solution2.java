@@ -9,7 +9,8 @@ public class Solution2 {
         for (int i = 0; i < 16; i++) {
             int left = 1 & (n >> (31 - i));
             int right = 1 & (n >> i);
-            if (left != right) {
+
+            if (left != right) { // 重点通过左右是否相等反转0和1
                 n ^= 1 << (31 - i);
                 n ^= 1 << i;
             }
