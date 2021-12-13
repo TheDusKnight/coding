@@ -1,6 +1,7 @@
 package leetcode._0126_WordLadderII;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -90,7 +91,16 @@ class Solution {
             one.remove(0);
         }
     }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        List<String> wordList = Arrays.asList("hot","dot","dog","lot","log","cog");
+        String beginWord = "hit";
+        String endWord = "cog";
+        System.out.println(sol.findLadders(beginWord, endWord, wordList));
+    }
 }
 
+// n是dict的长度，k是单词的平均长度
 // time: BFS O(V+E) = O(n + 26k*n) = O(n), DFS O(V+E+L*P) L是shortest path长度，P是shortest path个数
 // 注意L*P一定大于V+E。想象一根线连着发散图每次deep copy这根线都要计算一次，所以有一些线重复计算了很多次

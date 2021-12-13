@@ -34,6 +34,7 @@ class Solution2 {
             for (int j = 1; j <= jump; j++) {
                 if (i+j < nums.length)
                     min = Math.min(min, nums[i+j]);
+                else break;
             }
             // 当min没有被更新，说明它到达不了任何地方
             nums[i] = min+1;

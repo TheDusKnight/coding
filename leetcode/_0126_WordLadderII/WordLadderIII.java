@@ -37,7 +37,7 @@ class WordLadderIII {
                         if (!next.equals(cur) && dict.contains(next)) {
                             if (next.equals(endWord)) { // 找到一条路径立即返回
                                 res.add(next);
-                                graph.put(next, cur);
+                                graph.put(next, cur); // 忘记put
                                 return recoverPath(res, graph, endWord, beginWord);
                             }
                             graph.put(next, cur);
@@ -70,3 +70,5 @@ class WordLadderIII {
         System.out.println(sol.findLadders(beginWord, endWord, wordList));
     }
 }
+
+// time: O(n + 26*n)

@@ -13,7 +13,7 @@ class Solution3 {
         int curMax = 0;
         int jumps = 0;
         for (int i = 0; i < len; i++) {
-            // curMax出界，需要加一次jump然后反值
+            // curMax出界，实际需要再jump一次才能到达终点
             if (curMax >= len-1) return jumps+1;
             if (i > preMax) {
                 // 走出preMax界限，jump数需要加一

@@ -51,7 +51,7 @@ public class Solution3 {
                 if (set.contains(str) && dp[j+1]) {
                     dp[i] = true;
                     // 一通百通
-                    break;
+                    break; // 忘记加break
                 }
             }
         }

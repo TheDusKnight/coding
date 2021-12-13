@@ -7,7 +7,7 @@ class Solution {
         // if (nums.length == 1) return nums[0];
         
         int len = nums.length;
-        int dp = nums[0];
+        int dp = nums[0]; // 初始化错误得写成0
         int globalMax = dp;
         
         for (int i = 1; i < len; i++) {
