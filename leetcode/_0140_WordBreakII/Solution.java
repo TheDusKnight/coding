@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Solution {
-    // similar to valid ip address
+    // similar to restore ip address
     // dfs for loop 自写无boolean array pruning
     public List<String> wordBreak(String s, List<String> wordDict) {
         List<String> res = new ArrayList<>();
@@ -54,4 +54,4 @@ public class Solution {
     }
 }
 
-// time: O(2^n), space: O(3*n)
+// time: O(2^n), space: O(2^n)每个位置break或不break，一共有2^n中组合

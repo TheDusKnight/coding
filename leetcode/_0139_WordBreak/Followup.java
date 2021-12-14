@@ -18,11 +18,11 @@ public class Followup {
             set.add(word);
         }
         int dp[] = new int[tLen+1]; // 可以改成Integer[]初始为null说明没走过
+        Arrays.fill(dp, tLen+1); // 也可以初始化为tLen，保险起见tLen+1
         // 根据面试官要求分析切一刀值为多少？
         dp[tLen] = 0; // string为空是minCut是0
         for (int i = tLen-1; i >= 0; i--) {
             // 尝试不断更新dp[i]
-            dp[i] = Integer.MAX_VALUE;
             for (int j = i; j < tLen; j++) {
                 String str = s.substring(i, j+1);
                 // i到j的substring valid

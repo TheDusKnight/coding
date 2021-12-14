@@ -3,8 +3,8 @@ package leetcode._0093_RestoreIPAddress;
 import java.util.ArrayList;
 import java.util.List;
 
+// dfs 比 word break难
 class Solution {
-    // dfs for loop
     public List<String> restoreIpAddresses(String s) {
         List<String> res = new ArrayList<>();
         if (s == null || s.length() < 4 || s.length() > 255)
@@ -16,7 +16,7 @@ class Solution {
     private void dfs(List<String> res, String s, StringBuilder path, int idx, int num) {
         int sLen = s.length();
         int pLen = path.length();
-        if (num == 4) {
+        if (num == 4) { // 忘记数字是4
             if (idx == sLen) {
                 path.deleteCharAt(pLen-1);
                 res.add(path.toString());
@@ -28,17 +28,15 @@ class Solution {
         
         for (int l = 1; l <= 3; l++) {
             // idx+l = length of current path
-            if (idx+l > sLen)
-                break;
+            if (idx+l > sLen) break; // 忘记break
             int val = Integer.parseInt(s.substring(idx, idx+l));
             if (val <= 255) {
                 path.append(val + ".");
                 dfs(res, s, path, idx+l, num+1);
                 path.setLength(pLen);
             }
-            // 当val为0时，只能走"0."分支，0后面不能加数字
-            if (val == 0)
-                break;
+            // 当val为0时，只能走"0."分支，0后面不能接任何东西
+            if (val == 0) break;
         }
     }
 

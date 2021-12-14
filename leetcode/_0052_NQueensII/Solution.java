@@ -1,6 +1,7 @@
 package leetcode._0052_NQueensII;
 
 // 记录一下global count就行，不用输出board
+// 有space为O(N)的解法
 public class Solution {
     int count = 0;
     public int totalNQueens(int n) {
@@ -42,3 +43,5 @@ public class Solution {
         return true;
     }
 }
+
+// time: O(N!); space: O(N^2);
