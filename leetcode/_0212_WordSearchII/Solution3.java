@@ -62,13 +62,13 @@ class Solution3 {
         if (i < 0 || i >= row || j < 0 || j >= col || visited[i][j] || parent.children.get(board[i][j]) == null) {
             return;
         }
-        // 成功的base case
+        // 找到一个word
         TrieNode cur = parent.children.get(board[i][j]);
         if (cur.word != null) {
             res.add(cur.word);
             cur.word = null;
         }
-        // remove if leave node and return
+        // 一直走到底再返回
         if (cur.children.isEmpty()) {
             parent.children.remove(board[i][j]);
             return;
