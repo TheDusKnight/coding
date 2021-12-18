@@ -1,32 +1,16 @@
 package leetcode._1413_MininumValueToGetPositiveStepByStepSum;
 
-// binary search
+// prefix sum
 class Solution {
     public int minStartValue(int[] nums) {
         // cc
         
-        int start = 1, end = Integer.MAX_VALUE;
-        while (start <= end) {
-            int mid = start + (end - start) / 2;
-            if (validStepSum(nums, mid)) {
-                end = mid-1;
-            } else {
-                start = mid+1;
-            }
+        int curSum = 0, min = 0;
+        for (int i = 0; i < nums.length; i++) {
+            curSum += nums[i];
+            min = Math.min(min, curSum);
         }
         
-        return start;
-    }
-    
-    private boolean validStepSum(int[] nums, int target) {
-        for (int num: nums) {
-            target += num;
-            if (target < 1) return false;
-        }
-        
-        return true;
+        return min >= 0 ? 1 : -min + 1;
     }
 }
-
-// time: O(n⋅log(mn));
-// Let nn be the length of the array nums and mm be the absolute value of the lower bound of elements in nums.

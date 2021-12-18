@@ -6,16 +6,16 @@ import java.util.Queue;
 // maxHeap
 class Solution2 {
     public int[][] kClosest(int[][] points, int k) {
-        Queue<int[]> queue = new PriorityQueue<>((p1, p2) -> (p2[0]*p2[0]+p2[1]*p2[1]-p1[0]*p1[0]-p1[1]*p1[1]));
+        Queue<int[]> maxHeap = new PriorityQueue<>((p1, p2) -> (p2[0]*p2[0]+p2[1]*p2[1]-p1[0]*p1[0]-p1[1]*p1[1]));
         for (int[] point: points) {
-            queue.offer(point);
-            if (queue.size() > k)
-                queue.poll();
+            maxHeap.offer(point);
+            if (maxHeap.size() > k)
+                maxHeap.poll();
         }
         
         int[][] res = new int[k][];
         for (int i = 0; i < k; i++) {
-            res[i] = queue.poll();
+            res[i] = maxHeap.poll();
         }
         return res;
     }

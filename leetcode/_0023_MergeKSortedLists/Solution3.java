@@ -23,7 +23,7 @@ class Solution3 {
         
         Queue<ListNode> queue = new PriorityQueue<>((o1, o2) -> (o1.val-o2.val));
         for (ListNode cur: lists)
-            if (cur != null) // 注意check if null
+            if (cur != null) // 忘记check if null
                 queue.offer(cur);
         
         ListNode dummy = new ListNode();

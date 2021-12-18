@@ -123,7 +123,8 @@ public class Test {
 
         // System.out.println(foo(12));
 
-        System.out.println(0 ^ 0);
+        // System.out.println(0 ^ 0);
+        System.out.println(getString(-9872631));
     }
 
     // public static int foo(int n) {
@@ -133,5 +134,26 @@ public class Test {
         // System.out.println(curDigit);
         // return n % 10;
     // }
+
+    private static String getString(int input) {
+        boolean isNegative = false;
+        if (input < 0) {
+            isNegative = true;
+            input = -input;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
+        while (input > 0) {
+            int digit = input % 10;
+            input /= 10;
+            sb.append((char)(digit + '0'));
+            count++;
+            if (count % 3 == 0) sb.append(',');
+        }
+
+        if (isNegative) sb.append('-');
+        return sb.reverse().toString();
+    }
 
 }
