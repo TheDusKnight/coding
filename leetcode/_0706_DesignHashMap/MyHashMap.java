@@ -1,94 +1,60 @@
 package leetcode._0706_DesignHashMap;
 
-import java.util.LinkedList;
-
-class Pair<U, V> { // 泛型例子
-    public U first;
-    public V second;
-    
-    public Pair(U first, V second) {
-        this.first = first;
-        this.second = second;
-    }
-}
-
+// 自定义list node, 最好的做法
 class MyHashMap {
-    private int keyRange;
-    private Bucket[] bucketArray;
-
-    /** Initialize your data structure here. */
-    public MyHashMap() {
-        this.keyRange = 2069; // 769
-        this.bucketArray = new Bucket[this.keyRange];
-        for (int i = 0; i < this.keyRange; i++) {
-            this.bucketArray[i] = new Bucket();
+    class Node {
+        int key;
+        int val;
+        Node next;
+        
+        public Node(int key, int val) {
+            this.key = key;
+            this.val = val;
         }
     }
-    
-    protected int _hash(int key) {
-        return (key % keyRange);
+
+    Node[] nodes;
+    private static final int RANGE = 2069;
+    public MyHashMap() {
+        nodes = new Node[RANGE];
+        for (int i = 0; i < nodes.length; i++)
+            nodes[i] = new Node(-1,-1); // 必须初始化并赋值
     }
     
-    /** value will always be non-negative. */
+    private int _hash(int key) {
+        return key % RANGE;
+    }
+    
     public void put(int key, int value) {
         int idx = _hash(key);
-        bucketArray[idx].update(key, value);
+        Node prev = findPrev(nodes[idx], key);
+        if (prev.next == null) prev.next = new Node(key, value);
+        else prev.next.val = value;
     }
     
-    /** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
     public int get(int key) {
         int idx = _hash(key);
-        return bucketArray[idx].get(key);
+        Node prev = findPrev(nodes[idx], key);
+        return prev.next == null ? -1 : prev.next.val;
     }
     
-    /** Removes the mapping of the specified value key if this map contains a mapping for the key */
     public void remove(int key) {
         int idx = _hash(key);
-        bucketArray[idx].remove(key);
+        Node prev = findPrev(nodes[idx], key);
+        if (prev.next == null) return;
+        prev.next = prev.next.next;
+    }
+    
+    private Node findPrev(Node root, int key) {
+        Node cur = root, prev = null;
+        while (cur != null && cur.key != key) {
+            prev = cur;
+            cur = cur.next;
+        }
+        
+        return prev;
     }
 }
-
-class Bucket {
-    private LinkedList<Pair> bucket;
-    
-    public Bucket() {
-        bucket = new LinkedList<>();
-    }
-    
-    public Integer get(Integer key) { // 注意传的是Integer
-        for (Pair<Integer, Integer> pair: bucket) {
-            if (pair.first.equals(key))
-                return pair.second;
-        }
-        return -1;
-    }
-    
-    public void update(Integer key, Integer value) {
-        boolean found = false;
-        for (Pair<Integer, Integer> pair: bucket) {
-            if (pair.first.equals(key)) {
-                pair.second = value;
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
-            bucket.addFirst(new Pair<Integer, Integer>(key, value));
-        }
-    }
-    
-    public void remove(Integer key) {
-        for (Pair<Integer, Integer> pair: bucket) {
-            if (pair.first.equals(key)) {
-                bucket.remove(pair); // 这里是remove pair不是remove key
-                break;
-            }
-        }
-    }
-}
-
-// time: O(N / K). N is number of elements in hashMap, K is keyRange. N/K是每个bucket的平均长度，worst case O(1)找到 bucket，linkedList使用O(N/K)找到target;
-// space: O(K + M). K is the predefined buckets, M is the number of unique values in hashSet;
 
 /**
  * Your MyHashMap object will be instantiated and called as such:

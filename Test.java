@@ -3,7 +3,20 @@
 /** LinkedList remove API input为int是remove by index，input为Object是remove by Element */
 import java.util.*;
 
+class Node {
+    int key;
+    int val;
+    Node next;
+    
+    public Node() {}
+    
+    public Node(int key, int val) {
+        this.key = key;
+        this.val = val;
+    }
+}
 public class Test {
+
     public static void main(String[] args) {
         /** Arrays.sort() inplace sort array, 注意如果array type是primitive 不能改写comparator 函数*/
         /** Arrays.sort() 如何反向sort？class才能用lambda表达式反响sort，将int[]换成Integer[] */
@@ -124,15 +137,15 @@ public class Test {
         // System.out.println(foo(12));
 
         // System.out.println(0 ^ 0);
-        System.out.println(getString(-9872631));
+        // System.out.println(getString(-9872631));
+        // System.out.println(key);
+
+        Node node = new Node();
+        System.out.println(node.key);
     }
 
     // public static int foo(int n) {
-        // if (n < 10) return n;
-
-        // int curDigit = foo(n / 10);
-        // System.out.println(curDigit);
-        // return n % 10;
+    //     System.out.println(key);
     // }
 
     private static String getString(int input) {

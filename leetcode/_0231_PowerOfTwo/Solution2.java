@@ -1,14 +1,17 @@
 package leetcode._0231_PowerOfTwo;
 
-// 反向binary search, 从下到大考虑
-class Solution2 {
+// while loop
+class Solution {
     public boolean isPowerOfTwo(int n) {
         if (n <= 0) return false;
-        long a = 1;
-        while (a <= n) {
-            if (a == n) return true;
-            a *= 2;
+        
+        while (n != 1) {
+            if (n % 2 == 1) return false;
+            n /= 2;
         }
-        return false;
+        
+        return true;
     }
 }
+
+// time: O(log(N)); space: O(1);
