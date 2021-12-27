@@ -35,7 +35,7 @@ class Solution {
             } else if (pre == cur.right) { // cu左右摸完
                 res.add(stack.pop().val);
             }
-            pre = cur;
+            pre = cur; // 忘把pre赋值成cur
         }
         
         return res;
