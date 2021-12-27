@@ -1,6 +1,7 @@
 package leetcode._0198_HouseRobber;
 
-// 一维dp
+// 常数dp
+// 和Min Cost Climbing Stairs最大的不同在于初始化的不同
 class Solution2 {
     public int rob(int[] nums) {
         if (nums.length == 1) return nums[0];

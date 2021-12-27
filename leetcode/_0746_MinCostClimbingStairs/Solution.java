@@ -1,6 +1,6 @@
 package leetcode._0746_MinCostClimbingStairs;
 
-// dp
+// dp O(1)
 class Solution {
     public int minCostClimbingStairs(int[] cost) {
         if (cost == null || cost.length == 0) throw new IllegalArgumentException();
@@ -15,7 +15,7 @@ class Solution {
             dp0 = dp1;
             dp1 = dp2;
         }
-        
+        // 忘记check最后一位和倒数第二位都可能是res
         return Math.min(dp0, dp1); // cost to get to the top
     }
 }

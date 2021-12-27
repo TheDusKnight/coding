@@ -8,7 +8,7 @@ class Solution {
         int[] buckets = new int[N+1];
         for (int num: nums) buckets[num] += num;
         
-        int dp0 = buckets[0], dp1 = buckets[1], dp2;
+        int dp0 = buckets[0], dp1 = Math.max(buckets[0], buckets[1]), dp2;
         
         for (int i = 2; i <= N; i++) {
             dp2 = Math.max(dp1, dp0 + buckets[i]);
