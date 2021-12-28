@@ -9,6 +9,7 @@ class Solution4 {
         
         int maxIndex = 0;
         for (int i = 0; i < n; i++) {
+            // 忘记要先更新
             maxIndex = Math.max(nums[i]+i, maxIndex);
             if (maxIndex >= n-1) return true;
             // 必须写等于因为当maxIndex不能超过i时说明无法进入i+1

@@ -10,7 +10,7 @@ class Solution {
         if (desiredTotal <= 0) // 当desiredTotal为0时，直接宣布胜利
             return true;
         boolean[] choosable = new boolean[maxChoosableInteger+1];
-        Arrays.fill(choosable, true);
+        Arrays.fill(choosable, true); // 忘记初始化了
         return dfs(desiredTotal, 0, choosable);
     }
     
