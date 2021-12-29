@@ -1,7 +1,7 @@
 package leetcode._0309_BestTimeToBuyAndSellStockWithCooldown;
 
 public class Solution2 {
-    // 一维dp, O(1) memory
+    // dp, O(1) memory
     public int maxProfit(int[] prices) {
         if (prices == null)
             return -1;

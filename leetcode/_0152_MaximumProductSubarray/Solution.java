@@ -11,6 +11,7 @@ class Solution {
         
         for (int i = 1; i < n; i++) {
             int cur = nums[i];
+            // 忘记max和min是和cur比较而不是curMax或curMin
             int tmpMax = Math.max(cur, Math.max(curMax * cur, curMin * cur));
             curMin = Math.min(cur, Math.min(curMax * cur, curMin * cur));
             curMax = tmpMax;
