@@ -11,6 +11,7 @@ class Solution {
         
         for (int i = 2; i <= n; i++) {
             for (int j = 1; j <= i; j++) {
+                // dp[i-j]错写成dp[n-j]
                 dp[i] += dp[j-1] * dp[i-j];
             }
         }
