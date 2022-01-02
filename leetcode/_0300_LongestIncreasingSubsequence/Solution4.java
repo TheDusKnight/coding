@@ -21,6 +21,7 @@ class Solution4 {
         return seq.size();
     }
     
+    // 找到比num大的最小值的idx
     private int binarySearch(List<Integer> seq, int num) {
         int start = 0, end = seq.size()-1;
         

@@ -1,26 +1,27 @@
 package leetcode._0300_LongestIncreasingSubsequence;
 
-// 一维dp空间无法优化
+import java.util.Arrays;
+
+// 一维dp无法优化
 class Solution3 {
     public int lengthOfLIS(int[] nums) {
-        if (nums.length == 1) return 1;
+        if (nums == null) throw new IllegalArgumentException();
+        if (nums.length == 0) return 0;
         
-        int globalMax = 0, n = nums.length;
-        // dp[i]含义：从0到i包含i时longest increasing subsequence的长度
-        int[] dp = new int[n];
-        dp[0] = 1;
-        
-        for (int i = 1; i < n; i++) {
+        int len = nums.length, max = 1; // max最小为1
+        int[] dp = new int[len];
+        Arrays.fill(dp, 1); // 每一位dp最小伟1
+        for (int i = 1; i < len; i++) {
             for (int j = 0; j < i; j++) {
-                if (nums[i] > nums[j])
-                    dp[i] = Math.max(dp[i], dp[j]); // 找到最大的dp[j]
+                if (nums[j] < nums[i]) {
+                    dp[i] = Math.max(dp[i], dp[j]+1); // 找到最大的dp[i]
+                }
             }
-            dp[i] += 1;
-            globalMax = Math.max(globalMax, dp[i]);
+            max = Math.max(max, dp[i]);
         }
         
-        return globalMax;
+        return max;
     }
 }
 
-// time: O(N^2); space: O(N);
+// time: O(n^2); space: O(N);

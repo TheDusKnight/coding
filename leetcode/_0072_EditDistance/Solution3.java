@@ -19,10 +19,10 @@ class Solution3 {
                 } else {
                     cur = Math.min(pre, Math.min(dp[j-1], dp[j])) + 1;
                 }
-                dp[j-1] = pre;
+                dp[j-1] = pre; // 先从idx 0开始赋值
                 pre = cur;
             }
-            dp[n] = cur;
+            dp[n] = cur; // 最后不要忘了吧idx n赋值
         }
         
         return dp[n];
