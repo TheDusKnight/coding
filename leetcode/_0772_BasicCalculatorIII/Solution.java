@@ -28,7 +28,7 @@ class Solution {
                     val = val * 10 + (s.charAt(i++) - '0');
                 numSt.push(val);
             } else if (ch == ' ') i++;
-            else throw new RuntimeException("not available character");
+            else throw new RuntimeException("contains invalid character");
         }
         addOptr(numSt, optrSt, s, i, ')');
 
@@ -58,7 +58,7 @@ class Solution {
                 if (topWei == null || topWei < optrMap.get(optr)) break;
                 calculate(numSt, optrSt);
              }
-             optrSt.push(optr);
+             optrSt.push(optr); // stack算完再把新的运算符放入stack!
         }
     }
 
