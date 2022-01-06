@@ -1,75 +1,78 @@
 package leetcode._0772_BasicCalculatorIII;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 // stack，follow-up开头带负号怎么办
 class Solution {
-    HashMap<Character, Integer> optrMap;
+    String s;
+    int len;
+    Stack<Integer> numSt;
+    Stack<Character> signSt;
+    Map<Character, Integer> signMap;
     public int calculate(String s) {
         // cc
-
-        int len = s.length();
-        optrMap = new HashMap<>();
-        optrMap.put('+', 1); optrMap.put('-', 1);
-        optrMap.put('*', 2); optrMap.put('/', 2);
-        Stack<Integer> numSt = new Stack<>();
-        Stack<Character> optrSt = new Stack<>();
+        
+        this.s = s;
+        len = s.length();
+        numSt = new Stack<>(); signSt = new Stack<>();
+        signMap = new HashMap<>();
+        signMap.put('+', 1); signMap.put('-', 1);
+        signMap.put('*', 2); signMap.put('/', 2);
         int i = 0;
-        addOptr(numSt, optrSt, s, i, '(');
-        while (i < len) { // O(N)
-            char ch = s.charAt(i);
-            if (optrMap.containsKey(ch) || ch == '(' || ch == ')') {
-                addOptr(numSt, optrSt, s, i, ch); // O(N)
-                i++;
-            } else if (ch >= '0' && ch <= '9') {
-                int val = 0;
-                while (i < len && s.charAt(i) >= '0' && s.charAt(i) <= '9')
-                    val = val * 10 + (s.charAt(i++) - '0');
-                numSt.push(val);
-            } else if (ch == ' ') i++;
-            else throw new RuntimeException("contains invalid character");
+        
+        addSign('(', i);
+        while (i < len) { // O(N);
+            char c = s.charAt(i);
+            if (signMap.containsKey(c) || c == '(' || c == ')') {
+                addSign(c, i++); // O(N);
+            } else if (Character.isDigit(c)) {
+                int num = 0;
+                while (i < len && Character.isDigit(s.charAt(i)))
+                    num = num*10 + (s.charAt(i++) - '0');
+                numSt.push(num);
+            } else if (c == ' ') i++;
+            else throw new IllegalArgumentException();
         }
-        addOptr(numSt, optrSt, s, i, ')');
-
+        addSign(')', i);
+        
         return numSt.pop();
     }
-
-    private void addOptr(Stack<Integer> numSt, Stack<Character> optrSt, String s, int i, char optr) {
-        if (optr == '(') {
-            optrSt.push(optr);
-            if (leadingMinus(s, i)) numSt.push(0);
-        } else if (optr == ')') {
+    
+    private void addSign(char sign, int idx) {
+        if (sign == '(') {
+            signSt.push(sign);
+            if (leadingMinus(idx)) numSt.push(0);
+        } else if (sign == ')') {
             while (true) {
-                if (optrSt.isEmpty())
-                    throw new RuntimeException("missing '(");
-                char top = optrSt.peek();
+                if (signSt.isEmpty()) throw new RuntimeException("missisng '('");
+                char top = signSt.peek();
                 if (top == '(') {
-                    optrSt.pop();
+                    signSt.pop();
                     break;
                 }
-                calculate(numSt, optrSt); // 结账无脑算
+                calculate(); // 结账无脑算
             }
-        } else { // optrMap.contains()
-             while (true) {
-                if (optrSt.isEmpty()) break;
-                char top = optrSt.peek();
-                Integer topWei = optrMap.get(top);
-                if (topWei == null || topWei < optrMap.get(optr)) break;
-                calculate(numSt, optrSt);
-             }
-             optrSt.push(optr); // stack算完再把新的运算符放入stack!
+        } else { // signMap.contains()
+            while (true) {
+                if (signSt.isEmpty()) break;
+                Integer val = signMap.get(signSt.peek());
+                if (val == null || val < signMap.get(sign)) break;
+                calculate();
+            }
+            signSt.push(sign); // stack算完再把新的运算符放入stack!
         }
     }
-
-    private void calculate(Stack<Integer> numSt, Stack<Character> optrStack) {
+    
+    private void calculate() {
         int num2 = numSt.pop(), num1 = numSt.pop();
-        char optr = optrStack.pop();
-        numSt.push(cal(num1, num2, optr));
+        char sign = signSt.pop();
+        numSt.push(cal(num1, num2, sign));
     }
-
-    private int cal(int num1, int num2, char optr) {
-        switch(optr) {
+    
+    private int cal(int num1, int num2, char sign) {
+        switch(sign) {
             case '+': return num1 + num2;
             case '-': return num1 - num2;
             case '*': return num1 * num2;
@@ -77,21 +80,22 @@ class Solution {
             default: throw new RuntimeException();
         }
     }
-
-    private boolean leadingMinus(String s, int i) {
+    
+    private boolean leadingMinus(int i) {
         if (i == 0 && s.charAt(i) == '-') return true;
-        for (int j = i+1; j < s.length(); j++) {
-            if (s.charAt(j) != ' ') {
-                if (s.charAt(j) == '-') return true;
+        for (int idx = i+1; idx < len; idx++) {
+            if (s.charAt(idx) != ' ') {
+                if (s.charAt(idx) == '-') return true;
                 else return false;
             }
         }
-
         return false;
     }
 
     public static void main(String[] args) {
-        String s = "1+(-1+2)";
+        // String s = "1+(-1+2)";
+        // String s = "1+(1)";
+        String s = "1";
         Solution sol = new Solution();
         System.out.println(sol.calculate(s));
     }

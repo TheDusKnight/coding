@@ -5,33 +5,22 @@ import java.util.Stack;
 // stack 对称结构
 class Solution {
     public String parseTernary(String expression) {
-        if (expression == null || expression.length() == 0) return expression;
+        // cc
         
-        StringBuilder res = new StringBuilder();
+        String s = expression;
+        int len = s.length();
         Stack<Character> stack = new Stack<>();
-        int i = expression.length() - 1;
-        
-        while (i >= 0) {
-            char c = expression.charAt(i);
-            if (c == ' ') {
-                i--;
-            } else if (c == ':') {
-                i--;
-            }else if (c == '?') {
-                char express = expression.charAt(--i);
-                Character tChar = stack.pop();
-                Character fChar = stack.pop();
-                if (express == 'T') stack.push(tChar);
-                if (express == 'F') stack.push(fChar);
-                i--;
-            } else {
+        for (int i = len-1; i >= 0; i--) {
+            char c = s.charAt(i);
+            if (c == '?') {
+                char exp1 = stack.pop(), exp2 = stack.pop();
+                stack.push(s.charAt(--i) == 'T' ? exp1 : exp2);
+            } else if (c != ':') {
                 stack.push(c);
-                i--;
             }
         }
         
-        res.append(stack.pop());
-        return res.toString();
+        return String.valueOf(stack.pop());
     }
 }
 
