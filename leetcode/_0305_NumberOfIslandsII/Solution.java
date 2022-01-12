@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 // UF
-public class Solution {
+class Solution {
+    private static final int[][] DIRECTIONS = new int[][] {{1,0}, {-1,0}, {0,1}, {0,-1}};
     class UnionFind {
-        int[] parents, size;
-        int row, col, numOfIslands;
+        int[] parents, sizes;
+        int row, col, numOfIsland;
+        
         public UnionFind(int m, int n) {
-            this.row = m; this.col = n;
-            this.numOfIslands = 0;
+            row = m; col = n;
             parents = new int[m*n];
-            size = new int[m*n]; // this size of UF root;
-            for (int i = 0; i < row * col; i++) {
-                parents[i] = -1;
-                size[i] = 1;
-            }
+            sizes = new int[m*n]; // this size of UF root;
+            numOfIsland = 0;
+            for (int i = 0; i < m*n; i++) parents[i] = -1;
         }
         
         private int getRoot(int p) { // p is 拉直of(i,j)
@@ -26,62 +25,65 @@ public class Solution {
                 cur = parents[cur];
             }
             parents[p] = cur;
+            
             return cur;
         }
-
-        public boolean find(int i1, int j1, int i2, int j2) {
-            int p = i1*this.col+j1;
-            int q = i2*this.col+j2;
+        
+        private boolean find(int i1, int j1, int i2, int j2) {
+            int p = i1*col+j1, q = i2*col+j2;
             return getRoot(p) == getRoot(q);
         }
-
-        public void union(int i1, int j1, int i2, int j2) {
-            int p = i1*col+j1, q=i2*col+j2;
-            int rootP = getRoot(p), rootQ=getRoot(q);
-            if (size[rootP] > size[rootQ]) {
+        
+        private void union(int i1, int j1, int i2, int j2) {
+            int p = i1*col+j1, q = i2*col+j2;
+            int rootP = getRoot(p), rootQ = getRoot(q);
+            if (sizes[rootP] > sizes[rootQ]) {
                 parents[rootQ] = rootP;
-                size[rootP] += size[rootQ];
+                sizes[rootP] += sizes[rootQ];
             } else {
                 parents[rootP] = rootQ;
-                size[rootQ] += size[rootP];
+                sizes[rootQ] += sizes[rootP];
             }
-            this.numOfIslands--;
+            numOfIsland--;
         }
-
+        
         public void addIsland(int i, int j) {
             int idx = i*col+j;
             if (parents[idx] == -1) { // 检查当前区域是否之前add过，和面试管沟通
                 parents[idx] = idx; // 将该区域的root设为自己
-                this.numOfIslands++;
+                sizes[idx] = 1;
+                numOfIsland++;
             }
         }
-
+        
         public boolean isIsland(int i, int j) {
             return parents[i*col+j] >= 0;
         }
-
+        
         public int getNumOfIsland() {
-            return this.numOfIslands;
+            return numOfIsland;
         }
     }
-
+    
     public List<Integer> numIslands2(int m, int n, int[][] positions) {
         // cc
+        
         UnionFind uf = new UnionFind(m, n);
         List<Integer> res = new ArrayList<>();
         for (int[] pos: positions) {
             int i = pos[0], j = pos[1];
-            uf.addIsland(i,j);
-            int[][] DIRECTIONS = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+            uf.addIsland(i, j);
             for (int[] dir: DIRECTIONS) {
-                int ii = i+dir[0];
-                int jj = j+dir[1];
-                if (ii >= 0 && ii < uf.row && jj >= 0 && jj < uf.col && uf.isIsland(ii, jj) && !uf.find(i, j, ii, jj)) {
+                int ii = i + dir[0];
+                int jj = j + dir[1];
+                if (ii < 0 || ii >= m || jj < 0 || jj >= n)
+                    continue;
+                if (uf.isIsland(ii, jj) && !uf.find(i, j, ii, jj))
                     uf.union(i, j, ii, jj);
-                }
             }
             res.add(uf.getNumOfIsland());
         }
+        
         return res;
     }
 }
