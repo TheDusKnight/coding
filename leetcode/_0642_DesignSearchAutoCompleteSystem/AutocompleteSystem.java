@@ -84,6 +84,7 @@ public class AutocompleteSystem {
             insert(sentences[i], times[i]);
             count.put(sentences[i], times[i]);
         }
+        cur = root;
     }
     
     public List<String> input(char ch) {
@@ -97,6 +98,7 @@ public class AutocompleteSystem {
             return new ArrayList<>();
         }
         sb.append(ch);
+        // 有可能之前cur就是null需要check一下
         if(cur == null) { return new ArrayList<>(); }
         cur = cur.children[getIndex(ch)];
         if (cur == null) { return new ArrayList<>(); }
@@ -104,7 +106,7 @@ public class AutocompleteSystem {
     }
     
     private void insert(String str, int time) {
-        TrieNode cur = root;
+        cur = root;
         for (char ch: str.toCharArray()) {
             int idx = getIndex(ch);
             if (cur.children[idx] == null) {

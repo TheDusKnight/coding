@@ -38,6 +38,7 @@ public class WordDictionary {
     private boolean dfs(String word, TrieNode root, int idx) {
         if (root == null) return false;
         // idx和word因为dummy root的原因错位，idx指向word的最后一个char
+        // 当前层trie node的含义是上一层的idx字母
         if (idx == word.length()) {
             return root.isWord;
         }
@@ -52,6 +53,8 @@ public class WordDictionary {
         return false;
     }
 }
+
+// time: O(N*26^M) N is number of search, M is word average length
 
 /**
  * Your WordDictionary object will be instantiated and called as such:
