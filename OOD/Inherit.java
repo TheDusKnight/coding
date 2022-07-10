@@ -1,4 +1,5 @@
 package OOD;
+
 class Father {
     int a = 1;
 
@@ -21,9 +22,14 @@ class Son extends Father {
 }
 
 public class Inherit {
+    public int a = 0;
+    protected int b = 1;
+    private int c = 2;
+
     public static void main(String[] args) {
         Son t2 = new Son();
         t2.printSon();
         t2.printFather();
+
     }
 }
