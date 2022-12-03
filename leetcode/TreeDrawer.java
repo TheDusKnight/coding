@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class TreeDrawer {
-
     public static void draw(TreeNode root) {
         int maxLevel = TreeDrawer.maxLevel(root);
 
@@ -80,7 +79,7 @@ public class TreeDrawer {
         return Math.max(TreeDrawer.maxLevel(node.left), TreeDrawer.maxLevel(node.right)) + 1;
     }
 
-    private static  boolean isAllElementsNull(List list) {
+    private static boolean isAllElementsNull(List list) {
         for (Object object : list) {
             if (object != null)
                 return false;
@@ -95,7 +94,7 @@ public class TreeDrawer {
             // String data = "1,2,3,#,4,#,#,5";
             String data = "1,2,3,4,5";
             // TreeGenerator from SuanFaGe
-            TreeGenerator tg = new TreeGenerator(); 
+            TreeGenerator tg = new TreeGenerator();
             TreeNode root = tg.deserialize(data);
             TreeDrawer.draw(root);
 

@@ -1,5 +1,4 @@
 package OOD;
-import OOD.StaticFactoryMethod.College;
 
 class Father {
     int a = 1;
@@ -31,8 +30,5 @@ public class Inherit {
         Son t2 = new Son();
         t2.printSon();
         t2.printFather();
-
-        College college = College.getInformationCollege();
-        System.out.println(college.getCollegeName());
     }
 }

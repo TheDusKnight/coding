@@ -3,7 +3,7 @@ package OOD;
 import java.util.Arrays;
 
 public class XueHua {
-    public static void xueHua(int n) {
+    public XueHua(int n) {
         if (n <= 0) throw new IllegalArgumentException();
         
         for (int i = 1; i <= n; i++) {

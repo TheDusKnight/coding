@@ -1,3 +1,4 @@
+
 /** check boolean可以不写== true or == false，但check null必须写 */
 /** getOrDefault如果返回新的数据结构，记得要put回去否则不会保存在HashMap或HashSet里!! */
 /** LinkedList remove API input为int是remove by index，input为Object是remove by Element */
@@ -7,18 +8,21 @@ class Node {
     int key;
     int val;
     Node next;
-    
-    public Node() {}
-    
+
+    public Node() {
+    }
+
     public Node(int key, int val) {
         this.key = key;
         this.val = val;
     }
 }
-public class Test {
 
+public class Test {
     public static void main(String[] args) {
-        /** Arrays.sort() inplace sort array, 注意如果array type是primitive 不能改写comparator 函数*/
+        /**
+         * Arrays.sort() inplace sort array, 注意如果array type是primitive 不能改写comparator 函数
+         */
         /** Arrays.sort() 如何反向sort？class才能用lambda表达式反响sort，将int[]换成Integer[] */
 
         /** Collections.sort() inplace sort List */
@@ -45,19 +49,24 @@ public class Test {
 
         /** create array of arrayList */
         // List<Integer>[] tmp = new List[3];
-        // for (int i = 0; i < tmp.length; i++) { // 另一种写法：Arrays.setAll(tmp, element -> new ArrayList<>());
-        //     tmp[i] = new ArrayList<>();
+        // for (int i = 0; i < tmp.length; i++) { // 另一种写法：Arrays.setAll(tmp, element ->
+        // new ArrayList<>());
+        // tmp[i] = new ArrayList<>();
         // }
-        
+
         /** 反转arrayList */
         // Collections.reverse(tmp);
 
         /** convert arrayList to array使用toArray方法 */
 
-        /** 不存在convert List<Integer> to int[]的简单方法，toArray()的array对象必须是Object type。int[] array = list.stream().mapToInt(i->i).toArray();*/
+        /**
+         * 不存在convert List<Integer> to int[]的简单方法，toArray()的array对象必须是Object type。int[]
+         * array = list.stream().mapToInt(i->i).toArray();
+         */
 
         /** convert list of array to array of array */
-        // List<int[]> list = new ArrayList<>(); // 这种方法能成功的原因在于toArray()的array对象必须是Object type
+        // List<int[]> list = new ArrayList<>(); //
+        // 这种方法能成功的原因在于toArray()的array对象必须是Object type
         // int[][] array = list.toArray(new int[2][]); // 返回类型和传入类型match
 
         /** HashSet转ArrayList */
@@ -67,8 +76,8 @@ public class Test {
         // java8之前。从map中根据key获取value操作可能会有下面的操作
         // Object key = map.get("key");
         // if (key == null) {
-        //     key = new Object();
-        //     map.put("key", key);
+        // key = new Object();
+        // map.put("key", key);
         // }
         // java8之后。上面的操作可以简化为一行，若key对应的value为空，会将第二个参数的返回值存入并返回
         // Object key2 = map.computeIfAbsent("key", k -> new Object());
@@ -80,7 +89,8 @@ public class Test {
         // System.out.println(5 ^ 7);
 
         // int to bits
-        // System.out.println("i: " + String.format("%32s", Integer.toBinaryString(2)).replaceAll(" ", "0"));
+        // System.out.println("i: " + String.format("%32s",
+        // Integer.toBinaryString(2)).replaceAll(" ", "0"));
 
         /** substring 左闭右开区间 */
         // System.out.println("123".substring(0, 2));
@@ -127,12 +137,11 @@ public class Test {
 
         // System.out.println(1 << 2);
 
-
         // Integer[] intergers = new Integer[3];
         // int[] a = new int[3];
         // a[0]++;
-        // System.out.println(a[0]); 
-        // System.out.println('R' - 'A' + 1); 
+        // System.out.println(a[0]);
+        // System.out.println('R' - 'A' + 1);
 
         // System.out.println(foo(12));
 
@@ -140,12 +149,19 @@ public class Test {
         // System.out.println(getString(-9872631));
         // System.out.println(key);
 
-        Node node = new Node();
-        System.out.println(node.key);
+        // Node node = new Node();
+        // System.out.println(node.key);
+
+        double x = 1.0 / 10;
+        double y = 1 - 9.0 / 10;
+        double z = 1.0 / 0;
+        System.out.println(x);
+        System.out.println(y);
+        System.out.println(z);
     }
 
     // public static int foo(int n) {
-    //     System.out.println(key);
+    // System.out.println(key);
     // }
 
     private static String getString(int input) {
@@ -160,12 +176,14 @@ public class Test {
         while (input > 0) {
             int digit = input % 10;
             input /= 10;
-            sb.append((char)(digit + '0'));
+            sb.append((char) (digit + '0'));
             count++;
-            if (count % 3 == 0) sb.append(',');
+            if (count % 3 == 0)
+                sb.append(',');
         }
 
-        if (isNegative) sb.append('-');
+        if (isNegative)
+            sb.append('-');
         return sb.reverse().toString();
     }
 
