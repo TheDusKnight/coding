@@ -1,4 +1,4 @@
-package OOD;
+package OOD.Inherit;
 
 class Father {
     int a = 1;
@@ -21,7 +21,7 @@ class Son extends Father {
     }
 }
 
-public class Inherit {
+public class MyInherit {
     public int a = 0;
     protected int b = 1;
     private int c = 2;

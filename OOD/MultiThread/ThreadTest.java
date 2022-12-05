@@ -1,4 +1,4 @@
-package OOD;
+package OOD.MultiThread;
 
 public class ThreadTest {
     public static void main(String[] args) {

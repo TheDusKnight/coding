@@ -5,8 +5,8 @@ public class Pair<K, V> {
     private final K element0;
     private final V element1;
 
-    public static <K, V> Pair<K, V> createPair(K element0, V element1) {
-        return new Pair<K, V>(element0, element1);
+    public static <T, U> Pair<T, U> createPair(T element0, U element1) {
+        return new Pair<T, U>(element0, element1);
     }
 
     public Pair(K element0, V element1) {

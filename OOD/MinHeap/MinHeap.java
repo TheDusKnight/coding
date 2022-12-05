@@ -1,7 +1,8 @@
 package OOD.MinHeap;
 
 import java.util.Arrays;
-import OOD.Inherit;
+
+import OOD.Inherit.MyInherit;
 
 // 实现一个带update功能的minHeap
 public class MinHeap {

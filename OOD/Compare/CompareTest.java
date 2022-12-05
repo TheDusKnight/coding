@@ -1,4 +1,4 @@
-package OOD;
+package OOD.Compare;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
