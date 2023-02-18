@@ -152,12 +152,14 @@ public class Test {
         // Node node = new Node();
         // System.out.println(node.key);
 
-        double x = 1.0 / 10;
-        double y = 1 - 9.0 / 10;
-        double z = 1.0 / 0;
-        System.out.println(x);
-        System.out.println(y);
-        System.out.println(z);
+        // double x = 1.0 / 10;
+        // double y = 1 - 9.0 / 10;
+        // double z = 1.0 / 0;
+        // System.out.println(x);
+        // System.out.println(y);
+        // System.out.println(z);
+
+        System.out.println(String.format(Locale.US, "%03d", 21));
     }
 
     // public static int foo(int n) {
