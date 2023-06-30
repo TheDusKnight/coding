@@ -1,4 +1,4 @@
-package leetcode._0707_DesginLinkedList;
+package leetcode._0707_DesignLinkedList;
 
 // singly linked list
 class MyLinkedList {

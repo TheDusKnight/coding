@@ -1,4 +1,4 @@
-package OOD.StaticFactoryMethod;
+package OOD.StaticFactoryPattern;
 
 // 静态工厂模式
 public class College {
