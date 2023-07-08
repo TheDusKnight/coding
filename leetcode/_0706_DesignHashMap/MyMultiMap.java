@@ -2,13 +2,14 @@ package leetcode._0706_DesignHashMap;
 
 import java.util.*;
 
-class Cell<K, V> {
+class MultiCell<K, V> { // Sol1: change cell to multi cell
     K key;
-    V val;
+    List<V> vals;
 
-    public Cell(K key, V val) {
+    public MultiCell(K key, V val) {
         this.key = key;
-        this.val = val;
+        this.vals = new ArrayList<>();
+        this.vals.add(val);
     }
 
     @Override
@@ -31,25 +32,25 @@ class Cell<K, V> {
     }
 }
 
-public class MyHashMap<K, V> {
+public class MyMultiMap<K, V> {
     private static final double LOAD_FACTOR = 0.75d;
-    List<Cell<K, V>>[] buckets;
+    List<MultiCell<K, V>>[] buckets;
     int size;
     int capacity;
 
-    public MyHashMap() {
+    public MyMultiMap() {
         buckets = new ArrayList[256];
         size = 0;
         capacity = 256;
     }
 
-    public V get(K key) {
+    public List<V> get(K key) { // Sol2: Mutli Map可以允许duplicate
         int idx = _hash(key);
         if (buckets[idx] == null) return null;
 
-        for (Cell<K, V> cell: buckets[idx]) {
+        for (MultiCell<K, V> cell: buckets[idx]) {
             if (cell != null && cell.keyEquals(key)) {
-                return cell.val;
+                return cell.vals;
             }
         }
         return null;
@@ -61,15 +62,15 @@ public class MyHashMap<K, V> {
             buckets[idx] = new ArrayList<>();
         }
 
-        for (Cell<K, V> cell: buckets[idx]) {
-            // replace duplicate cell
+        for (MultiCell<K, V> cell: buckets[idx]) {
+            // add val to existing multi cell
             if (cell != null && cell.keyEquals(key)) {
-                cell.val = val;
+                cell.vals.add(val); // 注意这里是add val到list不是set val
                 return;
             }
         }
-        // add new cell
-        buckets[idx].add(new Cell(key, val));
+        // add new multi cell
+        buckets[idx].add(new MultiCell(key, val));
         this.size++;
         if (this.size >= this.capacity * this.LOAD_FACTOR) {
             rehash();
@@ -80,11 +81,11 @@ public class MyHashMap<K, V> {
         int idx = _hash(key);
         if (buckets[idx] == null) return false;
 
-        List<Cell<K, V>> list = buckets[idx];
+        List<MultiCell<K, V>> list = buckets[idx];
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) != null && list.get(i).keyEquals(key)) {
                 // swap
-                Cell<K, V> tmp= list.get(i);
+                MultiCell<K, V> tmp= list.get(i);
                 list.set(i, list.get(list.size()-1));
                 list.set(list.size()-1, tmp);
                 list.remove(list.size()-1);
@@ -103,9 +104,9 @@ public class MyHashMap<K, V> {
 
     private void rehash() {
         this.capacity *= 2;
-        List<Cell<K, V>>[] newBuckets = new ArrayList[this.capacity];
-        for (List<Cell<K, V>> bucket: this.buckets) {
-            for (Cell<K, V> cell: bucket) {
+        List<MultiCell<K, V>>[] newBuckets = new ArrayList[this.capacity];
+        for (List<MultiCell<K, V>> bucket: this.buckets) {
+            for (MultiCell<K, V> cell: bucket) {
                 if (cell != null) {
                     int newIdx = _hash(cell.key);
                     if (newBuckets[newIdx] == null) {
@@ -120,13 +121,15 @@ public class MyHashMap<K, V> {
     }
 
     public static void main(String[] args) {
-        MyHashMap<String, String> map = new MyHashMap<>();
+        MyMultiMap<String, String> map = new MyMultiMap<>();
         map.put("1", "hello");
         map.put("2453245234534", "world");
         System.out.println(map.get("2453245234534"));
         map.remove("2453245234534");
         System.out.println(map.get("2453245234534"));
         map.put("2453245234534", "ok");
+        System.out.println(map.get("2453245234534"));
+        map.put("2453245234534", "okk");
         System.out.println(map.get("2453245234534"));
     }
 }
