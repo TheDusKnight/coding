@@ -2,49 +2,55 @@ package leetcode._0706_DesignHashMap;
 
 import java.util.*;
 
-final class MultiCell<K, V> {
-    private final K key;
-    private List<V> vals;
-
-    public MultiCell(K key, V val) {
-        this.key = key;
-        this.vals = new ArrayList<>();
-        this.vals.add(val);
-    }
-
-    public K getKey() {
-        return this.key;
-    }
-
-    public List<V> getVals() {
-        return this.vals;
-    }
-
-    public void addVal(V val) {
-        this.vals.add(val);
-    }
-
-    public boolean keyEquals(K key) { // 比较只使用到key不需要传入Cell obj
-        return this.key == null ? key == null : this.key.equals(key);
-    }
-}
-
 public final class MyMultiHashMap<K, V> {
-    private static final int INIT_MAP_CAPACITY = 5; // 5方便测试
-    private static final int INIT_MAP_SIZE = 0;
+    private static final class MultiCell<K, V> {
+        private final K key;
+        private List<V> vals;
+
+        public MultiCell(K key, V val) {
+            this.key = key;
+            this.vals = new ArrayList<>();
+            this.vals.add(val);
+        }
+
+        public K getKey() {
+            return this.key;
+        }
+
+        public List<V> getVals() {
+            return this.vals;
+        }
+
+        public void addVal(V val) {
+            this.vals.add(val);
+        }
+
+        public boolean keyEquals(K key) { // 比较只使用到key不需要传入Cell obj
+            return this.key == null ? key == null : this.key.equals(key);
+        }
+    }
+
     private static final double LOAD_FACTOR = 0.75d;
     private List<MultiCell<K, V>>[] buckets;
-    private int bucketsSize;
-    private int bucketsCapacity;
+    private int capacity;
+    private int size;
 
     public MyMultiHashMap() {
-        buckets = new ArrayList[INIT_MAP_CAPACITY];
-        bucketsSize = INIT_MAP_SIZE;
-        bucketsCapacity = INIT_MAP_CAPACITY;
+        this(256);
+    }
+
+    public MyMultiHashMap(int capacity) {
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("Capacity must larger than 0");
+        }
+
+        buckets = new ArrayList[capacity];
+        this.capacity = capacity;
+        this.size = 0;
     }
 
     public List<V> get(K key) { // return null说明没找到
-        int idx = _hash(key);
+        int idx = hashing(key);
         if (buckets[idx] == null) {
             return null;
         }
@@ -58,12 +64,9 @@ public final class MyMultiHashMap<K, V> {
     }
 
     public void put(K key, V val) {
-        int idx = _hash(key);
+        int idx = hashing(key);
         if (buckets[idx] == null) {
             buckets[idx] = new ArrayList<>();
-        }
-        if (buckets[idx].size() == 0) {
-            this.bucketsSize++;
         }
 
         for (MultiCell<K, V> cell : buckets[idx]) {
@@ -73,14 +76,15 @@ public final class MyMultiHashMap<K, V> {
             }
         }
         buckets[idx].add(new MultiCell(key, val));
+        this.size++;
         // rehash要放到最后做不然index对应的bucket会变
-        if (this.bucketsSize >= this.bucketsCapacity * this.LOAD_FACTOR) {
-            rehash();
+        if (this.size >= this.capacity * MyMultiHashMap.LOAD_FACTOR) {
+            rehashing();
         }
     }
 
     public boolean remove(K key) { // return false说明没找到
-        int idx = _hash(key);
+        int idx = hashing(key);
         if (buckets[idx] == null) {
             return false;
         }
@@ -93,42 +97,38 @@ public final class MyMultiHashMap<K, V> {
                 list.set(i, list.get(list.size() - 1));
                 list.set(list.size() - 1, tmp);
                 list.remove(list.size() - 1);
-                if (list.size() == 0) {
-                    this.bucketsSize--;
-                }
+                this.size--;
                 return true;
             }
         }
         return false;
     }
 
-    public int getBucketsSize() {
-        return this.bucketsSize;
+    public int getSize() {
+        return this.size;
     }
 
-    public int getBucketsCapacity() {
-        return this.bucketsCapacity;
+    public int getCapacity() {
+        return this.capacity;
     }
 
-    private int _hash(K key) {
+    private int hashing(K key) {
         if (key == null)
             return 0;
 
-        return (Math.abs(key.hashCode() % this.bucketsCapacity));
+        return (Math.abs(key.hashCode() % this.capacity));
     }
 
-    private void rehash() {
-        this.bucketsCapacity *= 2;
-        this.bucketsSize = 0;
-        List<MultiCell<K, V>>[] newBuckets = new ArrayList[this.bucketsCapacity];
+    private void rehashing() {
+        this.capacity *= 2;
+        List<MultiCell<K, V>>[] newBuckets = new ArrayList[this.capacity];
         for (List<MultiCell<K, V>> bucket : this.buckets) {
             if (bucket == null)
                 continue;
             for (MultiCell<K, V> cell : bucket) {
-                int newIdx = _hash(cell.getKey());
+                int newIdx = hashing(cell.getKey());
                 if (newBuckets[newIdx] == null) {
                     newBuckets[newIdx] = new ArrayList<>();
-                    this.bucketsSize++;
                 }
                 // 不需要去重，因为已经检查过了
                 newBuckets[newIdx].add(cell);
@@ -137,8 +137,22 @@ public final class MyMultiHashMap<K, V> {
         this.buckets = newBuckets;
     }
 
+    public MyHashMap<K, List<V>> asMap() {
+        MyHashMap<K, List<V>> myHashMap = new MyHashMap<>();
+
+        for (List<MultiCell<K, V>> bucket : buckets) {
+            if (bucket == null) {
+                continue;
+            }
+            for (MultiCell<K, V> cell : bucket) {
+                myHashMap.put(cell.getKey(), cell.getVals());
+            }
+        }
+        return myHashMap;
+    }
+
     public static void main(String[] args) {
-        MyMultiHashMap<Student, String> map2 = new MyMultiHashMap<>();
+        MyMultiHashMap<Student, String> map2 = new MyMultiHashMap<>(5);
         Student s1 = new Student("1");
         Student s2 = new Student("2");
         Student s3 = new Student("1");
@@ -155,7 +169,7 @@ public final class MyMultiHashMap<K, V> {
         map2.put(s1, "Alex");
         System.out.println(map2.get(s1)); // [Sam, Alex]
         map2.put(s3, "Bill");
-        System.out.println(map2.getBucketsSize()); // 1
+        System.out.println(map2.getSize()); // 1
         System.out.println(map2.get(s1)); // [Sam, Alex, Bill]
         System.out.println(map2.get(s3)); // [Sam, Alex, Bill]
 
@@ -165,8 +179,8 @@ public final class MyMultiHashMap<K, V> {
         map2.put(s5, "Dog");
         map2.put(s6, "Eat");
         map2.put(s2, "Angel");
-        System.out.println(map2.getBucketsSize()); // ≈ 4 hash function在design很好的情况下每个bucket对应一个id
-        System.out.println(map2.getBucketsCapacity()); // 10
+        System.out.println(map2.getSize()); // 4
+        System.out.println(map2.getCapacity()); // 10
         System.out.println(map2.get(s1)); // [Sam, Alex, Bill, Banana]
         System.out.println(map2.get(s2)); // [Apple, Angel]
         System.out.println(map2.get(s3)); // [Sam, Alex, Bill, Banana]
@@ -175,8 +189,10 @@ public final class MyMultiHashMap<K, V> {
         System.out.println(map2.get(s6)); // [Cat, Eat]
 
         System.out.println(map2.remove(s5)); // true
-        System.out.println(map2.get(s6)); // null
-        System.out.println(map2.getBucketsSize()); // ≈ 3
+        System.out.println(map2.get(s5)); // null
+        System.out.println(map2.get(s6)); // [Cat, Eat]
+        System.out.println(map2.getSize()); // 3
+        System.out.println(map2.getCapacity()); // 10
 
     }
 }
