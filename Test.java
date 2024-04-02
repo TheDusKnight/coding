@@ -161,10 +161,13 @@ public class Test {
 
         // System.out.println(String.format(Locale.US, "%03d", 21));
 
-        List<String> list = Arrays.asList("1", null, "3");
-        for (String s : list) {
-            System.out.println(s);
-        }
+        // List<String> list = Arrays.asList("1", null, "3");
+        // for (String s : list) {
+        //     System.out.println(s);
+        // }
+
+        int i = 'a';
+        System.out.println(i - 'a');
     }
 
     // public static int foo(int n) {
